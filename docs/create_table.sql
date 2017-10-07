@@ -92,11 +92,10 @@ CREATE TABLE `user_bands`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `universities` (
-  `id`          BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name`        VARCHAR(64)          NOT NULL DEFAULT '',
-  `bands_count` BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
-  `created_at`  DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at`  DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,    
+  `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name`       VARCHAR(64)          NOT NULL DEFAULT '',
+  `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,    
   PRIMARY KEY(`id`),    
   UNIQUE KEY(`name`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -107,6 +106,7 @@ CREATE TABLE `circles` (
   `name`          VARCHAR(64)          NOT NULL DEFAULT '',
   `logo`          VARCHAR(64)          NOT NULL DEFAULT '',
   `members_count` BIGINT(20)  UNSIGNED NOT NULL DEFAULT 0,
+  `bands_count`   BIGINT(20)  UNSIGNED NOT NULL DEFAULT 0,
   `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,    
   PRIMARY KEY(`id`),
