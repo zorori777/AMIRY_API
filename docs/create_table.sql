@@ -246,16 +246,3 @@ CREATE TABLE `taggings` (
   KEY `index_taggings_on_tagger_id_and_tagger_type` (`tagger_id`,`tagger_type`),
   KEY `taggings_idy` (`taggable_id`,`taggable_type`,`tagger_id`,`context`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
-
-
-
-
-
-
-
-
-
-
-
-
-
