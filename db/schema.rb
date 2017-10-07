@@ -12,6 +12,20 @@
 
 ActiveRecord::Schema.define(version: 20171007133302) do
 
+  create_table "bands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "university_id", null: false
+    t.string "name", default: "", null: false
+    t.string "concept", default: "", null: false
+    t.text "description", null: false
+    t.integer "people_num", default: 0, null: false, unsigned: true
+    t.integer "type", limit: 1, default: 0, null: false, unsigned: true
+    t.datetime "united_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id", "name"], name: "index_bands_on_university_id_and_name", unique: true
+    t.index ["university_id"], name: "index_bands_on_university_id"
+  end
+
   create_table "universities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -19,4 +33,5 @@ ActiveRecord::Schema.define(version: 20171007133302) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  add_foreign_key "bands", "universities"
 end
