@@ -13,7 +13,7 @@ CREATE TABLE `users`(
   PRIMARY KEY(`id`),
   CONSTRAINT `fk_users_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE
   CONSTRAINT `fk_lives_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- パートのマスタテーブル
 CREATE TABLE `parts`(
@@ -23,8 +23,17 @@ CREATE TABLE `parts`(
   `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP           
   PRIMARY KEY(`id`),
-  CONSTRAINT `user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `user_parts`(
+  `id`      BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT(20) UNSIGNED NOT NULL, 
+  `part_id` BIGINT(20) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  CONSTRAINT `user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `part_id` FOREIGN KEY(`part_id`) REFERENCES `parts` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `lives`(
   `id`                 BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
