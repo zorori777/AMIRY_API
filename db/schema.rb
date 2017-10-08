@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007161446) do
+ActiveRecord::Schema.define(version: 20171008055434) do
+
+  create_table "band_lives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "band_id", null: false
+    t.bigint "live_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_band_lives_on_band_id"
+    t.index ["live_id"], name: "index_band_lives_on_live_id"
+  end
 
   create_table "bands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id", null: false
@@ -42,6 +51,7 @@ ActiveRecord::Schema.define(version: 20171007161446) do
   create_table "lives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id", null: false
     t.string "name", default: "", null: false
+    t.text "description", null: false
     t.integer "max_capacity", default: 0, null: false, unsigned: true
     t.integer "reservations_count", default: 0, null: false, unsigned: true
     t.integer "type", default: 0, null: false, comment: "サークルライブ: 1, サークルライブ以外: 2", unsigned: true
@@ -60,6 +70,8 @@ ActiveRecord::Schema.define(version: 20171007161446) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  add_foreign_key "band_lives", "bands"
+  add_foreign_key "band_lives", "lives", column: "live_id"
   add_foreign_key "bands", "circles"
   add_foreign_key "circles", "universities"
   add_foreign_key "lives", "circles"
