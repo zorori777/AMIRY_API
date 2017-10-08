@@ -136,7 +136,6 @@ CREATE TABLE `circles` (
   `id`            BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
   `university_id` BIGINT(20)  UNSIGNED NOT NULL,
   `name`          VARCHAR(64)          NOT NULL DEFAULT '',
-  `logo`          VARCHAR(64)          NOT NULL DEFAULT '',
   `members_count` BIGINT(20)  UNSIGNED NOT NULL DEFAULT 0,
   `bands_count`   BIGINT(20)  UNSIGNED NOT NULL DEFAULT 0,
   `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
