@@ -24,8 +24,8 @@ class Band < ApplicationRecord
 
   # Association
   belongs_to :circle
-  has_many :band_lives
-  has_many :lives, through: :band_lives
+  has_many   :band_lives
+  has_many   :lives, through: :band_lives
 
   # Validation
   validates :name,                             uniqueness: { scope: :circle_id }

@@ -17,14 +17,11 @@ class Circle < ApplicationRecord
 
   # Association
   has_many   :bands
-  has_many   :circles
+  has_many   :circle_images
   belongs_to :university
 
   # Validation
   validates :name, :description,          presence: true
   validates :bands_count, :members_count, numericality: true
-
-  # Uploader
-  mount_uploader :logo, LogoUploader
 
 end
