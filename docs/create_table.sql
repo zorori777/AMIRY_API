@@ -199,7 +199,7 @@ CREATE TABLE `lectures` (
   PRIMARY KEY(`id`),
   KEY(`hold_at`),
   CONSTRAINT `fk_lectures_on_user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE, 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `articles` (
   `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,  
@@ -244,11 +244,22 @@ CREATE TABLE `likes` (
   `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
-  UNIQUE KEY(`user_id`, `chat_group_id`), 
+  UNIQUE KEY(`sender_id`, `recipient_id`), 
   CONSTRAINT `fk_user_messages_on_sender_id`    FOREIGN KEY(`sender_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `matchings`(
+  `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `sender_id`    BIGINT(20) UNSIGNED NOT NULL
+  `recipient_id` BIGINT(20) UNSIGNED NOT NULL
+  `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  UNIQUE KEY(`sender_id`, `recipient_id`), 
+  CONSTRAINT `fk_user_messages_on_sender_id`    FOREIGN KEY(`sender_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
+  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- tagsがkudosみたいにできるか、確認
 CREATE TABLE `tags` (

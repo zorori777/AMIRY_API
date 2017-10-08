@@ -39,6 +39,7 @@ class User < ApplicationRecord
   has_many   :circles,     through: :user_circles
   has_many   :bands,       through: :user_bands
   has_many   :lives,       through: :user_lives
+  has_many   :lectures
   belongs_to :university
 
   # Validation

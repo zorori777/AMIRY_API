@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008103849) do
+ActiveRecord::Schema.define(version: 20171008112225) do
 
   create_table "article_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
@@ -83,6 +83,26 @@ ActiveRecord::Schema.define(version: 20171008103849) do
     t.index ["university_id"], name: "index_circles_on_university_id"
   end
 
+  create_table "lectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.text "description", null: false
+    t.string "address", default: "", null: false
+    t.datetime "hold_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["hold_at"], name: "index_lectures_on_hold_at"
+    t.index ["user_id"], name: "index_lectures_on_user_id"
+  end
+
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "sender_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.bigint "recipient_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["recipient_id"], name: "fk_rails_e63dc1dc05"
+    t.index ["sender_id"], name: "fk_rails_1c99703fe0"
+  end
+
   create_table "live_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "live_id", null: false
     t.string "name", default: "", null: false
@@ -104,6 +124,15 @@ ActiveRecord::Schema.define(version: 20171008103849) do
     t.index ["circle_id", "type"], name: "index_lives_on_circle_id_and_type"
     t.index ["circle_id"], name: "index_lives_on_circle_id"
     t.index ["hold_at"], name: "index_lives_on_hold_at"
+  end
+
+  create_table "matchings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "sender_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.bigint "recipient_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["recipient_id"], name: "fk_rails_6f4faa47c8"
+    t.index ["sender_id"], name: "fk_rails_4043de8e42"
   end
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -201,8 +230,13 @@ ActiveRecord::Schema.define(version: 20171008103849) do
   add_foreign_key "bands", "circles"
   add_foreign_key "circle_images", "circles"
   add_foreign_key "circles", "universities"
+  add_foreign_key "lectures", "users"
+  add_foreign_key "likes", "users", column: "recipient_id"
+  add_foreign_key "likes", "users", column: "sender_id"
   add_foreign_key "live_images", "lives", column: "live_id"
   add_foreign_key "lives", "circles"
+  add_foreign_key "matchings", "users", column: "recipient_id"
+  add_foreign_key "matchings", "users", column: "sender_id"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "user_bands", "bands"
