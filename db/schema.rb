@@ -127,12 +127,13 @@ ActiveRecord::Schema.define(version: 20171008112225) do
   end
 
   create_table "matchings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "sender_id", null: false, comment: "bigint活用のため、limit: 8"
-    t.bigint "recipient_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.bigint "like_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "acceptance", limit: 1, null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["recipient_id"], name: "fk_rails_6f4faa47c8"
-    t.index ["sender_id"], name: "fk_rails_4043de8e42"
+    t.index ["like_id"], name: "index_matchings_on_like_id"
+    t.index ["user_id"], name: "index_matchings_on_user_id"
   end
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -204,6 +205,8 @@ ActiveRecord::Schema.define(version: 20171008112225) do
     t.string "catchcopy", default: "", null: false
     t.text "self_introduction", null: false
     t.integer "bands_count", default: 0, null: false
+    t.integer "likes_count", default: 0, null: false
+    t.integer "mathcings_count", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -235,8 +238,8 @@ ActiveRecord::Schema.define(version: 20171008112225) do
   add_foreign_key "likes", "users", column: "sender_id"
   add_foreign_key "live_images", "lives", column: "live_id"
   add_foreign_key "lives", "circles"
-  add_foreign_key "matchings", "users", column: "recipient_id"
-  add_foreign_key "matchings", "users", column: "sender_id"
+  add_foreign_key "matchings", "likes"
+  add_foreign_key "matchings", "users"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "user_bands", "bands"

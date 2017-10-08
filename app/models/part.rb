@@ -10,7 +10,11 @@
 
 class Part < ApplicationRecord
 
+  # Association
   has_many :user_parts
   has_many :users, through: :user_parts
+
+  # Validation
+  validates :name, uniqueness: true, presence: true
 
 end

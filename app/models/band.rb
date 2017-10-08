@@ -30,7 +30,8 @@ class Band < ApplicationRecord
 
   # Validation
   validates :name,                             uniqueness: { scope: :circle_id }
-  validates :university_id, :name, :concept, 
+  validates :name, :concept, 
+            :circle_id, :people_num,
             :description, :type, :united_at,   presence: true
   validates :circle_id, :people_num,           numericality: true
   validate  :people_num_between_four_and_seven

@@ -8,6 +8,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string     :catchcopy,             null: false, default: ''
       t.text       :self_introduction,     null: false
       t.integer    :bands_count,           null: false, default: 0
+      t.integer    :likes_count,           null: false, default: 0
+      t.integer    :mathcings_count,       null: false, default: 0
 
       ## Database authenticatable
       t.string     :email,                 null: false, default: ''
@@ -21,7 +23,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.datetime   :remember_created_at
 
       ## Trackable
-      t.integer    :sign_in_count,         null: false, default: 0
+      t.integer    :sign_in_count,           null: false, default: 0
       t.datetime   :current_sign_in_at
       t.datetime   :last_sign_in_at
       t.string     :current_sign_in_ip
@@ -38,7 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.timestamps                         null: false, default: -> { 'CURRENT_TIMESTAMP' }
+      t.timestamps                           null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
     add_index :users, :email,                unique: true
