@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008065210) do
+ActiveRecord::Schema.define(version: 20171008080636) do
 
   create_table "band_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "band_id", null: false
@@ -94,6 +94,33 @@ ActiveRecord::Schema.define(version: 20171008065210) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "band_id", null: false
+    t.bigint "university_id", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "avatar", default: "", null: false
+    t.string "catchcopy", default: "", null: false
+    t.text "self_introduction", null: false
+    t.integer "bands_count", default: 0, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_users_on_band_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["university_id"], name: "index_users_on_university_id"
+  end
+
   add_foreign_key "band_images", "bands"
   add_foreign_key "band_lives", "bands"
   add_foreign_key "band_lives", "lives", column: "live_id"
@@ -102,4 +129,6 @@ ActiveRecord::Schema.define(version: 20171008065210) do
   add_foreign_key "circles", "universities"
   add_foreign_key "live_images", "lives", column: "live_id"
   add_foreign_key "lives", "circles"
+  add_foreign_key "users", "bands"
+  add_foreign_key "users", "universities"
 end

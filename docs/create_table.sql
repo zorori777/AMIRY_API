@@ -4,14 +4,14 @@
 
 CREATE TABLE `users`(
   `id`                BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `band_id`           BIGINT(20)  UNSIGNED NOT NULL,    
+  `university_id`     BIGINT(20)  UNSIGNED NOT NULL,
   `first_name`        VARCHAR(64)          NOT NULL DEFAULT '',
   `last_name`         VARCHAR(64)          NOT NULL DEFAULT '',
   `avatar`            VARCHAR(64) UNSIGNED NOT NULL DEFAULT '',
   `catchcopy`         VARCHAR(64) UNSIGNED NOT NULL DEFAULT '',
   `self_introduction` TEXT                 NOT NULL
-  `band_id`           BIGINT(20)  UNSIGNED NOT NULL DEFAULT '',
   `bands_count`       BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
-  `university_id`     BIGINT(20)  UNSIGNED NOT NULL,
   PRIMARY KEY(`id`),
   CONSTRAINT `fk_users_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE
   CONSTRAINT `fk_lives_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
@@ -21,11 +21,9 @@ CREATE TABLE `users`(
 CREATE TABLE `parts`(
   `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
   `name`       VARCHAR(64)          NOT NULL DEFAULT '',
-  `user_id`    BIGINT(20)  UNSIGNED NOT NULL,
   `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP           
   PRIMARY KEY(`id`),
-  CONSTRAINT `user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `user_parts`(
