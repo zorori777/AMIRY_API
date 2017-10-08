@@ -12,6 +12,10 @@ gem 'puma', '~> 3.7'
 gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails'
 
+# HAML
+gem 'erb2haml'
+gem 'haml-rails'
+
 # SCSS 
 gem 'sass-rails', '~> 5.0'
 
