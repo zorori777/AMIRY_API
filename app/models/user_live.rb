@@ -19,6 +19,6 @@ class UserLive < ApplicationRecord
   validates :user_id, :live_id, numericality: true, presence: true
 
   # Counter Culture
-  counter_culture :live, column_names: 'reservations_count'
+  counter_culture :live, column_name: 'reservations_count'
 
 end

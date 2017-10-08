@@ -6,7 +6,7 @@ class CreateCircles < ActiveRecord::Migration[5.1]
       t.string     :description,                   null: false, default: ''
       t.integer    :members_count, unsigned: true, null: false, default: 0
       t.integer    :bands_count,   unsigned: true, null: false, default: 0
-      t.timestamps                                 null: false
+      t.timestamps                                 null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
     add_index :circles, [:name, :university_id], unique: true

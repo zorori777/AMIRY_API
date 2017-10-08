@@ -171,8 +171,8 @@ CREATE TABLE `user_circles`(
   `updated_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   PRIMARY KEY(`id`),
   UNIQUE KEY(`circle_id`, `user_id`),
-  CONSTRAINT `fk_user_circles_on_user_id` FOREIGN KEY(`user_id`)   REFERENCES `users`   (`id`) ON UPDATE CASCADE, 
-  CONSTRAINT `fk_user_circles_on_band_id` FOREIGN KEY(`circle_id`) REFERENCES `circles` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `fk_user_circles_on_user_id`   FOREIGN KEY(`user_id`)   REFERENCES `users`   (`id`) ON UPDATE CASCADE, 
+  CONSTRAINT `fk_user_circles_on_circle_id` FOREIGN KEY(`circle_id`) REFERENCES `circles` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `events` (
@@ -220,31 +220,22 @@ CREATE TABLE `article_comments` (
   `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   PRIMARY KEY(`id`), 
-  CONSTRAINT `fk_article_comments_on_user_id`    FOREIGN KEY(`user_id`)    REFERENCES `users` (`id`)    ON UPDATE CASCADE ON DELETE CASCADE, 
+  CONSTRAINT `fk_article_comments_on_user_id`    FOREIGN KEY(`user_id`)    REFERENCES `users` (`id`)    ON UPDATE CASCADE, 
   CONSTRAINT `fk_article_comments_on_article_id` FOREIGN KEY(`article_id`) REFERENCES `articles` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `messages`(
   `id`            BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
-  `body`          VARCHAR(64)          NOT NULL
-  `user_id`       BIGINT(20)  UNSIGNED NOT NULL,
+  `sender_id`     BIGINT(20)  UNSIGNED NOT NULL,
+  `recipient_id` BIGINT(20)   UNSIGNED NOT NULL, 
+  `body`          VARCHAR(64)          NOT NULL DEFAULT '',
+  `image`         VARCHAR(64)          NOT NULL DEFAULT '',
   `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
-  CONSTRAINT `fk_messages_on_user_id`       FOREIGN KEY(`user_id`)       REFERENCES `users`       (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `user_messages`(
-  `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `sender_id`    BIGINT(20) UNSIGNED NOT NULL,
-  `recipient_id` BIGINT(20) UNSIGNED NOT NULL, 
-  `message_id`   BIGINT(20) UNSIGNED NOT NULL,
-  `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at`   DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY(`id`),
-  CONSTRAINT `fk_user_messages_on_sender_id`    FOREIGN KEY(`sender_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_messages_on_sender_id`         FOREIGN KEY(`sender_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE, 
+  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE, 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `likes` (
   `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
