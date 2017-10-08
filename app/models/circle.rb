@@ -17,10 +17,12 @@ class Circle < ApplicationRecord
   # Association
   has_many   :bands
   has_many   :circle_images
+  has_many   :user_circles
+  has_many   :circles,     through: :user_circles
   belongs_to :university
 
   # Validation
-  validates :name, :description,          presence: true
-  validates :bands_count, :members_count, numericality: true
+  validates :name, :description,                          presence: true
+  validates :bands_count, :members_count, :university_id, numericality: true
 
 end
