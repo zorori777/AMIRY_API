@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008064149) do
+ActiveRecord::Schema.define(version: 20171008065210) do
 
   create_table "band_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "band_id", null: false
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 20171008064149) do
     t.index ["university_id"], name: "index_circles_on_university_id"
   end
 
+  create_table "live_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "live_id", null: false
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["live_id"], name: "index_live_images_on_live_id"
+  end
+
   create_table "lives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id", null: false
     t.string "name", default: "", null: false
@@ -92,5 +100,6 @@ ActiveRecord::Schema.define(version: 20171008064149) do
   add_foreign_key "bands", "circles"
   add_foreign_key "circle_images", "circles"
   add_foreign_key "circles", "universities"
+  add_foreign_key "live_images", "lives", column: "live_id"
   add_foreign_key "lives", "circles"
 end
