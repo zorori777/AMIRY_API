@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008083632) do
+ActiveRecord::Schema.define(version: 20171008100910) do
+
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_articles_on_created_at"
+    t.index ["user_id"], name: "index_articles_on_user_id"
+  end
 
   create_table "band_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "band_id", null: false
@@ -101,6 +110,9 @@ ActiveRecord::Schema.define(version: 20171008083632) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  create_table "user_bands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  end
+
   create_table "user_circles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
     t.bigint "circle_id", null: false
@@ -108,6 +120,15 @@ ActiveRecord::Schema.define(version: 20171008083632) do
     t.datetime "updated_at", null: false
     t.index ["circle_id"], name: "index_user_circles_on_circle_id"
     t.index ["user_id"], name: "index_user_circles_on_user_id"
+  end
+
+  create_table "user_lives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "live_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["live_id"], name: "index_user_lives_on_live_id"
+    t.index ["user_id"], name: "index_user_lives_on_user_id"
   end
 
   create_table "user_parts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -144,6 +165,7 @@ ActiveRecord::Schema.define(version: 20171008083632) do
     t.index ["university_id"], name: "index_users_on_university_id"
   end
 
+  add_foreign_key "articles", "users"
   add_foreign_key "band_images", "bands"
   add_foreign_key "band_lives", "bands"
   add_foreign_key "band_lives", "lives", column: "live_id"
@@ -154,6 +176,8 @@ ActiveRecord::Schema.define(version: 20171008083632) do
   add_foreign_key "lives", "circles"
   add_foreign_key "user_circles", "circles"
   add_foreign_key "user_circles", "users"
+  add_foreign_key "user_lives", "lives", column: "live_id"
+  add_foreign_key "user_lives", "users"
   add_foreign_key "user_parts", "parts"
   add_foreign_key "user_parts", "users"
   add_foreign_key "users", "universities"

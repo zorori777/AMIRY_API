@@ -33,7 +33,7 @@ CREATE TABLE `user_parts`(
   PRIMARY KEY(`id`),
   CONSTRAINT `user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
   CONSTRAINT `part_id` FOREIGN KEY(`part_id`) REFERENCES `parts` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `lives`(
   `id`                 BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -49,6 +49,17 @@ CREATE TABLE `lives`(
   KEY(`university_id`, `type`),
   KEY(`hold_at`),
   CONSTRAINT `fk_lives_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_lives` (
+  `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`    BIGINT(20) UNSIGNED NOT NULL,  
+  `live_id`    BIGINT(20) UNSIGNED NOT NULL,
+  `created_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  CONSTRAINT `fk_user_lives_on_user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE, 
+  CONSTRAINT `fk_user_lives_on_live_id` FOREIGN KEY(`live_id`) REFERENCES `lives` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `live_images` (
@@ -159,10 +170,10 @@ CREATE TABLE `user_circles`(
   `created_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   PRIMARY KEY(`id`),
-  UNIQUE KEY(`user_id`, `circle_id`),
+  UNIQUE KEY(`circle_id`, `user_id`),
   CONSTRAINT `fk_user_circles_on_user_id` FOREIGN KEY(`user_id`)   REFERENCES `users`   (`id`) ON UPDATE CASCADE, 
   CONSTRAINT `fk_user_circles_on_band_id` FOREIGN KEY(`circle_id`) REFERENCES `circles` (`id`) ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `events` (
   `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -199,7 +210,7 @@ CREATE TABLE `articles` (
   PRIMARY KEY(`id`),
   KEY(`created_at`),
   CONSTRAINT `fk_user_circles_on_user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE, 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `article_comments` (
   `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,  
