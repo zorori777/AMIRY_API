@@ -11,7 +11,7 @@
 RECORD_NAME        = 'universities'
 UNIVERSITIES_ARRAY = %w(早稲田大学 慶応大学 埼玉大学 千葉大学 東京大学 信州大学)
 
-1.upto(UNIVERSITIES_ARRAY.size) do |num|
+UNIVERSITIES_ARRAY.size.times do |num|
   begin
     university = University.new(
       name: UNIVERSITIES_ARRAY[num] 
@@ -23,5 +23,7 @@ UNIVERSITIES_ARRAY = %w(早稲田大学 慶応大学 埼玉大学 千葉大学 �
     end
   rescue => error
     p "Seed file fails because #{error.message}. #{num} records have been inserted."
+    p "Total: #{University.count}"
+    exit
   end
 end

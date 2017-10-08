@@ -3,13 +3,15 @@
 -- Keeping the policy that this create_table.sql file should be up to date.
 
 CREATE TABLE `users`(
-  `id`            BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name`    VARCHAR(64)          NOT NULL DEFAULT '',
-  `last_name`     VARCHAR(64)          NOT NULL DEFAULT '',
-  `avatar`        VARCHAR(64) UNSIGNED NOT NULL DEFAULT '',
-  `band_id`       BIGINT(20)  UNSIGNED NOT NULL DEFAULT '',
-  `bands_count`   BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
-  `university_id` BIGINT(20)  UNSIGNED NOT NULL,
+  `id`                BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `first_name`        VARCHAR(64)          NOT NULL DEFAULT '',
+  `last_name`         VARCHAR(64)          NOT NULL DEFAULT '',
+  `avatar`            VARCHAR(64) UNSIGNED NOT NULL DEFAULT '',
+  `catchcopy`         VARCHAR(64) UNSIGNED NOT NULL DEFAULT '',
+  `self_introduction` TEXT                 NOT NULL
+  `band_id`           BIGINT(20)  UNSIGNED NOT NULL DEFAULT '',
+  `bands_count`       BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
+  `university_id`     BIGINT(20)  UNSIGNED NOT NULL,
   PRIMARY KEY(`id`),
   CONSTRAINT `fk_users_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE
   CONSTRAINT `fk_lives_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
@@ -51,6 +53,16 @@ CREATE TABLE `lives`(
   CONSTRAINT `fk_lives_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `live_images` (
+  `id`         BIGINT(20)  UNSIGNED NOT NULL,
+  `live_id`    BIGINT(20)  UNSIGNED NOT NULL, 
+  `name`       VARCHAR(20)          NOT NULL DEFAULT '',
+  `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  CONSTRAINT `fk_lives_images_on_live_id` FOREIGN KEY(`live_id`) REFERENCES `lives` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `reservations` (
   `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id`    BIGINT(20) UNSIGNED NOT NULL,
@@ -87,7 +99,7 @@ CREATE TABLE `band_images` (
   PRIMARY KEY(`id`),
   KEY(`band_id`),
   CONSTRAINT `fk_lives_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user_bands`(
   `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -98,7 +110,18 @@ CREATE TABLE `user_bands`(
   PRIMARY KEY(`id`),
   CONSTRAINT `fk_user_bands_on_user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE, 
   CONSTRAINT `fk_user_bands_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `band_lives` (
+  `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `band_id`    BIGINT(20) UNSIGNED NOT NULL,
+  `live_id`    BIGINT(20) UNSIGNED NOT NULL,
+  `created_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP
+  PRIMARY KEY(`id`),
+  CONSTRAINT `fk_user_bands_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `fk_user_bands_on_live_id` FOREIGN KEY(`live_id`) REFERENCES `lives` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `universities` (
   `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
