@@ -1,7 +1,7 @@
 class CreateBands < ActiveRecord::Migration[5.1]
   def change
     create_table :bands, option: 'ENGINE=InnoDB DEFAULT CHARSET=utf8;' do |t|
-      t.references :university,                  null: false, foreign_key: true
+      t.references :circle,                      null: false, foreign_key: true
       t.string     :name,                        null: false, default: ''
       t.string     :concept,                     null: false, default: ''
       t.text       :description,                 null: false
@@ -11,6 +11,6 @@ class CreateBands < ActiveRecord::Migration[5.1]
       t.timestamps                               null: false
     end
 
-    add_index :bands, [:university_id, :name], unique: true
+    add_index :bands, [:circle_id, :name], unique: true
   end
 end

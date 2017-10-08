@@ -40,8 +40,8 @@ CREATE TABLE `lives`(
   `name`               VARCHAR(64)          NOT NULL DEFAULT ''
   `max_capacity`       BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
   `reservations_count` BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
-  `university_id`      BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
-  `type`               TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0',               COMMENT 'サークルライブ以外: 0, サークルライブ: 1'
+  `circle_id`          BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
+  `type`               TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0',               COMMENT 'サークルライブ: 1, サークルライブ以外: 2'
   `hold_at`            DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP
   `created_at`         DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`         DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP           
@@ -49,7 +49,7 @@ CREATE TABLE `lives`(
   KEY(`university_id`, `type`),
   KEY(`hold_at`),
   CONSTRAINT `fk_lives_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `reservations` (
   `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -60,16 +60,16 @@ CREATE TABLE `reservations` (
   PRIMARY KEY(`id`),
   KEY(`user_id`),
   KEY(`live_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `bands`(
   `id`            BIGINT(20)  UNSIGNED NOT NULL,
+  `circle_id`     BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',               COMMENT 'インカレなら、0',
   `name`          VARCHAR(20)          NOT NULL DEFAULT '',
   `concept`       VARCHAR(64)          NOT NULL DEFAULT '',
   `description`   TEXT                 NOT NULL,
   `people_num`    BIGINT(64)           NOT NULL DEFAULT '0',
-  `type`          TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0', 
-  `university_id` BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',               COMMENT 'インカレなら、0',
+  `type`          TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0',               COMMENT '1: ヤロバン, 2: ギャルバン, 3: 混声, 4: 準ヤロバン, 5: 準ギャルバン, 6: インカレ'
   `united_at`     DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   `created_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`    DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP           
@@ -121,7 +121,7 @@ CREATE TABLE `circles` (
   PRIMARY KEY(`id`),
   UNIQUE KEY(`name`, `university_id`),
   CONSTRAINT `fk_circles_on_university_id` FOREIGN KEY(`university_id`) REFERENCES `universities` (`id`) ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `circle_images`(
   `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
