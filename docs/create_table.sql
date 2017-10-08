@@ -181,6 +181,7 @@ CREATE TABLE `events` (
 
 CREATE TABLE `lectures` (
   `id`          BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,  
+  `user_id`     BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,  
   `description` TEXT                 NOT NULL,
   `address`     VARCHAR(64)          NOT NULL DEFAULT '',
   `hold_at`     DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,

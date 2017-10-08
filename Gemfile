@@ -28,11 +28,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'carrierwave'
 gem 'fog'
 
-# Count UPDOWN
+# COUNT UPDOWN
 gem 'counter_culture'
 
-# Decorator
+# DECORATER
 gem 'draper'
+
+# SERIALIZER
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
