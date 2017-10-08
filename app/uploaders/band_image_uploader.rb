@@ -1,4 +1,4 @@
-class CircleImageUploader < CarrierWave::Uploader::Base
+class BandImageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file

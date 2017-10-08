@@ -24,6 +24,7 @@ class Band < ApplicationRecord
 
   # Association
   belongs_to :circle
+  has_many   :band_images
   has_many   :band_lives
   has_many   :lives, through: :band_lives
 

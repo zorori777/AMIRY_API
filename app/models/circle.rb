@@ -5,7 +5,6 @@
 #  id            :integer          not null, primary key
 #  university_id :integer          not null
 #  name          :string(255)      default(""), not null
-#  logo          :string(255)      default(""), not null
 #  description   :string(255)      default(""), not null
 #  members_count :integer          default(0), unsigned, not null
 #  bands_count   :integer          default(0), unsigned, not null
