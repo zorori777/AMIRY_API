@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008080636) do
+ActiveRecord::Schema.define(version: 20171008082225) do
 
   create_table "band_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "band_id", null: false
@@ -87,6 +87,13 @@ ActiveRecord::Schema.define(version: 20171008080636) do
     t.index ["hold_at"], name: "index_lives_on_hold_at"
   end
 
+  create_table "parts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_parts_on_name", unique: true
+  end
+
   create_table "universities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", default: "", null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -94,8 +101,16 @@ ActiveRecord::Schema.define(version: 20171008080636) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  create_table "user_parts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "part_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["part_id"], name: "index_user_parts_on_part_id"
+    t.index ["user_id"], name: "index_user_parts_on_user_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "band_id", null: false
     t.bigint "university_id", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -115,7 +130,6 @@ ActiveRecord::Schema.define(version: 20171008080636) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["band_id"], name: "index_users_on_band_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["university_id"], name: "index_users_on_university_id"
@@ -129,6 +143,7 @@ ActiveRecord::Schema.define(version: 20171008080636) do
   add_foreign_key "circles", "universities"
   add_foreign_key "live_images", "lives", column: "live_id"
   add_foreign_key "lives", "circles"
-  add_foreign_key "users", "bands"
+  add_foreign_key "user_parts", "parts"
+  add_foreign_key "user_parts", "users"
   add_foreign_key "users", "universities"
 end
