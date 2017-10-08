@@ -97,7 +97,6 @@ CREATE TABLE `band_images` (
   `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
-  KEY(`band_id`),
   CONSTRAINT `fk_lives_on_band_id` FOREIGN KEY(`band_id`) REFERENCES `bands` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -249,6 +248,8 @@ CREATE TABLE `likes` (
   CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- tagsがkudosみたいにできるか、確認
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,

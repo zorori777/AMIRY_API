@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008060759) do
+ActiveRecord::Schema.define(version: 20171008064149) do
+
+  create_table "band_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "band_id", null: false
+    t.string "name", default: "", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["band_id"], name: "index_band_images_on_band_id"
+  end
 
   create_table "band_lives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "band_id", null: false
@@ -38,6 +46,7 @@ ActiveRecord::Schema.define(version: 20171008060759) do
   create_table "circle_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id", null: false
     t.string "name", default: "", null: false
+    t.integer "type", default: 0, null: false, unsigned: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["circle_id"], name: "index_circle_images_on_circle_id"
@@ -77,6 +86,7 @@ ActiveRecord::Schema.define(version: 20171008060759) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  add_foreign_key "band_images", "bands"
   add_foreign_key "band_lives", "bands"
   add_foreign_key "band_lives", "lives", column: "live_id"
   add_foreign_key "bands", "circles"
