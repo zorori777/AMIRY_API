@@ -12,7 +12,7 @@
 class Article < ApplicationRecord
 
   # scope
-  scope :recent, -> { where(updated_at: :desc) }
+  scope :recent, -> { where(created_at: :desc) }
 
   # Association
   belongs_to :user
@@ -21,5 +21,9 @@ class Article < ApplicationRecord
   # Validation
   validates :content, :user_id, presence: true
   validates :user_id,           numericality: true
+
+  def created_by?(user)
+    self.user_id == user.id
+  end
   
 end

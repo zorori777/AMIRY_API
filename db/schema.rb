@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008112225) do
+ActiveRecord::Schema.define(version: 20171009133829) do
 
   create_table "article_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id", null: false
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(version: 20171008112225) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["name", "university_id"], name: "index_circles_on_name_and_university_id", unique: true
     t.index ["university_id"], name: "index_circles_on_university_id"
+  end
+
+  create_table "introductions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "sender_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.bigint "recipient_id", null: false, comment: "bigint活用のため、limit: 8"
+    t.text "description", null: false
+    t.integer "acceptance", limit: 1, default: 0, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["recipient_id"], name: "fk_rails_ddedff8c34"
+    t.index ["sender_id", "recipient_id"], name: "index_introductions_on_sender_id_and_recipient_id", unique: true
   end
 
   create_table "lectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -233,6 +244,8 @@ ActiveRecord::Schema.define(version: 20171008112225) do
   add_foreign_key "bands", "circles"
   add_foreign_key "circle_images", "circles"
   add_foreign_key "circles", "universities"
+  add_foreign_key "introductions", "users", column: "recipient_id"
+  add_foreign_key "introductions", "users", column: "sender_id"
   add_foreign_key "lectures", "users"
   add_foreign_key "likes", "users", column: "recipient_id"
   add_foreign_key "likes", "users", column: "sender_id"

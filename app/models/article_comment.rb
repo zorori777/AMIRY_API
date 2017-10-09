@@ -20,4 +20,8 @@ class ArticleComment < ApplicationRecord
   validates :content, :user_id, :article_id, presence: true
   validates :user_id, :article_id,           numericality: true 
 
+  def created_by?(user)
+    self.user_id == user.id
+  end
+
 end

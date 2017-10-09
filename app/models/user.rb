@@ -11,7 +11,7 @@
 #  self_introduction      :text(65535)      not null
 #  bands_count            :integer          default(0), not null
 #  likes_count            :integer          default(0), not null
-#  mathcings_count        :integer          default(0), not null
+#  matchings_count        :integer          default(0), not null
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)

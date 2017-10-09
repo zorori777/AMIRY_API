@@ -251,13 +251,27 @@ CREATE TABLE `likes` (
 
 CREATE TABLE `matchings`(
   `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `sender_id`    BIGINT(20) UNSIGNED NOT NULL
-  `recipient_id` BIGINT(20) UNSIGNED NOT NULL
+  `sender_id`    BIGINT(20) UNSIGNED NOT NULL,
+  `recipient_id` BIGINT(20) UNSIGNED NOT NULL,
   `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
   UNIQUE KEY(`sender_id`, `recipient_id`), 
   CONSTRAINT `fk_user_messages_on_sender_id`    FOREIGN KEY(`sender_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
+  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `introductions` (
+  `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `writer_id`    BIGINT(20) UNSIGNED NOT NULL,
+  `recipient_id` BIGINT(20) UNSIGNED NOT NULL,
+  `description`  TEXT                NOT NULL, 
+  `rejected`     TINYINT(3) UNSIGNED NOT NULL DEFAULT '0', 
+  `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+  `updated_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  UNIQUE KEY(`writer_id`, `recipient_id`), 
+  CONSTRAINT `fk_user_messages_on_writer_id`    FOREIGN KEY(`writer_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
   CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
