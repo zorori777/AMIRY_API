@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.text       :self_introduction,     null: false
       t.integer    :bands_count,           null: false, default: 0
       t.integer    :likes_count,           null: false, default: 0
-      t.integer    :mathcings_count,       null: false, default: 0
+      t.integer    :matchings_count,       null: false, default: 0
 
       ## Database authenticatable
       t.string     :email,                 null: false, default: ''

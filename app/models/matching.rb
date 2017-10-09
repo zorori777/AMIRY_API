@@ -16,11 +16,11 @@ class Matching < ApplicationRecord
   enum acceptance: { accepted: 1, rejected: 2 }
 
   # Association
-  belongs_to :live
+  belongs_to :like
   belongs_to :user
 
   # Validation
-  validates :user_id, :live_id, numericality: true, presence: true
+  validates :user_id, :like_id, numericality: true, presence: true
 
   # Counter Culture
   counter_culture :user, column_name: 'matchings_count'

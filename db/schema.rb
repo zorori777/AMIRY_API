@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20171008112225) do
     t.text "self_introduction", null: false
     t.integer "bands_count", default: 0, null: false
     t.integer "likes_count", default: 0, null: false
-    t.integer "mathcings_count", default: 0, null: false
+    t.integer "matchings_count", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

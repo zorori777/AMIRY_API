@@ -17,10 +17,10 @@ class UserCircle < ApplicationRecord
 
   # Validation
   validates :user_id, :circle_id, presence: true, numericality: true
-  validates :circle_id,           uniqueness: { scope: :use_id }
+  validates :circle_id,           uniqueness: { scope: :user_id }
 
   # Counter Culture
-  counter_culture :user,   column_name: 'members_count'
-  counter_culture :circle, column_name: 'bands_count'
+  counter_culture :user,   column_name: 'bands_count'
+  counter_culture :circle, column_name: 'members_count'
 
 end

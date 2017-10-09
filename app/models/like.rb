@@ -16,10 +16,11 @@ class Like < ApplicationRecord
   belongs_to :recipient, foreign_key: 'recipient_id', class_name: 'User'
 
   # Validation
-  validates :sender_id, :recipient_id, numericality: true, presence: true
+  validates :sender_id, 
+            :recipient_id, numericality: true, presence: true
+  validates :sender_id,    uniqueness: { scope: :recipient_id }
 
   # Counter Culture
   counter_culture :recipient, column_name: 'likes_count'
-
 
 end

@@ -21,6 +21,5 @@ class Article < ApplicationRecord
   # Validation
   validates :content, :user_id, presence: true
   validates :user_id,           numericality: true
-
   
 end

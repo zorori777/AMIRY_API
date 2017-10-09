@@ -3,7 +3,7 @@
 # Table name: parts
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)      default(""), not null
+#  name       :integer          default(NULL), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
