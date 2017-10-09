@@ -22,4 +22,7 @@ class Matching < ApplicationRecord
   # Validation
   validates :user_id, :live_id, numericality: true, presence: true
 
+  # Counter Culture
+  counter_culture :user, column_name: 'matchings_count'
+
 end

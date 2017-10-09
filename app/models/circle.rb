@@ -22,7 +22,9 @@ class Circle < ApplicationRecord
   belongs_to :university
 
   # Validation
-  validates :name, :description,                          presence: true
-  validates :bands_count, :members_count, :university_id, numericality: true
+  validates :name, :description,            presence: true
+  validates :bands_count, 
+            :members_count, :university_id, numericality: true
+  validates :name,                          uniqueness: { scope: :university_id }
 
 end
