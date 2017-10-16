@@ -38,19 +38,22 @@ class User < ApplicationRecord
   has_many   :user_circles
   has_many   :user_bands
   has_many   :user_lives
-  has_many   :parts,          through: :user_parts
-  has_many   :circles,        through: :user_circles
-  has_many   :bands,          through: :user_bands
-  has_many   :lives,          through: :user_lives
+  has_many   :parts,                  through: :user_parts
+  has_many   :circles,                through: :user_circles
+  has_many   :bands,                  through: :user_bands
+  has_many   :lives,                  through: :user_lives
   has_many   :lectures
   has_many   :matchings
-  has_many   :send_likes,     class_name: 'Like', foreign_key: 'sender_id'
-  has_many   :received_likes, class_name: 'Like', foreign_key: 'recipient_id'
+  has_many   :send_likes,             class_name: 'Like',         foreign_key: 'sender_id'
+  has_many   :received_likes,         class_name: 'Like',         foreign_key: 'recipient_id'
+  has_many   :send_introductions,     class_name: 'Introduction', foreign_key: 'sender_id'
+  has_many   :received_introductions, class_name: 'Introduction', foreign_key: 'recipient_id' 
 
   # Validation
-  validates :first_name, :last_name, :email, 
-            :self_introduction, :catchcopy,  presence: true
-  validates :university_id, :bands_count,    numericality: true
+  validates :university_id, :first_name, 
+            :last_name, :email, :bands_count,
+            :self_introduction, :catchcopy,   presence: true
+  validates :university_id, :bands_count,     numericality: true
 
   # Uploader
   mount_uploader :avatar, AvatarUploader
