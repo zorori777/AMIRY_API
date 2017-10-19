@@ -35,11 +35,12 @@ gem 'counter_culture'
 gem 'draper'
 
 # SERIALIZER
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.9.7'
 
 # AUTHENTICATION
 gem 'devise'
 
+# activeadmin
 gem 'activeadmin'
 
 group :development, :test do
