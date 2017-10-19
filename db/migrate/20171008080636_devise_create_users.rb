@@ -4,11 +4,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.references :university,            null: false, foreign_key: true
       t.string     :first_name,            null: false, default: ''
       t.string     :last_name,             null: false, default: ''
+      t.string     :display_name,          null: false, default: ''
       t.string     :avatar,                null: false, default: ''
       t.string     :catchcopy,             null: false, default: ''
       t.text       :self_introduction,     null: false
       t.integer    :bands_count,           null: false, default: 0
-      t.integer    :likes_count,           null: false, default: 0
+      t.integer    :received_likes_count,  null: false, default: 0
+      t.integer    :sendable_likes_count,  null: false, default: 0
       t.integer    :matchings_count,       null: false, default: 0
 
       ## Database authenticatable
@@ -43,6 +45,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.timestamps                           null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
+    add_index :users, :display_name,         unique: true
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true

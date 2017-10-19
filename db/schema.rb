@@ -212,11 +212,13 @@ ActiveRecord::Schema.define(version: 20171009133829) do
     t.bigint "university_id", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
+    t.string "display_name", default: "", null: false
     t.string "avatar", default: "", null: false
     t.string "catchcopy", default: "", null: false
     t.text "self_introduction", null: false
     t.integer "bands_count", default: 0, null: false
-    t.integer "likes_count", default: 0, null: false
+    t.integer "received_likes_count", default: 0, null: false
+    t.integer "sendable_likes_count", default: 0, null: false
     t.integer "matchings_count", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -230,6 +232,7 @@ ActiveRecord::Schema.define(version: 20171009133829) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["display_name"], name: "index_users_on_display_name", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["university_id"], name: "index_users_on_university_id"

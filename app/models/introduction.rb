@@ -6,7 +6,7 @@
 #  sender_id    :integer          not null
 #  recipient_id :integer          not null
 #  description  :text(65535)      not null
-#  acceptance   :integer          default(0), not null
+#  acceptance   :integer          default(NULL), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
