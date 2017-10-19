@@ -29,6 +29,8 @@
 #
 
 class User < ApplicationRecord
+  before_save :set_display_name, if: :new_record?
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -52,12 +54,21 @@ class User < ApplicationRecord
   has_many   :received_introductions, class_name: 'Introduction', foreign_key: 'recipient_id' 
 
   # Validation
-  validates :university_id, :first_name, 
+  validates :university_id, :first_name,
             :last_name, :email, :bands_count,
-            :self_introduction, :catchcopy,   presence: true
-  validates :university_id, :bands_count,     numericality: true
+            :self_introduction, :catchcopy,
+            :display_name,                    presence: true
+  validates :university_id, :bands_count,
+            :received_likes_count,
+            :sendable_likes_count,
+            :matchings_count,                 numericality: true
+  validates :email, :display_name,            uniqueness: true
 
   # Uploader
   mount_uploader :avatar, AvatarUploader
+
+  def set_display_name
+    "#{self.last_name} #{self.first_name}"
+  end
 
 end
