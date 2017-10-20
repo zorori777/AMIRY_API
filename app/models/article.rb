@@ -15,10 +15,10 @@ class Article < ApplicationRecord
   PER_PAGE = 15
 
   # Scope
-  scope :recent, -> { where(created_at: :desc) }
+  scope :in_newest_order, -> { order(created_at: :desc) }
 
   # Association
-  belongs_to :user
+  belongs_to :user, -> { includes(:university) }
   has_many   :article_comments
 
   # Validation

@@ -2,7 +2,8 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show]
 
   def index
-    @articles = paginate ArticleDecorator.decorate_collection(Article.all.includes(:user)), per_page: Article::PER_PAGE
+    all_articles = Article.all.includes(:user).in_newest_order
+    @articles = paginate ArticleDecorator.decorate_collection(all_articles), per_page: Article::PER_PAGE
 
     respond_to do |format|
       format.html { render :index }
