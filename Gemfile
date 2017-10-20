@@ -44,6 +44,7 @@ gem 'devise'
 gem 'activeadmin'
 
 # API PAGINATION
+gem 'kaminari'
 gem 'api-pagination'
 
 group :development, :test do

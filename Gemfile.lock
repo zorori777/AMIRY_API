@@ -516,6 +516,7 @@ DEPENDENCIES
   fog
   haml-rails
   jbuilder (~> 2.5)
+  kaminari
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.3.18, < 0.5)
   pry-byebug
