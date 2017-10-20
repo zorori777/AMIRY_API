@@ -11,7 +11,10 @@
 
 class Article < ApplicationRecord
 
-  # scope
+  # Constant
+  PER_PAGE = 15
+
+  # Scope
   scope :recent, -> { where(created_at: :desc) }
 
   # Association

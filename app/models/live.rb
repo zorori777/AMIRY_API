@@ -19,6 +19,9 @@ class Live < ApplicationRecord
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
+  # Constant
+  PER_PAGE = 15
+
   # Enum
   enum type: { circle_live: 1, national: 2, other: 3 }
 

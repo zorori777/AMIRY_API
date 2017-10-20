@@ -10,6 +10,9 @@
 
 class University < ApplicationRecord
 
+  # Constant
+  PER_PAGE = 10
+
   # Association
   has_many :bands 
   has_many :circles

@@ -13,6 +13,10 @@
 
 class Lecture < ApplicationRecord
 
+  # Constant
+  PER_PAGE = 10
+
+  # Scope
   scope :newest, -> { where(created_at: :desc) }
 
   # Association

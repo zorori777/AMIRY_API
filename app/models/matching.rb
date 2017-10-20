@@ -12,6 +12,9 @@
 
 class Matching < ApplicationRecord
 
+  # Constant
+  PER_PAGE = 15
+
   # Enum
   enum acceptance: { accepted: 1, rejected: 2 }
 

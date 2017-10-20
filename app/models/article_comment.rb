@@ -11,6 +11,9 @@
 #
 
 class ArticleComment < ApplicationRecord
+
+  # Constant
+  PER_PAGE = 10
   
   # Association
   belongs_to :article

@@ -19,6 +19,9 @@ class Band < ApplicationRecord
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
+  # Constant
+  PER_PAGE = 15
+
   # Enum
   enum type: { only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5 }
 

@@ -14,6 +14,9 @@
 
 class Circle < ApplicationRecord
 
+  # Constant
+  PER_PAGE = 15
+
   # Association
   has_many   :bands
   has_many   :circle_images

@@ -13,6 +13,9 @@
 
 class Introduction < ApplicationRecord
 
+  # Constant
+  PER_PAGE = 7
+
   # Enum
   enum acceptance: { accepted: 1, rejected: 99 }
 
