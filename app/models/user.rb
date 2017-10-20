@@ -56,19 +56,19 @@ class User < ApplicationRecord
   # Validation
   validates :university_id, :first_name,
             :last_name, :email, :bands_count,
-            :self_introduction, :catchcopy,
-            :display_name,                    presence: true
+            :self_introduction, :catchcopy,   presence: true
   validates :university_id, :bands_count,
             :received_likes_count,
             :sendable_likes_count,
             :matchings_count,                 numericality: true
-  validates :email, :display_name,            uniqueness: true
+  validates :email,                           uniqueness: true
 
   # Uploader
   mount_uploader :avatar, AvatarUploader
 
+  # Setter Methods
   def set_display_name
-    "#{self.last_name} #{self.first_name}"
+    self.display_name = "#{self.last_name} #{self.first_name}"
   end
 
 end
