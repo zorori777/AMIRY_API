@@ -40,8 +40,11 @@ gem 'active_model_serializers', '~> 0.9.7'
 # AUTHENTICATION
 gem 'devise'
 
-# activeadmin
+# ACTIVEADMIN
 gem 'activeadmin'
+
+# API PAGINATION
+gem 'api-pagination'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -71,7 +74,7 @@ group :development do
   # ANNOTATE
   gem 'annotate'
 
-  # N + 1 monitor
+  # N + 1 MONITOR
   gem 'bullet'
 end
 
