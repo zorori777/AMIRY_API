@@ -213,6 +213,8 @@ ActiveRecord::Schema.define(version: 20171009133829) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "display_name", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "avatar", default: "", null: false
     t.string "catchcopy", default: "", null: false
     t.text "self_introduction", null: false
@@ -220,8 +222,7 @@ ActiveRecord::Schema.define(version: 20171009133829) do
     t.integer "received_likes_count", default: 0, null: false
     t.integer "sendable_likes_count", default: 0, null: false
     t.integer "matchings_count", default: 0, null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.integer "account_status", default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

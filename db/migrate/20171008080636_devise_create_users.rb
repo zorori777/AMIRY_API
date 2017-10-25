@@ -5,6 +5,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string     :first_name,            null: false, default: ''
       t.string     :last_name,             null: false, default: ''
       t.string     :display_name,          null: false, default: ''
+      t.string     :email,                 null: false, default: ''
+      t.string     :encrypted_password,    null: false, default: ''
       t.string     :avatar,                null: false, default: ''
       t.string     :catchcopy,             null: false, default: ''
       t.text       :self_introduction,     null: false
@@ -12,10 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.integer    :received_likes_count,  null: false, default: 0
       t.integer    :sendable_likes_count,  null: false, default: 0
       t.integer    :matchings_count,       null: false, default: 0
-
-      ## Database authenticatable
-      t.string     :email,                 null: false, default: ''
-      t.string     :encrypted_password,    null: false, default: ''
+      t.integer    :account_status,        null: false, default: 0
 
       ## Recoverable
       t.string     :reset_password_token

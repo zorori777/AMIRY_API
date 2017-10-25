@@ -7,6 +7,8 @@
 #  first_name             :string(255)      default(""), not null
 #  last_name              :string(255)      default(""), not null
 #  display_name           :string(255)      default(""), not null
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
 #  avatar                 :string(255)      default(""), not null
 #  catchcopy              :string(255)      default(""), not null
 #  self_introduction      :text(65535)      not null
@@ -14,8 +16,7 @@
 #  received_likes_count   :integer          default(0), not null
 #  sendable_likes_count   :integer          default(0), not null
 #  matchings_count        :integer          default(0), not null
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
+#  account_status         :integer          default(NULL), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -35,6 +36,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # Constant
+  REGISTERED   = 1
+  UNREGISTERED = 2
+
+  # Enum
+  enum account_status: { registered: 1, unregistered: 2 }
 
   # Association
   belongs_to :university
