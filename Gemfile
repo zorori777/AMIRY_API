@@ -11,6 +11,7 @@ gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.7'
 gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails'
+gem 'rake', '< 11.0'
 
 # HAML
 gem 'erb2haml'
@@ -62,6 +63,11 @@ group :development, :test do
 
   # FAKE DATA
   gem 'faker'
+
+  # TESTING FRAMEWORK
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
