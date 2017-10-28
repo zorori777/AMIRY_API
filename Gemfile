@@ -9,7 +9,6 @@ end
 gem 'rails', '~> 5.1.3'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.7'
-gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails'
 gem 'rake', '< 11.0'
 
@@ -40,6 +39,9 @@ gem 'active_model_serializers', '~> 0.9.7'
 
 # AUTHENTICATION
 gem 'devise'
+
+# AUTHORIZATION
+gem 'cancancan'
 
 # ACTIVEADMIN
 gem 'activeadmin'
