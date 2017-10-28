@@ -14,8 +14,8 @@ class University < ApplicationRecord
   PER_PAGE = 10
 
   # Association
-  has_many :bands 
   has_many :circles
+  has_many :users
 
   # Validation
   validates :name, uniqueness: true, presence: true
