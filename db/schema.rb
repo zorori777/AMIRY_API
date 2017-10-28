@@ -255,6 +255,8 @@ ActiveRecord::Schema.define(version: 20171028130106) do
     t.integer "sendable_likes_count", default: 0, null: false
     t.integer "matchings_count", default: 0, null: false
     t.integer "account_status", default: 0, null: false
+    t.string "provider", default: "", null: false
+    t.string "uid", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

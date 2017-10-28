@@ -16,6 +16,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.integer    :matchings_count,       null: false, default: 0
       t.integer    :account_status,        null: false, default: 0
 
+      ## Omniauthable
+      t.string     :provider,              null: false, default: ''
+      t.string     :uid,                   null: false, default: ''
+
       ## Recoverable
       t.string     :reset_password_token
       t.datetime   :reset_password_sent_at
