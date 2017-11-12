@@ -2,7 +2,7 @@ require 'grape-swagger'
 
 class APIRoot < Grape::API
   format :json
-  # prefix :api
+  prefix :api
 
   add_swagger_documentation(
     hide_documentation_path: false,

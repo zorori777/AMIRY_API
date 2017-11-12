@@ -4,15 +4,21 @@ module APIComponents
       class Overview < ApiController
         desc 'Get public profile for specified company' do
           detail <<~DETAIL
-              Get a profile for a professional who has the same id as the given param id.
+              Get a overview for a circle who has the same id as the given param id.
           DETAIL
           http_codes([
-            { code: 200, message: 'Professional', model: Entities::Circle::Overview }
+            { code: 200, message: 'circle', model: Entities::Circle::Overview }
           ])
         end
 
         params do
-          requires :id, type: Integer, description: 'the id of the professional'
+          requires :id, type: Integer, description: 'the id of the circle'
+        end
+
+        get '/:id/circle' do
+          circle = Circle.find(params[:id])
+
+          present circle, Entities::Circle::Overview
         end
       end
     end
