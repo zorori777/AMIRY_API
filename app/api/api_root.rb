@@ -8,8 +8,8 @@ class APIRoot < Grape::API
     hide_documentation_path: false,
     doc_version: 'Document 0.0',
     info: {
-        title: 'Black Thunder',
-        description: 'Black Thunder API'
+        title: 'AMIRY',
+        description: 'AMIRY API'
     }
   )
 
