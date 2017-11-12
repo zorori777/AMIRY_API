@@ -51,6 +51,15 @@ gem 'activeadmin'
 gem 'kaminari'
 gem 'api-pagination'
 
+# Grape API
+gem 'grape', '~> 1'
+gem 'grape-entity'
+gem 'hashie-forbidden_attributes'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
+gem 'grape-swagger-rails'
+gem 'grape-middleware-logger'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
