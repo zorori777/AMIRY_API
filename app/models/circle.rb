@@ -30,4 +30,8 @@ class Circle < ApplicationRecord
             :members_count, :university_id, numericality: true
   validates :name,                          uniqueness: { scope: :university_id }
 
+  def university_name
+    self.university.name
+  end
+
 end
