@@ -17,8 +17,7 @@ module APIComponents
 
         get '/:id' do
           circle = ::Circle.find(params[:id])
-
-          present circle, Entities::Circle::Overview
+          present circle, with: Entities::Circle::Overview
         end
       end
     end
