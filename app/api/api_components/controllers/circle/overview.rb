@@ -15,8 +15,8 @@ module APIComponents
           requires :id, type: Integer, description: 'the id of the circle'
         end
 
-        get '/:id/circle' do
-          circle = Circle.find(params[:id])
+        get '/:id' do
+          circle = ::Circle.find(params[:id])
 
           present circle, Entities::Circle::Overview
         end
