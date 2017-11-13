@@ -5,8 +5,8 @@
 #  id           :integer          not null, primary key
 #  sender_id    :integer          not null
 #  recipient_id :integer          not null
-#  body         :string(255)      default("NO BOBY"), not null
-#  image        :string(255)      default("NO IMAGE"), not null
+#  body         :string(255)      default(""), not null
+#  image        :string(255)      default(""), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

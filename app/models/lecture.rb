@@ -4,6 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  user_id     :integer          not null
+#  title       :string(255)      not null
 #  description :text(65535)      not null
 #  address     :string(255)      default(""), not null
 #  hold_at     :datetime         not null

@@ -1,7 +1,7 @@
 class CreateCircles < ActiveRecord::Migration[5.1]
   def change
     create_table :circles, option: 'ENGINE=InnoDB DEFAULT CHARSET=utf8;' do |t|
-      t.references :university,                    null: false, foreign_key: true 
+      t.integer    :university_id,                 null: false
       t.string     :name,                          null: false, default: ''
       t.string     :description,                   null: false, default: ''
       t.integer    :members_count, unsigned: true, null: false, default: 0

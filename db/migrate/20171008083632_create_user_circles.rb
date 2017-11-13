@@ -1,9 +1,9 @@
 class CreateUserCircles < ActiveRecord::Migration[5.1]
   def change
     create_table :user_circles, option: 'ENGINE=InnoDB DEFAULT CHARSET=utf8;' do |t|
-      t.references :user,   null: false, foreign_key: true
-      t.references :circle, null: false, foreign_key: true
-      t.timestamps          null: false, default: -> { 'CURRENT_TIMESTAMP' }
+      t.integer    :user_id,   null: false
+      t.integer    :circle_id, null: false
+      t.timestamps             null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
   end
 end

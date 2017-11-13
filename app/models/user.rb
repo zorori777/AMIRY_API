@@ -17,6 +17,8 @@
 #  sendable_likes_count   :integer          default(0), not null
 #  matchings_count        :integer          default(0), not null
 #  account_status         :integer          default(NULL), not null
+#  provider               :string(255)      default(""), not null
+#  uid                    :string(255)      default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime

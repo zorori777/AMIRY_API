@@ -207,7 +207,8 @@ CREATE TABLE `lectures` (
 
 CREATE TABLE `articles` (
   `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,  
-  `user_id`    BIGINT(20) UNSIGNED NOT NULL,  
+  `user_id`    BIGINT(20) UNSIGNED NOT NULL,
+  `title`      VARCHAR(64)         NOT NULL DEFAULT ''
   `content`    TEXT                NOT NULL,
   `created_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP, 
