@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   mount APIRoot => '/'
-  mount GrapeSwaggerRails::Engine => '/docs'
+  mount GrapeSwaggerRails::Engine => '/api-spec'
 
   resources :circles, only: :index
   resources :articles, only: :index
