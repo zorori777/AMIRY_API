@@ -1,22 +1,16 @@
 require 'grape-swagger'
 
 class APIRoot < Grape::API
+  version 'v1'
   format :json
   prefix :api
-
-  add_swagger_documentation(
-    hide_documentation_path: false,
-    doc_version: 'Document 0.0',
-    info: {
-        title: 'AMIRY',
-        description: 'AMIRY API'
-    }
-  )
 
   namespace :circle do
     namespace :overview do
       mount APIComponents::Controllers::Circle::Overview
     end
   end
+
+  add_swagger_documentation
 
 end
