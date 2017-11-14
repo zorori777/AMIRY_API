@@ -20,7 +20,7 @@ class Article < ApplicationRecord
   scope :in_newest_order, -> { order(created_at: :desc) }
 
   # Association
-  belongs_to :user, -> { includes(:university) }
+  belongs_to :user, -> { includes(:university) }, optional: true
   has_many   :article_comments
 
   # Validation
@@ -29,6 +29,10 @@ class Article < ApplicationRecord
 
   def created_by?(user)
     self.user_id == user.id
+  end
+
+  def author_name
+    self.user&.name.to_s
   end
   
 end
