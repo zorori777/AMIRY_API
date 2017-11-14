@@ -52,13 +52,13 @@ gem 'kaminari'
 gem 'api-pagination'
 
 # Grape API
-gem 'grape', '~> 1'
-gem 'grape-entity'
-gem 'hashie-forbidden_attributes'
-gem 'grape-swagger'
-gem 'grape-swagger-entity'
-gem 'grape-swagger-rails'
-gem 'grape-middleware-logger'
+gem 'grape', '1.0.0'
+gem 'grape-entity', '0.6.1'
+gem 'hashie-forbidden_attributes', '0.1.1'
+gem 'grape-swagger', '0.27.2'
+gem 'grape-swagger-entity', '0.2.0'
+gem 'grape-swagger-rails', '0.3.0'
+gem 'grape-middleware-logger', '1.9.0'
 
 # CORS
 gem 'rack-cors'
