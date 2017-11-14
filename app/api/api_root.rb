@@ -6,11 +6,24 @@ class APIRoot < Grape::API
   prefix :api
 
   namespace :circle do
-    namespace :overview do
-      mount APIComponents::Controllers::Circle::Overview
-    end
+    mount APIComponents::Controllers::CirclesController
   end
 
-  add_swagger_documentation
+  namespace :article do
+    mount APIComponents::Controllers::ArticlesController
+  end
+
+  route :any, '*path' do
+  end
+
+  add_swagger_documentation(
+    hide_documentation_path: false,
+    doc_version: 'Document 0.0',
+    info: {
+      title: 'AMIRY',
+      description: 'AMIRY API'
+    }
+  )
+
 
 end
