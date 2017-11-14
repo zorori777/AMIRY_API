@@ -5,11 +5,11 @@ class APIRoot < Grape::API
   format :json
   prefix :api
 
-  namespace :circle do
+  namespace :circles do
     mount APIComponents::Controllers::CirclesController
   end
 
-  namespace :article do
+  namespace :articles do
     mount APIComponents::Controllers::ArticlesController
   end
 
