@@ -32,7 +32,8 @@
 #
 
 class User < ApplicationRecord
-  before_save :set_display_name, if: :new_record?
+  before_save :set_display_name, :set_empty_self_introduction,
+              :set_no_university_status,                       if: :new_record?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -41,14 +42,15 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
   # Constant
-  REGISTERED   = 1
-  UNREGISTERED = 2
+  NO_UNIVERSITY = 0
+  REGISTERED    = 1
+  UNREGISTERED  = 2
 
   # Enum
   enum account_status: { registered: 1, unregistered: 2 }
 
   # Association
-  belongs_to :university
+  belongs_to :university,             optional: true
   has_many   :user_parts
   has_many   :user_circles
   has_many   :user_bands
@@ -65,21 +67,40 @@ class User < ApplicationRecord
   has_many   :received_introductions, class_name: 'Introduction', foreign_key: 'recipient_id' 
 
   # Validation
-  validates :university_id, :first_name,
-            :last_name, :email, :bands_count,
-            :self_introduction, :catchcopy,   presence: true
-  validates :university_id, :bands_count,
+  validates :first_name, :last_name, :email, presence: true
+  validates :bands_count,
             :received_likes_count,
             :sendable_likes_count,
-            :matchings_count,                 numericality: true
-  validates :email,                           uniqueness: true
+            :matchings_count,                numericality: true
+  validates :email,                          uniqueness: true
 
   # Uploader
   mount_uploader :avatar, AvatarUploader
 
+  # Class methods
+  class << self
+    def from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create!(
+        email:             auth.info.email,
+        password:          Devise.friendly_token[0,20],
+        first_name:        auth.info.first_name,
+        last_name:         auth.info.last_name,
+        remote_avatar_url: auth.info.image
+      )
+    end
+  end
+
   # Setter Methods
   def set_display_name
     self.display_name = "#{self.last_name} #{self.first_name}"
+  end
+
+  def set_empty_self_introduction
+    self.self_introduction = ""
+  end
+
+  def set_no_university_status
+    self.university_id = NO_UNIVERSITY
   end
 
 end

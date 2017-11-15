@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 20171028130106) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "university_id", null: false
+    t.integer "university_id", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "display_name", default: "", null: false
@@ -259,8 +259,6 @@ ActiveRecord::Schema.define(version: 20171028130106) do
     t.index ["display_name"], name: "index_users_on_display_name", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["university_id"], name: "index_users_on_university_id"
   end
 
-  add_foreign_key "users", "universities"
 end

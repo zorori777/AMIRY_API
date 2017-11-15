@@ -77,7 +77,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
 
   # FAKE DATA
-  gem 'faker'
+  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
 
   # TESTING FRAMEWORK
   gem 'rspec-rails'

@@ -10,7 +10,7 @@ module APIComponents
           ])
         end
         get '' do
-          present Article.all, with: Entities::Article
+          present Article.includes(:user).all, with: Entities::Article
         end
 
         desc 'Return an article.' do
