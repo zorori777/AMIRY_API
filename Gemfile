@@ -40,6 +40,7 @@ gem 'active_model_serializers', '~> 0.9.7'
 # AUTHENTICATION
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'jwt'
 
 # AUTHORIZATION
 gem 'cancancan'
