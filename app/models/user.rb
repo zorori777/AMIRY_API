@@ -90,6 +90,11 @@ class User < ApplicationRecord
     end
   end
 
+  # Getter methods
+  def university_name
+    self.university&.name.to_s
+  end
+
   # Setter Methods
   def set_display_name
     self.display_name = "#{self.last_name} #{self.first_name}"

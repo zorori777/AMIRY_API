@@ -20,7 +20,7 @@ class Article < ApplicationRecord
   scope :in_newest_order, -> { order(created_at: :desc) }
 
   # Association
-  belongs_to :user, -> { includes(:university) }, optional: true
+  belongs_to :user, optional: true
   has_many   :article_comments
 
   # Validation
@@ -32,7 +32,7 @@ class Article < ApplicationRecord
   end
 
   def author_name
-    self.user&.name.to_s
+    self.user&.display_name.to_s
   end
   
 end

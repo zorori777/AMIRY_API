@@ -13,6 +13,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::ArticlesController
   end
 
+  namespace :me do
+    mount APIComponents::Controllers::MeController
+  end
+
   route :any, '*path' do
   end
 
