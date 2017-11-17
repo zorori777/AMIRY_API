@@ -33,7 +33,7 @@
 
 class User < ApplicationRecord
   before_save :set_display_name, :set_empty_self_introduction,
-              :set_no_university_status,                       if: :new_record?
+              :set_no_university_status, :set_account_status_registered, if: :new_record?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -95,6 +95,10 @@ class User < ApplicationRecord
     self.university&.name.to_s
   end
 
+  def avatar_link
+    self.avatar.file.filename
+  end
+
   # Setter Methods
   def set_display_name
     self.display_name = "#{self.last_name} #{self.first_name}"
@@ -106,6 +110,10 @@ class User < ApplicationRecord
 
   def set_no_university_status
     self.university_id = NO_UNIVERSITY
+  end
+
+  def set_account_status_registered
+    self.account_status = REGISTERED
   end
 
 end
