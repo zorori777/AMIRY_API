@@ -10,8 +10,8 @@
 
 class University < ApplicationRecord
 
-  # Constant
-  PER_PAGE = 10
+  # Pagination
+  paginates_per 15
 
   # Association
   has_many :circles
@@ -19,5 +19,10 @@ class University < ApplicationRecord
 
   # Validation
   validates :name, uniqueness: true, presence: true
+
+  # Getter methods
+  def circles_num
+    self.circles.size
+  end
 
 end

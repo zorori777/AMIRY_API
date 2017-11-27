@@ -47,7 +47,7 @@ gem 'cancancan'
 gem 'activeadmin'
 
 # API PAGINATION
-gem 'grape-kaminari'
+gem 'kaminari'
 
 # Grape API
 gem 'grape', '1.0.0'

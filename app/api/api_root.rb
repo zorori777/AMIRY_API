@@ -13,6 +13,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::ArticlesController
   end
 
+  namespace :universities do
+    mount APIComponents::Controllers::UniversitiesController
+  end
+
   namespace :me do
     mount APIComponents::Controllers::MeController
   end
