@@ -26,7 +26,7 @@ class Live < ApplicationRecord
   enum type: { circle_live: 1, national: 2, other: 3 }
 
   # Scope
-  scope :recent,  -> { where(hold_at: :desc) } 
+  scope :recent,  -> { order(hold_at: :desc) }
 
   # Association
   belongs_to :circle
@@ -41,12 +41,18 @@ class Live < ApplicationRecord
   validates :circle_id, :max_capacity, 
             :reservations_count,                numericality: true
 
-  def has_available_spots?
-    self.max_capacity >= self.reservations_count
+  # Getter Methods
+  def circle_name
+    self.circle&.name.to_s
   end
 
-  def avaliable_spots_num
+  def available_seats
     self.max_capacity - self.reservations_count
+  end
+
+  # Checker Methods
+  def has_available_seats?
+    self.available_seats > 0
   end
 
 end
