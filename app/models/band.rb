@@ -20,7 +20,7 @@ class Band < ApplicationRecord
   self.inheritance_column = :_type_disabled
 
   # Constant
-  PER_PAGE = 15
+  paginates_per 15
 
   # Enum
   enum type: { only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5 }
@@ -39,10 +39,21 @@ class Band < ApplicationRecord
   validates :circle_id, :people_num,           numericality: true
   validate  :people_num_between_four_and_seven
 
-  def intercollege?
-    self.university_id == 0
+  # Getter Methods
+  def circle_name
+    self.circle&.name.to_s
   end
 
+  # Checker Methods
+  def intercollege_circle
+    self.intercollege?
+  end
+
+  def intercollege?
+    self.circle_id == 0
+  end
+
+  # Custom Validaiton
   def people_num_between_four_and_seven
     if self.people_num < 3 || self.people_num > 8
       errors.add(:people_num, 'The number of a band should be between 4 and 7.')
