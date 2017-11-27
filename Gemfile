@@ -34,13 +34,11 @@ gem 'counter_culture'
 # DECORATER
 gem 'draper'
 
-# SERIALIZER
-gem 'active_model_serializers', '~> 0.9.7'
-
 # AUTHENTICATION
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'jwt'
+gem 'koala'
 
 # AUTHORIZATION
 gem 'cancancan'
@@ -49,8 +47,7 @@ gem 'cancancan'
 gem 'activeadmin'
 
 # API PAGINATION
-gem 'kaminari'
-gem 'api-pagination'
+gem 'grape-kaminari'
 
 # Grape API
 gem 'grape', '1.0.0'
