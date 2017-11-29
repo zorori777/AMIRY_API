@@ -53,7 +53,7 @@ class Band < ApplicationRecord
     self.circle_id == 0
   end
 
-  # Custom Validaiton
+  # Custom Validation
   def people_num_between_four_and_seven
     if self.people_num < 3 || self.people_num > 8
       errors.add(:people_num, 'The number of a band should be between 4 and 7.')
