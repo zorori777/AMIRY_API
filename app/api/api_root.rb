@@ -21,6 +21,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::CirclesController
   end
 
+  namespace :introductions do
+    mount APIComponents::Controllers::IntroductionsController
+  end
+
   namespace :lives do
     mount APIComponents::Controllers::LivesController
   end
