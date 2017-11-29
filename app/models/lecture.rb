@@ -13,12 +13,15 @@
 #
 
 class Lecture < ApplicationRecord
+  # Callback Methods
+  before_save :set_description_empty, if: :new_record?
 
   # Constant
-  PER_PAGE = 10
+  paginates_per 10
 
   # Scope
-  scope :newest, -> { where(created_at: :desc) }
+  scope :recent, -> { where(created_at: :desc) }
+  scope :passed, -> { where("created_at < ?", Date.today)}
 
   # Association
   belongs_to :user
@@ -28,4 +31,8 @@ class Lecture < ApplicationRecord
             :address, :hold_at,     presence: true
   validates :user_id,               numericality: true
 
+  # Setter methods
+  def set_description_empty
+    self.description = ''
+  end
 end

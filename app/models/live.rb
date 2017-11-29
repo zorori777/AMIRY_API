@@ -20,7 +20,7 @@ class Live < ApplicationRecord
   self.inheritance_column = :_type_disabled
 
   # Constant
-  PER_PAGE = 15
+  paginates_per 15
 
   # Enum
   enum type: { circle_live: 1, national: 2, other: 3 }

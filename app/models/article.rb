@@ -14,7 +14,7 @@
 class Article < ApplicationRecord
 
   # Constant
-  PER_PAGE = 15
+  paginates_per 15
 
   # Scope
   scope :in_newest_order, -> { order(created_at: :desc) }
