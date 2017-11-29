@@ -22,10 +22,11 @@ class Introduction < ApplicationRecord
   enum acceptance: { accepted: 1, pending: 2, rejected: 3 }
 
   # Validation
-  validates :sender_id, :recipient_id, numericality: true, presence: true
+  validates :sender_id, :recipient_id,         numericality: true, presence: true
   validates :sender_id, :recipient_id, 
-            :acceptance, :description, presence: true
-  validates :sender_id,                uniqueness: { scope: :recipient_id }
+            :acceptance, :description,         presence: true
+  validates :sender_id,                        uniqueness: { scope: :recipient_id }
+  validate  :different_sender_and_recipient_id
 
   # Association
   belongs_to :sender,    class_name: 'User', foreign_key: 'sender_id'
@@ -43,5 +44,13 @@ class Introduction < ApplicationRecord
   # Setter Methods
   def set_acceptance_pending
     self.acceptance = Introduction.acceptances[:pending]
+  end
+
+  # Custom Validation
+  def different_sender_and_recipient_id
+    if self.sender_id == self.recipient_id
+      errors.add('sender_id', 'sender_id should not be the same as recipient_id.')
+      errors.add('recipient_id', 'recipient_id should not be the same as sender_id.')
+    end
   end
 end

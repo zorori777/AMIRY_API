@@ -59,6 +59,7 @@ class User < ApplicationRecord
   has_many   :circles,                through: :user_circles
   has_many   :bands,                  through: :user_bands
   has_many   :lives,                  through: :user_lives
+  has_many   :introductions,                                      foreign_key: 'recipient_id'
   has_many   :lectures
   has_many   :matchings
   has_many   :send_likes,             class_name: 'Like',         foreign_key: 'sender_id'
