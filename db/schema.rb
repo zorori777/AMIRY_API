@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20171028130106) do
 
   create_table "lectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
-    t.string "title", null: false
+    t.string "title", default: "", null: false
     t.text "description", null: false
     t.string "address", default: "", null: false
     t.datetime "hold_at", default: -> { "CURRENT_TIMESTAMP" }, null: false

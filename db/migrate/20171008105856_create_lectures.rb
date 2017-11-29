@@ -2,7 +2,7 @@ class CreateLectures < ActiveRecord::Migration[5.1]
   def change
     create_table :lectures, option: 'ENGINE=InnoDB DEFAULT CHARSET=utf8;' do |t|
       t.integer    :user_id,     null: false
-      t.string     :title,       null: false
+      t.string     :title,       null: false, default: ''
       t.text       :description, null: false
       t.string     :address,     null: false, default: ''
       t.datetime   :hold_at,     null: false, default: -> { 'CURRENT_TIMESTAMP' }
