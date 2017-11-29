@@ -2,7 +2,7 @@ module APIComponents
   module Entities
     class Lecture < Grape::Entity
       expose :id
-      expose :user_id
+      expose :holder_name
       expose :title
       expose :description
       expose :address

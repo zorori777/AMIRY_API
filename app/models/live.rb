@@ -19,7 +19,7 @@ class Live < ApplicationRecord
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
-  # Constant
+  # Pagination
   paginates_per 15
 
   # Enum

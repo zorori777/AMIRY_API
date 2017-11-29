@@ -9,6 +9,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::ArticlesController
   end
 
+  namespace :article_commments do
+    mount APIComponents::Controllers::ArticleCommentsController
+  end
+
   namespace :bands do
     mount APIComponents::Controllers::BandsController
   end

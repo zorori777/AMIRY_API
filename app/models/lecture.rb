@@ -16,7 +16,7 @@ class Lecture < ApplicationRecord
   # Callback Methods
   before_save :set_description_empty, if: :new_record?
 
-  # Constant
+  # Pagination
   paginates_per 10
 
   # Scope
@@ -31,7 +31,12 @@ class Lecture < ApplicationRecord
             :address, :hold_at,     presence: true
   validates :user_id,               numericality: true
 
-  # Setter methods
+  # Getter Methods
+  def holder_name
+    self.user&.display_name.to_s
+  end
+
+  # Setter Methods
   def set_description_empty
     self.description = ''
   end

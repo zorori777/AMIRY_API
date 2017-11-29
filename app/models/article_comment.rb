@@ -13,8 +13,11 @@
 class ArticleComment < ApplicationRecord
 
   # Constant
-  PER_PAGE = 10
-  
+  paginates_per 10
+
+  # Scope
+  scope :newest, -> { order(created_at: :desc) }
+
   # Association
   belongs_to :article
   belongs_to :user
@@ -23,6 +26,12 @@ class ArticleComment < ApplicationRecord
   validates :content, :user_id, :article_id, presence: true
   validates :user_id, :article_id,           numericality: true 
 
+  # Getter Method
+  def commenter_name
+    self.user&.display_name.to_s
+  end
+
+  # Checker Method
   def created_by?(user)
     self.user_id == user.id
   end
