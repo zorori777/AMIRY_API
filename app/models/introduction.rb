@@ -12,12 +12,14 @@
 #
 
 class Introduction < ApplicationRecord
+  # Callback
+  before_save :set_acceptance_pending, if: :new_record?
 
-  # Constant
-  PER_PAGE = 7
+  # Pagination
+  paginates_per 7
 
   # Enum
-  enum acceptance: { accepted: 1, rejected: 99 }
+  enum acceptance: { accepted: 1, pending: 2, rejected: 3 }
 
   # Validation
   validates :sender_id, :recipient_id, numericality: true, presence: true
@@ -29,4 +31,17 @@ class Introduction < ApplicationRecord
   belongs_to :sender,    class_name: 'User', foreign_key: 'sender_id'
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
 
+  # Getter methods
+  def sender_name
+    self.sender&.display_name.to_s
+  end
+
+  def recipient_name
+    self.recipient&.display_name.to_s
+  end
+
+  # Setter Methods
+  def set_acceptance_pending
+    self.acceptance = Introduction.acceptances[:pending]
+  end
 end

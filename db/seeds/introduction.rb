@@ -11,7 +11,7 @@
 #  updated_at   :datetime         not null
 #
 
-RECORD_NAME = 'introdcutions'
+RECORD_NAME = 'introductions'
 DUMMY_REPEAT_TIMES = 20
 
 1.upto(DUMMY_REPEAT_TIMES) do |num|
@@ -20,7 +20,6 @@ DUMMY_REPEAT_TIMES = 20
       sender_id:    User.pluck(:id).sample,
       recipient_id: User.pluck(:id).sample,
       description:  Faker::HowIMetYourMother.quote,
-      acceptance:   Introduction.acceptances.value.sample,
     )
     introduction.save!
     p introduction
