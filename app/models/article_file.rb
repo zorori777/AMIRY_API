@@ -14,7 +14,7 @@ class ArticleFile < ApplicationRecord
 
   # Validation
   validates :user_id, :article_id, numericality: { only_integer: true }, presence: true
-  
+
   # Uploader
   mount_uploader :name, ArticleFileUploader
 
