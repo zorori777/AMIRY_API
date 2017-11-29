@@ -229,6 +229,16 @@ CREATE TABLE `article_comments` (
   CONSTRAINT `fk_article_comments_on_article_id` FOREIGN KEY(`article_id`) REFERENCES `articles` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `article_files` (
+  `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`    BIGINT(20)  UNSIGNED NOT NULL,
+  `article_id` BIGINT(20)  UNSIGNED NOT NULL,
+  `name`       VARCHAR(64)          NOT NULL DEFAULT '',
+  `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`)
+)
+
 CREATE TABLE `messages`(
   `id`            BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
   `sender_id`     BIGINT(20)  UNSIGNED NOT NULL,
