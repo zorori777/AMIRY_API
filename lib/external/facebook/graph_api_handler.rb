@@ -1,4 +1,8 @@
 require 'json'
+require 'time'
+require 'dotenv'
+
+Dotenv.overload
 
 module External
   module Facebook
@@ -22,6 +26,48 @@ module External
         @friend_endpoint_response = JSON.parse(friend_endpoint_response.body)
       end
 
+      def valid_facebook_id_and_token?
+        valid_app_id? && valid_facebook_id? && valid_facebook_token?
+      end
+
+      def valid_app_id?
+        return false unless @debug_token_response['data']['app_id'].present?
+        ENV['FACEBOOK_APP_ID'] == @debug_token_response['data']['app_id']
+      end
+
+      def valid_facebook_id?
+        return false unless @debug_token_response['data']['user_id'].present?
+        @facebook_id == @debug_token_response['data']['user_id']
+      end
+
+      def valid_facebook_token?
+        return false unless @debug_token_response['data']['expires_at'].present?
+        Time.now.to_i <= @debug_token_response['data']['expires_at']
+      end
+
+      def facebook_friends
+        @friend_endpoint_response['data']
+      end
+
+      def facebook_friends_num
+        @friend_endpoint_response['summary']['total_count'] || 0
+      end
+
+      def first_name
+        @me_endpoint_response['first_name']
+      end
+
+      def last_name
+        @me_endpoint_response['last_name']
+      end
+
+      def email
+        @me_endpoint_response['email']
+      end
+
+      def facebook_id
+        @me_endpoint_response['id']
+      end
     end
   end
 end
