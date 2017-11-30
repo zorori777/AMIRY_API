@@ -2,9 +2,9 @@ class CreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
       t.integer    :university_id,            unsigned: true, null: false
-      t.integer    :facebook_id,              unsigned: true, null: false, default: 0
+      t.integer    :facebook_id,              unsigend: true, null: false, default: 0, limit: 8
       t.string     :facebook_token,                           null: false, default: ''
-      t.integer    :facebook_toke_expires_at, unsigned: true, null: false, default: 0
+      t.integer    :facebook_toke_expires_at, unsigned: true, null: false, default: 0, limit: 8
       t.string     :first_name,                               null: false, default: ''
       t.string     :last_name,                                null: false, default: ''
       t.string     :display_name,                             null: false, default: ''

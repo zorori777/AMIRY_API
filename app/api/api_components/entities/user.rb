@@ -8,7 +8,7 @@ module APIComponents
       expose :display_name
       expose :email
       expose :avatar_link
-      expose :catchcopy
+      expose :catch_copy
       expose :self_introduction
       expose :bands_count
       expose :received_likes_count

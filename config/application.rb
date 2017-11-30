@@ -21,5 +21,8 @@ module AMIRY
         resource '*', headers: :any, methods: [:get, :post, :put, :delete]
       end
     end
+
+    config.autoload_paths += %W(#{config.root}/lib)
+
   end
 end
