@@ -38,7 +38,7 @@ gem 'draper'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'jwt'
-gem 'koala'
+gem 'faraday'
 
 # AUTHORIZATION
 gem 'cancancan'
