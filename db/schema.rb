@@ -238,23 +238,27 @@ ActiveRecord::Schema.define(version: 20171130024002) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "university_id", null: false
+    t.integer "university_id", null: false, unsigned: true
+    t.integer "facebook_id", default: 0, null: false, unsigned: true
+    t.string "facebook_token", default: "", null: false
+    t.integer "facebook_toke_expires_at", default: 0, null: false, unsigned: true
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "display_name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "avatar", default: "", null: false
-    t.string "catchcopy", default: "", null: false
+    t.string "catch_copy", default: "", null: false
     t.text "self_introduction", null: false
-    t.integer "bands_count", default: 0, null: false
-    t.integer "received_likes_count", default: 0, null: false
-    t.integer "sendable_likes_count", default: 0, null: false
-    t.integer "matchings_count", default: 0, null: false
-    t.integer "account_status", default: 0, null: false
+    t.integer "bands_count", default: 0, null: false, unsigned: true
+    t.integer "received_likes_count", default: 0, null: false, unsigned: true
+    t.integer "sendable_likes_count", default: 0, null: false, unsigned: true
+    t.integer "matchings_count", default: 0, null: false, unsigned: true
+    t.integer "account_status", default: 0, null: false, unsigned: true
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["display_name"], name: "index_users_on_display_name", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["facebook_id"], name: "index_users_on_facebook_id", unique: true
+    t.index ["university_id"], name: "index_users_on_university_id"
   end
 
 end
