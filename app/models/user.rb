@@ -2,44 +2,27 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  university_id          :integer          not null
-#  first_name             :string(255)      default(""), not null
-#  last_name              :string(255)      default(""), not null
-#  display_name           :string(255)      default(""), not null
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  avatar                 :string(255)      default(""), not null
-#  catchcopy              :string(255)      default(""), not null
-#  self_introduction      :text(65535)      not null
-#  bands_count            :integer          default(0), not null
-#  received_likes_count   :integer          default(0), not null
-#  sendable_likes_count   :integer          default(0), not null
-#  matchings_count        :integer          default(0), not null
-#  account_status         :integer          default(NULL), not null
-#  provider               :string(255)      default(""), not null
-#  uid                    :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                   :integer          not null, primary key
+#  university_id        :integer          not null
+#  first_name           :string(255)      default(""), not null
+#  last_name            :string(255)      default(""), not null
+#  display_name         :string(255)      default(""), not null
+#  email                :string(255)      default(""), not null
+#  avatar               :string(255)      default(""), not null
+#  catchcopy            :string(255)      default(""), not null
+#  self_introduction    :text(65535)      not null
+#  bands_count          :integer          default(0), not null
+#  received_likes_count :integer          default(0), not null
+#  sendable_likes_count :integer          default(0), not null
+#  matchings_count      :integer          default(0), not null
+#  account_status       :integer          default(NULL), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
 #
 
 class User < ApplicationRecord
   before_save :set_display_name, :set_empty_self_introduction,
               :set_no_university_status, :set_account_status_registered, if: :new_record?
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook]
 
   # Constant
   NO_UNIVERSITY = 0
