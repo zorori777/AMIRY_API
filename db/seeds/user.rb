@@ -2,32 +2,26 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  university_id          :integer          not null
-#  first_name             :string(255)      default(""), not null
-#  last_name              :string(255)      default(""), not null
-#  display_name           :string(255)      default(""), not null
-#  avatar                 :string(255)      default(""), not null
-#  catchcopy              :string(255)      default(""), not null
-#  self_introduction      :text(65535)      not null
-#  bands_count            :integer          default(0), not null
-#  received_likes_count   :integer          default(0), not null
-#  sendable_likes_count   :integer          default(0), not null
-#  matchings_count        :integer          default(0), not null
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                       :integer          not null, primary key
+#  university_id            :integer          unsigned, not null
+#  facebook_id              :integer          default(0), not null
+#  facebook_token           :string(255)      default(""), not null
+#  facebook_toke_expires_at :integer          default(0), unsigned, not null
+#  first_name               :string(255)      default(""), not null
+#  last_name                :string(255)      default(""), not null
+#  display_name             :string(255)      default(""), not null
+#  email                    :string(255)      default(""), not null
+#  avatar                   :string(255)      default(""), not null
+#  catch_copy               :string(255)      default(""), not null
+#  self_introduction        :text(65535)      not null
+#  bands_count              :integer          default(0), unsigned, not null
+#  received_likes_count     :integer          default(0), unsigned, not null
+#  sendable_likes_count     :integer          default(0), unsigned, not null
+#  matchings_count          :integer          default(0), unsigned, not null
+#  account_status           :integer          default(NULL), unsigned, not null
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
 #
-
 
 RECORD_NAME = 'users'
 DUMMY_REPEAT_TIMES = 20
@@ -38,12 +32,12 @@ DUMMY_REPEAT_TIMES = 20
   begin
     user = User.new(
       university_id:     University.pluck(:id).sample,
+      facebook_id:       Faker::Omniauth.facebook[:extra][:raw_info][:id],
       first_name:        first_name,
       last_name:         Faker::Name.last_name, 
-      catchcopy:         Faker::StarWars.quote,
+      catch_copy:        Faker::StarWars.quote,
       self_introduction: Faker::Lorem.sentence,
       email:             Faker::Internet.email(first_name),
-      password:          Faker::Internet.password(10, 20),
     )
     user.save!
     p user
