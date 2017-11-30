@@ -61,16 +61,14 @@ gem 'grape-middleware-logger', '1.9.0'
 # CORS
 gem 'rack-cors'
 
-group :staging do
-  # FAKE DATA
-  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
+# FAKE DATA
+gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
 
-  # DEBUG
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-byebug'
-  gem 'pry-stack_explorer'
-end
+# DEBUG
+gem 'pry-rails'
+gem 'pry-doc'
+gem 'pry-byebug'
+gem 'pry-stack_explorer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -83,15 +81,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
-
-  # FAKE DATA
-  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
-
-  # DEBUG
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-byebug'
-  gem 'pry-stack_explorer'
 end
 
 group :development do
