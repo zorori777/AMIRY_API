@@ -61,21 +61,23 @@ gem 'grape-middleware-logger', '1.9.0'
 # CORS
 gem 'rack-cors'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
+group :staging, :development, :test do
+  # FAKE DATA
+  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
 
   # DEBUG
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+end
 
-  # FAKE DATA
-  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
 
   # TESTING FRAMEWORK
   gem 'rspec-rails'
