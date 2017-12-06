@@ -52,4 +52,3 @@ describe University do
     end
   end
 end
-

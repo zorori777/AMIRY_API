@@ -2,25 +2,25 @@
 #
 # Table name: users
 #
-#  id                       :integer          not null, primary key
-#  university_id            :integer          unsigned, not null
-#  facebook_id              :integer          default(0), not null
-#  facebook_token           :string(255)      default(""), not null
-#  facebook_toke_expires_at :integer          default(0), unsigned, not null
-#  first_name               :string(255)      default(""), not null
-#  last_name                :string(255)      default(""), not null
-#  display_name             :string(255)      default(""), not null
-#  email                    :string(255)      default(""), not null
-#  avatar                   :string(255)      default(""), not null
-#  catch_copy               :string(255)      default(""), not null
-#  self_introduction        :text(65535)      not null
-#  bands_count              :integer          default(0), unsigned, not null
-#  received_likes_count     :integer          default(0), unsigned, not null
-#  sendable_likes_count     :integer          default(0), unsigned, not null
-#  matchings_count          :integer          default(0), unsigned, not null
-#  account_status           :integer          default(NULL), unsigned, not null
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
+#  id                        :integer          not null, primary key
+#  university_id             :integer          unsigned, not null
+#  facebook_id               :integer          default(0), not null
+#  facebook_token            :string(255)      default(""), not null
+#  facebook_token_expires_at :integer          default(0), unsigned, not null
+#  first_name                :string(255)      default(""), not null
+#  last_name                 :string(255)      default(""), not null
+#  display_name              :string(255)      default(""), not null
+#  email                     :string(255)      default(""), not null
+#  avatar                    :string(255)      default(""), not null
+#  catch_copy                :string(255)      default(""), not null
+#  self_introduction         :text(65535)      not null
+#  bands_count               :integer          default(0), unsigned, not null
+#  received_likes_count      :integer          default(0), unsigned, not null
+#  sendable_likes_count      :integer          default(0), unsigned, not null
+#  matchings_count           :integer          default(0), unsigned, not null
+#  account_status            :integer          default(NULL), unsigned, not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
 
 class User < ApplicationRecord
@@ -54,12 +54,15 @@ class User < ApplicationRecord
   has_many   :received_introductions, class_name: 'Introduction', foreign_key: 'recipient_id' 
 
   # Validation
-  validates :first_name, :last_name, :email, presence: true
-  validates :bands_count,
+  validates :email, :facebook_id,        uniqueness: true
+  validates :first_name, :last_name,
+            :email, :facebook_id,        presence: true
+  validates :facebook_id,
+            :facebook_token_expires_at,
+            :bands_count,
             :received_likes_count,
             :sendable_likes_count,
-            :matchings_count,                numericality: true
-  validates :email,                          uniqueness: true
+            :matchings_count,            numericality: { only_integer: true }
 
   # Uploader
   mount_uploader :avatar, AvatarUploader

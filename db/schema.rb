@@ -241,7 +241,7 @@ ActiveRecord::Schema.define(version: 20171130024002) do
     t.integer "university_id", null: false, unsigned: true
     t.bigint "facebook_id", default: 0, null: false
     t.string "facebook_token", default: "", null: false
-    t.bigint "facebook_toke_expires_at", default: 0, null: false, unsigned: true
+    t.bigint "facebook_token_expires_at", default: 0, null: false, unsigned: true
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "display_name", default: "", null: false

@@ -23,32 +23,20 @@
 #  updated_at                :datetime         not null
 #
 
-RECORD_NAME = 'users'
-DUMMY_REPEAT_TIMES = 20
+FactoryBot.define do
+  user_object = Faker::Omniauth.facebook
 
-1.upto(DUMMY_REPEAT_TIMES) do |num|
-  first_name = Faker::Name.first_name
-
-  begin
-    user = User.new(
-      university_id:     University.pluck(:id).sample,
-      facebook_id:       Faker::Omniauth.facebook[:extra][:raw_info][:id],
-      first_name:        first_name,
-      last_name:         Faker::Name.last_name, 
-      catch_copy:        Faker::StarWars.quote,
-      self_introduction: Faker::Lorem.sentence,
-      email:             Faker::Internet.email(first_name),
-    )
-    user.save!
-    p user
-    if num == DUMMY_REPEAT_TIMES
-      p "#{num} records of #{RECORD_NAME} inserted. Total: #{User.count}"
-    end
-  rescue => error
-    p "Seed file fails because #{error.message}. #{num - 1} records have been inserted."
-    p "Total: #{User.count}"
-    exit
+  factory :user do
+    association :university, factory: :university
+    facebook_id               { user_object[:extra][:raw_info][:id].to_i }
+    facebook_token            { user_object[:credentials][:token] }
+    facebook_token_expires_at { user_object[:credentials][:expires_at] }
+    first_name                { user_object[:info][:first_name] }
+    last_name                 { user_object[:info][:last_name] }
+    email                     { user_object[:info][:email] }
+    avatar                    { user_object[:info][:image] }
+    catch_copy                { Faker::HowIMetYourMother.catch_phrase }
+    self_introduction         { Faker::HowIMetYourMother.quote }
+    account_status            { User.account_statuses[:registered] }
   end
 end
-
-

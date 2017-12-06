@@ -23,32 +23,16 @@
 #  updated_at                :datetime         not null
 #
 
-RECORD_NAME = 'users'
-DUMMY_REPEAT_TIMES = 20
+require 'rails_helper'
 
-1.upto(DUMMY_REPEAT_TIMES) do |num|
-  first_name = Faker::Name.first_name
+describe User do
+  let(:user) { build(:user) }
 
-  begin
-    user = User.new(
-      university_id:     University.pluck(:id).sample,
-      facebook_id:       Faker::Omniauth.facebook[:extra][:raw_info][:id],
-      first_name:        first_name,
-      last_name:         Faker::Name.last_name, 
-      catch_copy:        Faker::StarWars.quote,
-      self_introduction: Faker::Lorem.sentence,
-      email:             Faker::Internet.email(first_name),
-    )
-    user.save!
-    p user
-    if num == DUMMY_REPEAT_TIMES
-      p "#{num} records of #{RECORD_NAME} inserted. Total: #{User.count}"
+  describe 'Validations' do
+    context 'with all necessary attributes' do
+      it 'is valid' do
+        expect(user).to be_valid
+      end
     end
-  rescue => error
-    p "Seed file fails because #{error.message}. #{num - 1} records have been inserted."
-    p "Total: #{User.count}"
-    exit
   end
 end
-
-
