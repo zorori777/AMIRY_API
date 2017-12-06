@@ -25,4 +25,8 @@ class University < ApplicationRecord
     self.circles.size
   end
 
+  def circles_id_and_name
+    self.circles.map { |circle| { id: circle.id, name: circle.name } }
+  end
+
 end
