@@ -34,5 +34,63 @@ describe User do
         expect(user).to be_valid
       end
     end
+
+    context 'Presence Validation' do
+      context 'without all necessary attributes' do
+        it 'is invalid with nil first_name' do
+          user.first_name = nil
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:first_name]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with empty first_name' do
+          user.first_name = ''
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:first_name]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with nil last_name' do
+          user.last_name = nil
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:last_name]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with empty last_name' do
+          user.last_name = ''
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:last_name]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with nil email' do
+          user.email = nil
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:email]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with empty email' do
+          user.email = ''
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:email]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with empty email' do
+          user.email = ''
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:email]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with nil facebook_id' do
+          user.facebook_id = nil
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:facebook_id]).to include('can\'t be blank')
+        end
+
+        it 'is invalid with empty facebook_id' do
+          user.facebook_id = ''
+          expect(user.valid?).to be_falsey
+          expect(user.errors[:facebook_id]).to include('can\'t be blank')
+        end
+      end
+    end
   end
 end
