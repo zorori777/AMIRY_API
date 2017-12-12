@@ -272,12 +272,14 @@ CREATE TABLE `matchings`(
   `id`           BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `sender_id`    BIGINT(20) UNSIGNED NOT NULL,
   `recipient_id` BIGINT(20) UNSIGNED NOT NULL,
+  `like_id`      BIGINT(20) UNSIGNED NOT NULL,
   `created_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`   DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(`id`),
   UNIQUE KEY(`sender_id`, `recipient_id`), 
   CONSTRAINT `fk_user_messages_on_sender_id`    FOREIGN KEY(`sender_id`)    REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE, 
-  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `fk_user_messages_on_like_id`      FOREIGN KEY(`like_id`)      REFERENCES `likes` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `introductions` (

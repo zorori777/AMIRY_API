@@ -174,12 +174,13 @@ ActiveRecord::Schema.define(version: 20171130024002) do
   end
 
   create_table "matchings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "like_id", null: false
-    t.integer "user_id", null: false
-    t.integer "acceptance", limit: 1, null: false
+    t.integer "like_id", null: false, unsigned: true
+    t.integer "sender_id", null: false, unsigned: true
+    t.integer "recipient_id", null: false, unsigned: true
+    t.integer "acceptance", limit: 1, null: false, unsigned: true
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["like_id", "user_id"], name: "index_matchings_on_like_id_and_user_id", unique: true
+    t.index ["sender_id", "recipient_id"], name: "index_matchings_on_sender_id_and_recipient_id", unique: true
   end
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

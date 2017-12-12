@@ -2,12 +2,13 @@
 #
 # Table name: matchings
 #
-#  id         :integer          not null, primary key
-#  like_id    :integer          not null
-#  user_id    :integer          not null
-#  acceptance :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  like_id      :integer          unsigned, not null
+#  sender_id    :integer          unsigned, not null
+#  recipient_id :integer          unsigned, not null
+#  acceptance   :integer          unsigned, not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Matching < ApplicationRecord
