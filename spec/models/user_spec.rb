@@ -92,5 +92,21 @@ describe User do
         end
       end
     end
+
+    context 'Uniqueness Validation' do
+      it 'is invalid with the email that has already been taken.' do
+        existing_user = create(:user)
+        user.email = existing_user.email
+        expect(user.valid?).to be_falsey
+        expect(user.errors[:email]).to include('has already been taken')
+      end
+
+      it 'is invalid with the facebook_id that has already been taken.' do
+        existing_user = create(:user)
+        user.facebook_id = existing_user.facebook_id
+        expect(user.valid?).to be_falsey
+        expect(user.errors[:facebook_id]).to include('has already been taken')
+      end
+    end
   end
 end
