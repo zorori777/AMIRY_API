@@ -13,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :circles do
+  factory :circle do
     association   :university, factory: :university
     name          { Faker::Company.name  }
     description   { Faker::Lorem.paragraph }

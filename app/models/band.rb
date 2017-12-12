@@ -19,7 +19,11 @@ class Band < ApplicationRecord
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
-  # Constant
+  # Constants
+  MIX_NUM = 4
+  MAX_NUM = 7
+
+  # Pagination
   paginates_per 15
 
   # Enum
@@ -29,7 +33,7 @@ class Band < ApplicationRecord
   belongs_to :circle
   has_many   :band_images
   has_many   :band_lives
-  has_many   :lives, through: :band_lives
+  has_many   :lives,      through: :band_lives
 
   # Validation
   validates :name,                             uniqueness: { scope: :circle_id }
@@ -55,7 +59,7 @@ class Band < ApplicationRecord
 
   # Custom Validation
   def people_num_between_four_and_seven
-    if self.people_num < 3 || self.people_num > 8
+    if self.people_num < MIX_NUM || self.people_num > MAX_NUM
       errors.add(:people_num, 'The number of a band should be between 4 and 7.')
     end
   end

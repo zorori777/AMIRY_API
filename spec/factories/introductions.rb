@@ -12,7 +12,7 @@
 #
 
 FactoryBot.define do
-  factory :introductions do
+  factory :introduction do
     association  :sender,    factory: :user
     association  :recipient, factory: :user
     description  { Faker::Lorem.paragraph }

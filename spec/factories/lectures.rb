@@ -13,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :lectures do
+  factory :lecture do
     association :user,    factory: :user
     title       { Faker::Book.title }
     description { Faker::Lorem.paragraph }

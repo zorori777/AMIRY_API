@@ -15,7 +15,7 @@
 #
 
 FactoryBot.define do
-  factory :lives do
+  factory :live do
     association        :circle, factory: :circle
     name               { Faker::Company.name }
     description        { Faker::Lorem.paragraph }

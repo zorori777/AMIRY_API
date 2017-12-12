@@ -12,7 +12,7 @@
 #
 
 FactoryBot.define do
-  factory :messages do
+  factory :message do
     association :sender,    factory: :user
     association :recipeint, factory: :user
     body        { Faker::HowIMetYourMother.quote }

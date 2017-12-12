@@ -21,7 +21,8 @@ class Matching < ApplicationRecord
 
   # Association
   belongs_to :like
-  belongs_to :user
+  belongs_to :sender,    foreign_key: 'sender_id',    class_name: 'User'
+  belongs_to :recipient, foreign_key: 'recipient_id', class_name: 'User'
 
   # Validation
   validates :user_id, :like_id, numericality: true, presence: true

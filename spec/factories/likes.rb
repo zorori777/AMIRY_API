@@ -10,7 +10,7 @@
 #
 
 FactoryBot.define do
-  factory :likes do
+  factory :like do
     association :sender,    factory: :user
     association :recipeint, factory: :user
   end

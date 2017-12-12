@@ -9,7 +9,7 @@
 #
 
 FactoryBot.define do
-  factory :parts do
+  factory :part do
     name { Part.names.values.sample }
   end
 end

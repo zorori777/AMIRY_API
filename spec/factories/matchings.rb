@@ -12,7 +12,7 @@
 #
 
 FactoryBot.define do
-  factory :matchings do
+  factory :matching do
     association :like,      factory: :live
     association :sender,    factory: :user
     association :recipeint, factory: :user
