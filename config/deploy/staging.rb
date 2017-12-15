@@ -51,7 +51,7 @@
 # ------------------------------------
 server "13.230.13.45",
    user: "umeki",
-   roles: %w{web app db},
+   roles: %w{web app db}
 #   ssh_options: {
 #     user: "user_name", # overrides user setting above
 #     keys: %w(/home/user_name/.ssh/id_rsa),

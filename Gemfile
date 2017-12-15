@@ -61,7 +61,7 @@ gem 'grape-middleware-logger', '1.9.0'
 # CORS
 gem 'rack-cors'
 
-group :production do
+group :production, :staging do
   # APPLICATION SERVER  
   gem 'unicorn'
   gem 'rails_12factor'
@@ -80,7 +80,7 @@ group :development, :test do
   gem 'rails-controller-testing'
 
   # FAKE DATA
-  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
+  gem 'faker'
 
   # DEBUG
   gem 'pry-rails'
