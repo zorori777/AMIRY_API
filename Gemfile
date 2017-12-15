@@ -61,10 +61,12 @@ gem 'grape-middleware-logger', '1.9.0'
 # CORS
 gem 'rack-cors'
 
+gem 'rails_12factor'
+
 group :production, :staging do
   # APPLICATION SERVER  
   gem 'unicorn'
-  gem 'rails_12factor'
+  # gem 'rails_12factor'
 end
 
 group :development, :test do
