@@ -61,16 +61,8 @@ gem 'grape-middleware-logger', '1.9.0'
 # CORS
 gem 'rack-cors'
 
-# FAKE DATA
-gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
-
-# DEBUG
-gem 'pry-rails'
-gem 'pry-doc'
-gem 'pry-byebug'
-gem 'pry-stack_explorer'
-
 group :production do
+  # APPLICATION SERVER  
   gem 'unicorn'
   gem 'rails_12factor'
 end
@@ -86,6 +78,15 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+
+  # FAKE DATA
+  gem 'faker', git: 'git://github.com/stympy/faker.git', branch: 'master'
+
+  # DEBUG
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 group :development do
@@ -101,6 +102,12 @@ group :development do
 
   # N + 1 MONITOR
   gem 'bullet'
+
+  # AUTOMATIC DEPLOY
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
