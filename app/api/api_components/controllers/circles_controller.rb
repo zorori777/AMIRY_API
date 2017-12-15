@@ -2,7 +2,7 @@ module APIComponents
   module Controllers
     class CirclesController < ApiController
       # index
-      desc 'Return an Circle.' do
+      desc 'Return all Cirlcle objects' do
         http_codes([
            { code: 200, message: 'circle', model: Entities::Circle }
         ])
