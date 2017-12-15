@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: AMIRY_production
-  username: AMIRY
-  password: <%= ENV['AMIRY_DATABASE_PASSWORD'] %>
+  username: root
+  password: 
