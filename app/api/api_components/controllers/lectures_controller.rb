@@ -1,7 +1,7 @@
 module APIComponents
   module Controllers
     class LecturesController < ApiController
-      desc 'Return all lives' do
+      desc 'Return all lectures' do
         http_codes([
           { code: 200, message: 'lecture', model: Entities::Lecture }
         ])
