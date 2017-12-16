@@ -4,7 +4,7 @@ lock "~> 3.10.1"
 set :application, "AMIRY_API"
 set :repo_url, "git@github.com:r-ume/AMIRY_API.git"
 
-set :branch, 'master'
+set :branch, 'feature/unicorn_deploy'
 
 set :deploy_to, '/home/umeki/AMIRY_API'
 
