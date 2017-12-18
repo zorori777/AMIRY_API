@@ -3,7 +3,7 @@ lock "~> 3.10.1"
 
 set :application, "AMIRY_API"
 set :repo_url, "git@github.com:r-ume/AMIRY_API.git"
-set :branch, 'deploy'
+set :branch, 'master'
 set :deploy_to, '/home/umeki/AMIRY_API'
 set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
