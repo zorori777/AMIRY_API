@@ -1,6 +1,8 @@
 module APIComponents
   module Controllers
     class ArticlesController < ApiController
+      format :json
+
       # index
       desc 'Returns all articles' do
         detail <<~DETAIL
@@ -20,13 +22,19 @@ module APIComponents
           Returns an Article Object
         DETAIL
         http_codes([
-          { code: 200, message: 'Article', model: Entities::Article }
-        ])
+          { code: 200, message: 'Article', model: Entities::Article },
+          { code: 400, message: 'Error',   model: Entities::Error }
+       ])
       end
       params do
-        requires :id, type: Integer, desc: 'Article id.'
+        requires :id, type: Integer, desc: 'Article Primary id.'
       end
       get '/:id' do
+        article_id = params[:id].to_i
+        article = Article.find_by(id: article_id)
+        unless article.present?
+          Errors::RecordNotFoundError.new(id: article_id, model: 'Article')
+        end
         present Article.find(params[:id]), with: Entities::Article
       end
 
