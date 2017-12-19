@@ -7,6 +7,7 @@ module APIComponents
       expose :description
       expose :acceptance
       expose :created_at
+      expose :updated_at
     end
   end
 end

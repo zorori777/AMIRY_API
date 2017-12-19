@@ -20,9 +20,14 @@ DUMMY_REPEAT_TIMES = 20
       sender_id:    User.pluck(:id).sample,
       recipient_id: User.pluck(:id).sample,
       description:  Faker::HowIMetYourMother.quote,
+      acceptance:   Introduction.acceptances.values.sample
     )
     introduction.save!
-    p introduction
+    p "---------------"
+    Introduction.column_names.each do |column|
+      p "#{column}: #{introduction.send(column)}"
+    end
+    p "---------------"
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Introduction.count}"
     end
