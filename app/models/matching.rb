@@ -13,8 +13,8 @@
 
 class Matching < ApplicationRecord
 
-  # Constant
-  PER_PAGE = 15
+  # Pagination
+  paginates_per 15
 
   # Enum
   enum acceptance: { accepted: 1, rejected: 2 }
@@ -31,12 +31,13 @@ class Matching < ApplicationRecord
   # Counter Culture
   counter_culture :recipient, column_name: 'matchings_count'
 
+  # Getter Methods
   def sender_name
     self.sender&.display_name.to_s
   end
 
   def recipient_name
-    self.recipient&.&display_name.to_s
+    self.recipient&.display_name.to_s
   end
 
 end

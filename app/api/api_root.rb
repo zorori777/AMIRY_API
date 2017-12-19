@@ -33,12 +33,16 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::LecturesController
   end
 
+  namespace :me do
+    mount APIComponents::Controllers::MeController
+  end
+
   namespace :universities do
     mount APIComponents::Controllers::UniversitiesController
   end
 
-  namespace :me do
-    mount APIComponents::Controllers::MeController
+  namespace :users do
+    mount APIComponents::Controllers::UsersController
   end
 
   route :any, '*path' do

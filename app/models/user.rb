@@ -27,6 +27,9 @@ class User < ApplicationRecord
   before_save :set_display_name, :set_empty_self_introduction,
               :set_no_university_status, :set_account_status_registered, if: :new_record?
 
+  # Pagination
+  paginates_per 10
+
   # Constant
   NO_UNIVERSITY = 0
   REGISTERED    = 1
@@ -85,7 +88,7 @@ class User < ApplicationRecord
   end
 
   def avatar_link
-    self.avatar.file.filename
+    self.avatar.file&.filename.to_s
   end
 
   # Setter Methods
