@@ -20,7 +20,7 @@ class Lecture < ApplicationRecord
   paginates_per 10
 
   # Scope
-  scope :recent, -> { where(created_at: :desc) }
+  scope :recent, -> { order(created_at: :desc) }
   scope :passed, -> { where("created_at < ?", Date.today)}
 
   # Association
@@ -38,6 +38,6 @@ class Lecture < ApplicationRecord
 
   # Setter Methods
   def set_description_empty
-    self.description = ''
+    self.description = '' if self.description.blank?
   end
 end
