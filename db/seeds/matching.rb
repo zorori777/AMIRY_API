@@ -16,12 +16,17 @@ DUMMY_REPEAT_TIMES = 20
 1.upto(DUMMY_REPEAT_TIMES) do |num|
   begin
     matching = Matching.new(
-      like_id:    Like.pluck(:id).sample,
-      user_id:    User.pluck(:id).sample,
-      acceptance: Matching.acceptances.values.sample
+      like_id:      Like.pluck(:id).sample,
+      recipient_id: User.pluck(:id).sample,
+      sender_id:    User.pluck(:id).sample,
+      acceptance:   Matching.acceptances.values.sample
     )
-    matching.save! 
-    p matching
+    matching.save!
+    p "---------------"
+    Matching.column_names.each do |column|
+      p "#{column}: #{matching.send(column)}"
+    end
+    p "---------------"
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Matching.count}"
     end

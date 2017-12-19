@@ -21,6 +21,6 @@ class Like < ApplicationRecord
   validates :sender_id,    uniqueness: { scope: :recipient_id }
 
   # Counter Culture
-  counter_culture :recipient, column_name: 'likes_count'
+  counter_culture :recipient, column_name: 'received_likes_count'
 
 end
