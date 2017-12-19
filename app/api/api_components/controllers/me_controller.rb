@@ -11,8 +11,8 @@ module APIComponents
         if user_debug_id = headers['User-Debug-Id']
           @user = User.find(user_debug_id)
         else
-          facebook_token      = headers['Facebook_Token']
-          facebook_id         = headers['Facebook_Id']
+          facebook_token     = headers['Facebook_Token']
+          facebook_id        = headers['Facebook_Id']
           user_facebook_info = External::Facebook::GraphApiHandler.new(facebook_token: facebook_token, facebook_id: facebook_id)
 
           unless user_facebook_info.valid_facebook_id_and_token?
@@ -54,9 +54,28 @@ module APIComponents
         present user, with: Entities::User
       end
 
+      desc 'GET /me/articles' do
+        http_codes([
+          { code: 200, message: 'Introduction', model: Entities::Article },
+          { code: 400, message: 'Error',        model: Entities::Error }
+        ])
+        headers(
+          facebook_id:    { description: 'The id of the user on facebook',             required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          user_debug_id:  { description: 'Debug id.', required: false },
+        )
+      end
+      get '/articles' do
+        unless @user.present?
+          Errors::RecordNotFoundError.new(id: params[:facebook_id], model: 'User')
+        end
+        present @user.articles, with: Entities::Article
+      end
+
       desc 'GET /me/introductions' do
         http_codes([
-          { code: 200, message: 'User Object', model: Entities::Introduction }
+          { code: 200, message: 'Introduction', model: Entities::Introduction },
+          { code: 400, message: 'Error',        model: Entities::Error }
         ])
         headers(
           facebook_id:    { description: 'The id of the user on facebook',             required: false },
@@ -70,6 +89,7 @@ module APIComponents
         end
         present @user.introductions, with: Entities::Introduction
       end
+
     end
   end
 end
