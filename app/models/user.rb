@@ -69,12 +69,12 @@ class User < ApplicationRecord
 
   # Class methods
   class << self
-    def create_from_graph_api(user_object:)
-      where(facebook_id: user_object.facebook_id).first_or_create!(
-        email:             user_object.email,
-        first_name:        user_object.first_name,
-        last_name:         user_object.last_name,
-        remote_avatar_url: "https://graph.facebook.com/#{user_object.facebook_id}/picture?type=large"
+    def create_from_graph_api(user_facebook_info:)
+      where(facebook_id: user_facebook_info.facebook_id).first_or_create!(
+        email:             user_facebook_info.email,
+        first_name:        user_facebook_info.first_name,
+        last_name:         user_facebook_info.last_name,
+        remote_avatar_url: "https://graph.facebook.com/#{user_facebook_info.facebook_id}/picture?type=large"
       )
     end
   end

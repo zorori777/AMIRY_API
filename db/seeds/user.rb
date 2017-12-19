@@ -33,6 +33,7 @@ DUMMY_REPEAT_TIMES = 20
     user = User.new(
       university_id:     University.pluck(:id).sample,
       facebook_id:       Faker::Omniauth.facebook[:extra][:raw_info][:id],
+      facebook_token:    Faker::Omniauth.facebook[:credentials][:token],
       first_name:        first_name,
       last_name:         Faker::Name.last_name, 
       catch_copy:        Faker::StarWars.quote,
