@@ -33,6 +33,9 @@ module APIComponents
           user_debug_id:  { description: 'Debug id.', required: false },
         )
       end
+      params do
+        optional :page, type: Integer, desc: "Page Num"
+      end
       get '/' do
         unless @user.present?
           Errors::RecordNotFoundError.new(id: params[:facebook_id], model: 'User')
@@ -72,6 +75,48 @@ module APIComponents
         present @user.articles, with: Entities::Article
       end
 
+      desc 'GET /me/bands' do
+        http_codes([
+          { code: 200, message: 'Introduction', model: Entities::Band },
+          { code: 400, message: 'Error',        model: Entities::Error }
+        ])
+        headers(
+          facebook_id:    { description: 'The id of the user on facebook',             required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          user_debug_id:  { description: 'Debug id.',                                  required: false },
+        )
+      end
+      params do
+        optional :page, type: Integer, desc: 'Page Num'
+      end
+      get '/bands' do
+        unless @user.present?
+          Errors::RecordNotFoundError.new(id: params[:facebook_id], model: 'User')
+        end
+        present @user.bands, with: Entities::Band
+      end
+
+      desc 'GET /me/circles' do
+        http_codes([
+          { code: 200, message: 'Circle', model: Entities::Circle },
+          { code: 400, message: 'Error',  model: Entities::Error  }
+        ])
+        headers(
+          facebook_id:    { description: 'The id of the user on facebook',             required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          user_debug_id:  { description: 'Debug id.',                                  required: false },
+        )
+      end
+      params do
+        optional :page, type: Integer, desc: 'Page Num'
+      end
+      get '/circles' do
+        unless @user.present?
+          Errors::RecordNotFoundError.new(id: params[:facebook_id], model: 'User')
+        end
+        present @user.circles, with: Entities::Circle
+      end
+
       desc 'GET /me/introductions' do
         http_codes([
           { code: 200, message: 'Introduction', model: Entities::Introduction },
@@ -82,6 +127,9 @@ module APIComponents
           facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
           user_debug_id:  { description: 'Debug id.', required: false },
         )
+      end
+      params do
+        optional :page, type: Integer, desc: 'Page Num'
       end
       get '/introductions' do
         unless @user.present?
@@ -101,6 +149,9 @@ module APIComponents
           user_debug_id:  { description: 'Debug id.', required: false },
         )
       end
+      params do
+        optional :page, type: Integer, desc: 'Page Num'
+      end
       get '/lectures' do
         unless @user.present?
           Errors::RecordNotFoundError.new(id: params[:facebook_id], model: 'User')
@@ -118,6 +169,9 @@ module APIComponents
           facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
           user_debug_id:  { description: 'Debug id.', required: false },
         )
+      end
+      params do
+        optional :page, type: Integer, desc: 'Page Num'
       end
       get '/matchings' do
         unless @user.present?
