@@ -40,7 +40,11 @@ DUMMY_REPEAT_TIMES = 20
       email:             Faker::Internet.email(first_name),
     )
     user.save!
-    p user
+    p "---------------"
+    User.column_names.each do |column|
+      p "#{column}: #{user.send(column)}"
+    end
+    p "---------------"
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{User.count}"
     end

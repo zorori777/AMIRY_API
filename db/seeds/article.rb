@@ -18,7 +18,7 @@ DUMMY_REPEAT_TIMES = 20
   begin
     article = Article.new(
       user_id: User.pluck(:id).sample,
-      title:   Faker::OnePiece.character,
+      title:   Faker::HowIMetYourMother.character,
       content: Faker::HowIMetYourMother.quote,
     )
     article.save! 
