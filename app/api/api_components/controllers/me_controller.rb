@@ -72,6 +72,24 @@ module APIComponents
         present @user.articles, with: Entities::Article
       end
 
+      desc 'GET /me/matchings' do
+        http_codes([
+          { code: 200, message: 'Matching', model: Entities::Matching },
+          { code: 400, message: 'Error',    model: Entities::Error    }
+        ])
+        headers(
+          facebook_id:    { description: 'The id of the user on facebook',             required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          user_debug_id:  { description: 'Debug id.', required: false },
+        )
+      end
+      get '/matchings' do
+        unless @user.present?
+          Errors::RecordNotFoundError.new(id: params[:facebook_id], model: 'User')
+        end
+        present @user.matchings, with: Entities::Matching
+      end
+
       desc 'GET /me/introductions' do
         http_codes([
           { code: 200, message: 'Introduction', model: Entities::Introduction },
