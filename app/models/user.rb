@@ -31,9 +31,10 @@ class User < ApplicationRecord
   paginates_per 10
 
   # Constant
-  NO_UNIVERSITY = 0
-  REGISTERED    = 1
-  UNREGISTERED  = 2
+  NO_UNIVERSITY    = 0
+  REGISTERED       = 1
+  UNREGISTERED     = 2
+  BONUS_LIKE_COUNT = 5
 
   # Enum
   enum account_status: { registered: 1, unregistered: 2 }
@@ -106,6 +107,10 @@ class User < ApplicationRecord
 
   def set_account_status_registered
     self.account_status = REGISTERED
+  end
+
+  def add_bonus_likes_count
+    self.update!(sendable_likes_count: self.sendable_likes_count + BONUS_LIKE_COUNT)
   end
 
 end
