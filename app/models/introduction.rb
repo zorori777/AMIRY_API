@@ -13,7 +13,7 @@
 
 class Introduction < ApplicationRecord
   # Callback
-  before_save :set_acceptance_pending, if: :new_record?
+  before_validation :set_acceptance_pending, if: :new_record?
 
   # Pagination
   paginates_per 7
@@ -22,8 +22,8 @@ class Introduction < ApplicationRecord
   enum acceptance: { accepted: 1, pending: 2, rejected: 3 }
 
   # Validation
-  validates :sender_id, :recipient_id,         numericality: true, presence: true
-  validates :sender_id, :recipient_id, 
+  validates :sender_id, :recipient_id,         presence: true, numericality: { only_integer: true }
+  validates :sender_id, :recipient_id,
             :acceptance, :description,         presence: true
   validates :sender_id,                        uniqueness: { scope: :recipient_id }
   validate  :different_sender_and_recipient_id
