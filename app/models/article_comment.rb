@@ -27,7 +27,7 @@ class ArticleComment < ApplicationRecord
   validates :user_id, :article_id,           numericality: true 
 
   # Getter Method
-  def commenter_name
+  def commentor_name
     self.user&.display_name.to_s
   end
 
