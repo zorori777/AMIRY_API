@@ -296,6 +296,21 @@ CREATE TABLE `introductions` (
   CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 通知テーブル
+CREATE TABLE `notifications` (
+  `id`                BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`           BIGINT(20)  UNSIGNED NOT NULL,
+  `target_model_type` TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0',
+  `target_model_id`   BIGINT(20)  UNSIGNED NOT NULL,
+  `body`              VARCHAR(64)          NOT NULL DEFAULT '',
+  `status`            TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0',
+  `created_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`        DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  KEY(`user_id`),
+  CONSTRAINT `notifications_on_user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- tagsがkudosみたいにできるか、確認
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
