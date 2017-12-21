@@ -1,10 +1,10 @@
 module APIComponents
   module Entities
     class University < Grape::Entity
-      expose :id
-      expose :name
-      expose :circles_num
-      expose :circles_id_and_name
+      expose :id,                  documentation: { required: true, type: 'Integer', desc: 'The primary id.' }
+      expose :name,                documentation: { required: true, type: 'String',  desc: 'The name of the university.' }
+      expose :circles_num,         documentation: { required: true, type: 'Integer', desc: 'The number of circles that the university has.' }
+      expose :circles_id_and_name, documentation: { required: true, type: 'Array',   desc: 'The ids and names of circles that the university has.' }
     end
   end
 end

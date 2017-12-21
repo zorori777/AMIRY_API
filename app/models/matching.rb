@@ -17,7 +17,7 @@ class Matching < ApplicationRecord
   paginates_per 15
 
   # Enum
-  enum acceptance: { accepted: 1, rejected: 2 }
+  enum acceptance: { accepted: 1, pending: 2, rejected: 3 }
 
   # Association
   belongs_to :like
