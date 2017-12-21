@@ -14,6 +14,12 @@
 
 class Notification < ApplicationRecord
 
+  # Callback
+  before_validation :set_unread_status, if: :new_record?
+
+  # Pagination
+  paginates_per 10
+
   # Enum
   enum status:            { read: 1, unread: 2 }
   enum target_model_type: { matching: 1, like: 2, introduction: 3 }
@@ -26,5 +32,10 @@ class Notification < ApplicationRecord
   validates :user_id, :status,
             :target_model_type,
             :target_model_id,   presence: true, numericality: { only_integer: true }
+
+  # Setter Method
+  def set_unread_status
+    self.status = Notification.statuses[:unread]
+  end
 
 end

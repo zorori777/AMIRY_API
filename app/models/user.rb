@@ -51,6 +51,7 @@ class User < ApplicationRecord
   has_many   :lives,                  through: :user_lives
   has_many   :introductions,          -> { includes :sender, :recipient },  foreign_key: 'recipient_id'
   has_many   :lectures
+  has_many   :notifications
   has_many   :matchings,              -> { includes :sender }, class_name: 'Matching',     foreign_key: 'recipient_id'
   has_many   :send_likes,             class_name: 'Like',         foreign_key: 'sender_id'
   has_many   :received_likes,         class_name: 'Like',         foreign_key: 'recipient_id'
