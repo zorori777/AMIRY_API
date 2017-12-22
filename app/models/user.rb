@@ -24,6 +24,8 @@
 #
 
 class User < ApplicationRecord
+
+  # Callback
   before_save :set_display_name, :set_empty_self_introduction,
               :set_no_university_status, :set_account_status_registered, if: :new_record?
 
@@ -32,8 +34,6 @@ class User < ApplicationRecord
 
   # Constant
   NO_UNIVERSITY    = 0
-  REGISTERED       = 1
-  UNREGISTERED     = 2
   BONUS_LIKE_COUNT = 5
 
   # Enum
