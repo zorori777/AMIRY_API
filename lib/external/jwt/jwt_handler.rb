@@ -1,7 +1,7 @@
 require 'jwt'
 require 'dotenv'
 
-Dotenv.reload
+Dotenv.overload
 
 module External
   module Jwt
@@ -16,22 +16,53 @@ module External
         @created_at  = created_at
       end
 
-      def encodes_jwt
-        JWT.encode self.payload, self.hamc_secret_key, HMAC_ALGORITHM
+      def encodes
+        ::JWT.encode(payload, hmac_secret, HMAC_ALGORITHM)
+      end
+
+      def user_by(token:)
+        begin
+          decoded_token = ::JWT.decode(token, hmac_secret, true, { algorithm: HMAC_ALGORITHM } )
+          user = User.find_by(facebook_id: decoded_token.first['data']['facebook_id'])
+          unless user.present?
+            return {
+                error: {
+                    message: 'User Not Found', code: 404,
+                    detail:  'User with facebook id in JWT does not exist.',
+                }
+            }
+          end
+          user
+        rescue ::JWT::ExpiredSignature
+          refresh!
+        rescue ::JWT::DecodeError
+          {
+            error: {
+                message: 'Jwt Decode Error', code: 403,
+                detail:  'Jwt did not get decode properly.',
+            }
+          }
+        end
       end
 
       private
       def payload
         {
+          exp:  Time.now.to_i + LIFETIME_SECONDS,
+          data: {
             facebook_id: @facebook_id,
             email:       @email,
             created_at:  @created_at,
-            expires_at:  Date.today.to_i + LIFETIME_SECONDS
+          }
         }
       end
 
-      def hamc_secret
+      def hmac_secret
         ENV['HMAC_SECRET']
+      end
+
+      def refresh!
+        encodes
       end
     end
   end
