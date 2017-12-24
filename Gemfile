@@ -61,14 +61,15 @@ gem 'grape-middleware-logger', '1.9.0'
 # CORS
 gem 'rack-cors'
 
+# HEROKU DEPLOY
 gem 'rails_12factor'
 
+# LISTEN
 gem 'listen', '>= 3.0.5', '< 3.2'
 
 group :production, :staging do
   # APPLICATION SERVER  
   gem 'unicorn'
-  # gem 'rails_12factor'
 end
 
 group :development, :test do

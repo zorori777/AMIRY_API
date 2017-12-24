@@ -107,7 +107,7 @@ class User < ApplicationRecord
   end
 
   def set_account_status_registered
-    self.account_status = REGISTERED
+    self.account_status = User.account_statuses[:registered]
   end
 
   def add_bonus_likes_count

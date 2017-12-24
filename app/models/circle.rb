@@ -25,13 +25,15 @@ class Circle < ApplicationRecord
   belongs_to :university
 
   # Validation
-  validates :name, :description,            presence: true
+  validates :name, :description,
+            :members_count, :bands_count,   presence: true
   validates :bands_count, 
-            :members_count, :university_id, numericality: true
+            :members_count, :university_id, numericality: { only_integer: true }
   validates :name,                          uniqueness: { scope: :university_id }
 
+  # Getter method
   def university_name
-    self.university.name
+    self.university&.name.to_s
   end
 
 end
