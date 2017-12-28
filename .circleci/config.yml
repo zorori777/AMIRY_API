@@ -1,31 +1,29 @@
-machine:
-  docker:
-    - image: circleci/ruby:2.4.1-node-browsers
-      environment:
-        RAILS_ENV: test
-        DB_HOST: 127.0.0.1
-        DB_USERNAME: 'root'
-        DB_PASSWORD: ''
+version: 2
+jobs:
+  build:
+    working_directory: ~/AMIRY_API
+    docker:
+      - image: circleci/ruby:2.4.1-node-browsers
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: 'root'
+          DB_PASSWORD: ''
 
-  timezone:
-    Asia/Tokyo
-
-  ruby:
-    version:
-      2.4.1
-
-dependencies:
-  override:
-    - bundle install:
-        timeout: 180
-
-database:
-  override:
-    - bundle exec rake db:create RAILS_ENV=test
-    - bundle exec rake db:schema:load RAILS_ENV=test
-    - bundle exec rake db:migrate RAILS_ENV=test
-
-test:
-  override:
-    - bundle exec rspec
-    - bundle exec rubocop
+    steps:
+      - checkout
+      - run:
+          name: Install Ruby Dependencies
+          command: bundle install
+      - run:
+          name: Database creation
+          command: |
+            bundle exec rake db:create RAILS_ENV=test
+            bundle exec rake db:schema:load RAILS_ENV=test
+            bundle exec rake db:migrate RAILS_ENV=test
+      - run:
+          name: rspec
+          command: bundle exec rspec
+      - run:
+          name: rubocop
+          command: bundle exec rubocop
