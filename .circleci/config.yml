@@ -1,5 +1,17 @@
-version: 1
-ruby:
-  version: 2.4.1
+version: 2
 
+machine:
+  ruby:
+    version: 2.4.1
 
+  timezone:
+    Asia/Tokyo
+
+dependencies:
+  override:
+    - bundle install:
+        timeout: 180
+
+test:
+  override:
+    - rubocop
