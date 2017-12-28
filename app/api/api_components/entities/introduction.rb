@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in Introduction model
     class Introduction < Grape::Entity
       expose :id,             documentation: { required: true, type: 'Integer', desc: 'The primary id of the circle.' }
       expose :sender_name,    documentation: { required: true, type: 'String',  desc: 'The name of the user who sent the introduction.' }

@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in User model
     class User < Grape::Entity
       expose :id,                   documentation: { required: true, type: 'Integer', desc: 'The primary id.' }
       expose :university_name,      documentation: { required: true, type: 'String',  desc: 'The name of the university that the user belongs to.' }

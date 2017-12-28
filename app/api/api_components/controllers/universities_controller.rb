@@ -7,7 +7,7 @@ module APIComponents
         ])
       end
       params do
-        optional :page, type: Integer, desc: "Page Num"
+        optional :page, type: Integer, desc: 'Page Num'
       end
       get '/' do
         present University.includes(:circles).page(params[:page]), with: Entities::University

@@ -1,5 +1,4 @@
 class LiveImageUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -11,7 +10,7 @@ class LiveImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{model.class.to_s.underscore}"
+    model.class.to_s
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -25,5 +24,4 @@ class LiveImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

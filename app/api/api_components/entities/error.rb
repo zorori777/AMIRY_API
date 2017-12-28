@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in Error model
     class Error < Grape::Entity
       expose :error do
         expose :message, documentation: { required: true, type: 'String',  desc: 'Error Message.' }

@@ -15,7 +15,6 @@
 #
 
 class Live < ApplicationRecord
-
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
@@ -36,9 +35,9 @@ class Live < ApplicationRecord
   has_many   :users,     through: :user_lives
 
   # Validation
-  validates :name, :hold_at, 
+  validates :name, :hold_at,
             :max_capacity, :reservations_count, presence: true
-  validates :circle_id, :max_capacity, 
+  validates :circle_id, :max_capacity,
             :reservations_count,                numericality: true
 
   # Getter Methods
@@ -51,8 +50,7 @@ class Live < ApplicationRecord
   end
 
   # Checker Methods
-  def has_available_seats?
-    self.available_seats > 0
+  def seats_avaiable?
+    self.available_seats.positive?
   end
-
 end

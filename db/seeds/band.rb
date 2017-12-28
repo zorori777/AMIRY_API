@@ -18,7 +18,6 @@ RECORD_NAME = 'bands'
 DUMMY_REPEAT_TIMES = 20
 
 1.upto(DUMMY_REPEAT_TIMES) do |num|
-
   begin
     band = Band.new(
       circle_id:   Circle.pluck(:id).sample,

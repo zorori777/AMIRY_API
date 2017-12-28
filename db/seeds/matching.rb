@@ -22,11 +22,11 @@ DUMMY_REPEAT_TIMES = 20
       acceptance:   Matching.acceptances.values.sample
     )
     matching.save!
-    p "---------------"
+    p '---------------'
     Matching.column_names.each do |column|
       p "#{column}: #{matching.send(column)}"
     end
-    p "---------------"
+    p '---------------'
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Matching.count}"
     end

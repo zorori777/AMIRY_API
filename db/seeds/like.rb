@@ -16,7 +16,7 @@ DUMMY_REPEAT_TIMES = 20
   begin
     like = Like.new(
       sender_id:    User.pluck(:id).sample,
-      recipient_id: User.pluck(:id).sample,
+      recipient_id: User.pluck(:id).sample
     )
     like.save!
     p like

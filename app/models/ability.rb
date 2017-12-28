@@ -5,7 +5,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(admin_user)
-
     alias_action :create, :read, :update, :destroy, to: :crud
 
     if admin_user.super_admin?
@@ -15,6 +14,5 @@ class Ability
       can :read, :all
       can :read, ActiveAdmin::Page, name: 'Dashboard'
     end
-
   end
 end

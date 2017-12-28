@@ -5,7 +5,7 @@ module APIComponents
       format :json
 
       before do
-        # TODO NEED TO DELETE THIS FOR PRODUCTION
+        # TODO: NEED TO DELETE THIS FOR PRODUCTION
         if user_debug_id = headers['User-Debug-Id']
           @user = User.find(user_debug_id)
         else
@@ -25,11 +25,11 @@ module APIComponents
       desc '/' do
         http_codes([
           { code: 200, message: 'User',  model: Entities::User },
-          { code: 400, message: 'Error', model: Entities::Error },
+          { code: 400, message: 'Error', model: Entities::Error }
         ])
         headers(
           facebook_id:    { description: 'The id of the user on facebook',             required: false },
-          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false }
         )
       end
       params do
@@ -43,12 +43,12 @@ module APIComponents
       desc '/' do
         http_codes([
           { code: 200, message: 'User',  model: Entities::User },
-          { code: 400, message: 'Error', model: Entities::Error },
+          { code: 400, message: 'Error', model: Entities::Error }
         ])
         headers(
           facebook_id:    { description: 'The id of the user on facebook',             required: false },
           facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
-          user_debug_id:  { description: 'Debug id.', required: false },
+          user_debug_id:  { description: 'Debug id.', required: false }
         )
       end
       get '/:id' do
@@ -64,12 +64,12 @@ module APIComponents
       desc '/' do
         http_codes([
           { code: 200, message: 'User',  model: Entities::User },
-          { code: 400, message: 'Error', model: Entities::Error },
+          { code: 400, message: 'Error', model: Entities::Error }
         ])
         headers(
-            facebook_id:    { description: 'The id of the user on facebook',             required: false },
-            facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
-            user_debug_id:  { description: 'Debug id.',                                  required: false },
+          facebook_id:    { description: 'The id of the user on facebook',             required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          user_debug_id:  { description: 'Debug id.',                                  required: false }
         )
       end
       delete '/' do

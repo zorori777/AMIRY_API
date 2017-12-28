@@ -13,7 +13,6 @@
 #
 
 class Notification < ApplicationRecord
-
   # Callback
   before_validation :set_unread_status, if: :new_record?
 
@@ -37,5 +36,4 @@ class Notification < ApplicationRecord
   def set_unread_status
     self.status = Notification.statuses[:unread]
   end
-
 end

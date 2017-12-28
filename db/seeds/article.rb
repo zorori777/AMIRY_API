@@ -19,9 +19,9 @@ DUMMY_REPEAT_TIMES = 20
     article = Article.new(
       user_id: User.pluck(:id).sample,
       title:   Faker::HowIMetYourMother.character,
-      content: Faker::HowIMetYourMother.quote,
+      content: Faker::HowIMetYourMother.quote
     )
-    article.save! 
+    article.save!
     p article
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Article.count}"

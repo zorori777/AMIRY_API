@@ -1,5 +1,4 @@
 ActiveAdmin.register University do
-
   permit_params :name
 
   index do

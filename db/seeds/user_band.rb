@@ -19,11 +19,11 @@ DUMMY_REPEAT_TIMES = 20
       band_id: Band.pluck(:id).sample
     )
     user_band.save!
-    p "---------------"
+    p '---------------'
     UserBand.column_names.each do |column|
       p "#{column}: #{user_band.send(column)}"
     end
-    p "---------------"
+    p '---------------'
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Band.count}"
     end

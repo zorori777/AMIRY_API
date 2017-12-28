@@ -48,9 +48,8 @@ class Introduction < ApplicationRecord
 
   # Custom Validation
   def different_sender_and_recipient_id
-    if self.sender_id == self.recipient_id
-      errors.add('sender_id', 'sender_id should not be the same as recipient_id.')
-      errors.add('recipient_id', 'recipient_id should not be the same as sender_id.')
-    end
+    return unless self.sender_id == self.recipient_id
+    errors.add('sender_id', 'sender_id should not be the same as recipient_id.')
+    errors.add('recipient_id', 'recipient_id should not be the same as sender_id.')
   end
 end

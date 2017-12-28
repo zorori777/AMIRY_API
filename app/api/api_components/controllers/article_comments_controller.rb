@@ -2,12 +2,12 @@ module APIComponents
   module Controllers
     class ArticleCommentsController < ApiController
       desc 'Return all comments associated with the specific article.' do
-      http_codes([
-        { code: 200, message: 'Article Comment', model: Entities::ArticleComment }
-      ])
+        http_codes([
+          { code: 200, message: 'Article Comment', model: Entities::ArticleComment }
+        ])
       end
       params do
-        optional :page, type: Integer, desc: "Page Num"
+        optional :page,       type: Integer, desc: 'Page Num'
         requires :article_id, type: Integer, desc: 'The id of the article.'
       end
       get '/' do

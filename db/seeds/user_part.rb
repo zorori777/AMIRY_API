@@ -18,7 +18,7 @@ DUMMY_REPEAT_TIMES = 20
       user_id: User.pluck(:id).sample,
       part_id: Part.pluck(:id).sample
     )
-    user_part.save! 
+    user_part.save!
     p user_part
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{UserPart.count}"

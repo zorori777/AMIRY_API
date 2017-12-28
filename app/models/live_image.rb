@@ -10,7 +10,6 @@
 #
 
 class LiveImage < ApplicationRecord
-  
   # Association
   belongs_to :live
 

@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in Band model
     class Band < Grape::Entity
       expose :id,                  documentation: { required: true, type: 'Integer', desc: 'The primary id of the circle.' }
       expose :circle_name,         documentation: { required: true, type: 'String',  desc: 'The name of the circle that the band belongs to.' }

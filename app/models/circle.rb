@@ -13,7 +13,6 @@
 #
 
 class Circle < ApplicationRecord
-
   # Pagination
   paginates_per 15
 
@@ -27,7 +26,7 @@ class Circle < ApplicationRecord
   # Validation
   validates :name, :description,
             :members_count, :bands_count,   presence: true
-  validates :bands_count, 
+  validates :bands_count,
             :members_count, :university_id, numericality: { only_integer: true }
   validates :name,                          uniqueness: { scope: :university_id }
 
@@ -35,5 +34,4 @@ class Circle < ApplicationRecord
   def university_name
     self.university&.name.to_s
   end
-
 end

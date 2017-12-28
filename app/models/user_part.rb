@@ -10,12 +10,10 @@
 #
 
 class UserPart < ApplicationRecord
-
   # Associations
   belongs_to :user
   belongs_to :part
 
   # Validations
-  validates :user_id, :part_id, numericality: true
-
+  validates :user_id, :part_id, numericality: { only_integer: true }
 end

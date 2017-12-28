@@ -10,7 +10,6 @@
 #
 
 class UserCircle < ApplicationRecord
-
   # Association
   belongs_to :user
   belongs_to :circle
@@ -22,5 +21,4 @@ class UserCircle < ApplicationRecord
   # Counter Culture
   counter_culture :user,   column_name: 'bands_count'
   counter_culture :circle, column_name: 'members_count'
-
 end

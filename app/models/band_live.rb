@@ -10,12 +10,10 @@
 #
 
 class BandLive < ApplicationRecord
-
   # Association
   belongs_to :band
   belongs_to :live
 
   # Validation
-  validates :band_id, :live_id, numericality: true
-  
+  validates :band_id, :live_id, numericality: { only_integer: true }
 end

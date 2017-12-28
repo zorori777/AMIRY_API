@@ -11,8 +11,7 @@
 #
 
 class ArticleComment < ApplicationRecord
-
-  # Constant
+  # Pagination
   paginates_per 10
 
   # Scope
@@ -24,7 +23,7 @@ class ArticleComment < ApplicationRecord
 
   # Validation
   validates :content, :user_id, :article_id, presence: true
-  validates :user_id, :article_id,           numericality: true 
+  validates :user_id, :article_id,           numericality: { only_integer: true }
 
   # Getter Method
   def commentor_name
@@ -35,5 +34,4 @@ class ArticleComment < ApplicationRecord
   def created_by?(user)
     self.user_id == user.id
   end
-
 end

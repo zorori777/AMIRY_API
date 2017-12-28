@@ -12,7 +12,6 @@
 #
 
 class Article < ApplicationRecord
-
   # Constant
   paginates_per 15
 
@@ -34,5 +33,4 @@ class Article < ApplicationRecord
   def author_name
     self.user&.display_name.to_s
   end
-  
 end

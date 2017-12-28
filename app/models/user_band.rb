@@ -10,12 +10,10 @@
 #
 
 class UserBand < ApplicationRecord
-
   # Validation
   validates :user_id, :band_id, presence: true, numericality: { only_integer: true }
 
   # Association
   belongs_to :user
   belongs_to :band
-
 end

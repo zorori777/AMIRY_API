@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -16,7 +16,7 @@ gem 'rake', '< 11.0'
 gem 'erb2haml'
 gem 'haml-rails'
 
-# SCSS 
+# SCSS
 gem 'sass-rails', '~> 5.0'
 
 # JAVASCRIPT
@@ -68,7 +68,7 @@ gem 'rails_12factor'
 gem 'listen', '>= 3.0.5', '< 3.2'
 
 group :production, :staging do
-  # APPLICATION SERVER  
+  # APPLICATION SERVER
   gem 'unicorn'
 end
 

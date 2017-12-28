@@ -73,7 +73,7 @@ describe Circle do
         expect(circle.errors[:name]).to include('has already been taken')
       end
     end
-  end # Validations
+  end
 
   describe 'Getter methods' do
     it 'university_name gets the name of the associated university' do

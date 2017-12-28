@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in Notification model
     class Notification < Grape::Entity
       expose :id,                documentation: { required: true, type: 'Integer', desc: 'The primary id of the notification.' }
       expose :user_id,           documentation: { required: true, type: 'Integer', desc: 'The id of the user.' }

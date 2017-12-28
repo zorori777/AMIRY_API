@@ -10,17 +10,15 @@
 #
 
 class Like < ApplicationRecord
-
   # Assocation
   belongs_to :sender,    foreign_key: 'sender_id',    class_name: 'User'
   belongs_to :recipient, foreign_key: 'recipient_id', class_name: 'User'
 
   # Validation
-  validates :sender_id, 
+  validates :sender_id,
             :recipient_id, numericality: true, presence: true
   validates :sender_id,    uniqueness: { scope: :recipient_id }
 
   # Counter Culture
   counter_culture :recipient, column_name: 'received_likes_count'
-
 end

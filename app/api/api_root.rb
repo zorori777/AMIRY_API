@@ -56,6 +56,4 @@ class APIRoot < Grape::API
       description: 'AMIRY API'
     }
   )
-
-
 end

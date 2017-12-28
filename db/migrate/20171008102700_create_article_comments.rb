@@ -8,6 +8,5 @@ class CreateArticleComments < ActiveRecord::Migration[5.1]
     end
 
     add_index :article_comments, :user_id
-
   end
 end
