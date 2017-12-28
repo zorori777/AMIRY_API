@@ -55,6 +55,9 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Enabled: false
 
+Layout/CommentIndentation:
+  Enabled: false
+
 Layout/ExtraSpacing:
   Enabled: false
 
