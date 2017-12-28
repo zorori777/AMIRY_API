@@ -24,7 +24,6 @@
 #
 
 class User < ApplicationRecord
-
   # Callback
   before_save :set_display_name, :set_empty_self_introduction,
               :set_no_university_status, :set_account_status_registered, if: :new_record?
@@ -56,7 +55,7 @@ class User < ApplicationRecord
   has_many   :send_likes,             class_name: 'Like',         foreign_key: 'sender_id'
   has_many   :received_likes,         class_name: 'Like',         foreign_key: 'recipient_id'
   has_many   :send_introductions,     class_name: 'Introduction', foreign_key: 'sender_id'
-  has_many   :received_introductions, class_name: 'Introduction', foreign_key: 'recipient_id' 
+  has_many   :received_introductions, class_name: 'Introduction', foreign_key: 'recipient_id'
 
   # Validation
   validates :email, :facebook_id,        uniqueness: true
@@ -99,7 +98,7 @@ class User < ApplicationRecord
   end
 
   def set_empty_self_introduction
-    self.self_introduction = ""
+    self.self_introduction = ''
   end
 
   def set_no_university_status
@@ -113,5 +112,4 @@ class User < ApplicationRecord
   def add_bonus_likes_count
     self.update!(sendable_likes_count: self.sendable_likes_count + BONUS_LIKE_COUNT)
   end
-
 end

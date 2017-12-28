@@ -7,6 +7,6 @@ class CreateCircleImages < ActiveRecord::Migration[5.1]
       t.timestamps                             null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :circle_images, [:circle_id, :name], unique: true
+    add_index :circle_images, %i(circle_id name), unique: true
   end
 end

@@ -21,13 +21,13 @@ class Lecture < ApplicationRecord
 
   # Scope
   scope :recent, -> { order(created_at: :desc) }
-  scope :passed, -> { where("created_at < ?", Date.today)}
+  scope :passed, -> { where('created_at < ?', Date.today) }
 
   # Association
   belongs_to :user
 
   # Validation
-  validates :user_id, :description, 
+  validates :user_id, :description,
             :address, :hold_at,     presence: true
   validates :user_id,               numericality: true
 

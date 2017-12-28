@@ -19,6 +19,3 @@ FactoryBot.define do
     updated_times { Faker::Number.between(1, 10) }
   end
 end
-
-
-

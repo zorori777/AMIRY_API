@@ -11,6 +11,6 @@ class CreateBands < ActiveRecord::Migration[5.1]
       t.timestamps                               null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :bands, [:circle_id, :name], unique: true
+    add_index :bands, %i(circle_id name), unique: true
   end
 end

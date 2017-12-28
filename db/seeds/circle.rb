@@ -22,7 +22,7 @@ DUMMY_REPEAT_TIMES = 20
       name:          Faker::Company.name,
       description:   Faker::Lorem.sentence
     )
-    circle.save! 
+    circle.save!
     p circle
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Circle.count}"

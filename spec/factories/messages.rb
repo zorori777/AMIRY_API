@@ -16,6 +16,6 @@ FactoryBot.define do
     association :sender,    factory: :user
     association :recipeint, factory: :user
     body        { Faker::HowIMetYourMother.quote }
-    image       { Faker::Avatar.image("my-own-slug") }
+    image       { Faker::Avatar.image('my-own-slug') }
   end
 end

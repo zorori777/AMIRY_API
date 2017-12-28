@@ -68,6 +68,7 @@ GEM
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (8.0.0)
+    ast (2.3.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -438,8 +439,12 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    parallel (1.12.0)
+    parser (2.4.0.2)
+      ast (~> 2.3)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
+    powerpack (0.1.1)
     pry (0.11.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -494,6 +499,8 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.2.2)
+      rake
     raindrops (0.19.0)
     rake (10.5.0)
     ransack (1.8.4)
@@ -538,6 +545,14 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
+    rubocop (0.51.0)
+      parallel (~> 1.10)
+      parser (>= 2.3.3.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 2.2.2, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-progressbar (1.9.0)
     ruby_dep (1.5.0)
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
@@ -587,6 +602,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
+    unicode-display_width (1.3.0)
     unicorn (5.3.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -660,6 +676,7 @@ DEPENDENCIES
   rails_12factor
   rake (< 11.0)
   rspec-rails
+  rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
   spring

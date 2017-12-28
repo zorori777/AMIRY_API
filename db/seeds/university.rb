@@ -14,9 +14,9 @@ UNIVERSITIES_ARRAY = %w(早稲田大学 慶応大学 埼玉大学 千葉大学 �
 UNIVERSITIES_ARRAY.size.times do |num|
   begin
     university = University.new(
-      name: UNIVERSITIES_ARRAY[num] 
+      name: UNIVERSITIES_ARRAY[num]
     )
-    university.save! 
+    university.save!
     p university
     if num == UNIVERSITIES_ARRAY.size - 1
       p "#{UNIVERSITIES_ARRAY.size} records of #{RECORD_NAME} inserted. Total: #{University.count}"

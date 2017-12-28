@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.10.1"
+lock '~> 3.10.1'
 
-set :application, "AMIRY_API"
-set :repo_url, "git@github.com:r-ume/AMIRY_API.git"
+set :application, 'AMIRY_API'
+set :repo_url, 'git@github.com:r-ume/AMIRY_API.git'
 set :branch, 'master'
 set :deploy_to, '/home/umeki/AMIRY_API'
 set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
@@ -19,7 +19,7 @@ namespace :deploy do
 
   desc 'Create database'
   task :db_create do
-    on roles(:db) do |host|
+    on roles(:db) do |_|
       with rails_env: fetch(:rails_env) do
         within current_path do
           execute :bundle, :exec, :rake, 'db:create'

@@ -23,11 +23,11 @@ DUMMY_REPEAT_TIMES = 20
       acceptance:   Introduction.acceptances.values.sample
     )
     introduction.save!
-    p "---------------"
+    p '---------------'
     Introduction.column_names.each do |column|
       p "#{column}: #{introduction.send(column)}"
     end
-    p "---------------"
+    p '---------------'
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Introduction.count}"
     end
@@ -36,5 +36,4 @@ DUMMY_REPEAT_TIMES = 20
     p "Total: #{Introduction.count}"
     exit
   end
-
 end

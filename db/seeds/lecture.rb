@@ -24,11 +24,11 @@ DUMMY_REPEAT_TIMES = 20
       hold_at:     Date.today
     )
     lecture.save!
-    p "---------------"
+    p '---------------'
     Lecture.column_names.each do |column|
       p "#{column}: #{lecture.send(column)}"
     end
-    p "---------------"
+    p '---------------'
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Lecture.count}"
     end

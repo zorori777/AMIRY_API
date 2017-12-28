@@ -12,7 +12,6 @@
 #
 
 class Matching < ApplicationRecord
-
   # Pagination
   paginates_per 15
 
@@ -39,5 +38,4 @@ class Matching < ApplicationRecord
   def recipient_name
     self.recipient&.display_name.to_s
   end
-
 end

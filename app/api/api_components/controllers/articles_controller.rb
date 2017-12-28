@@ -40,16 +40,16 @@ module APIComponents
 
       # create
       desc 'Create an Article.'
-        params do
-          requires :title,   type: String, desc: 'title'
-          requires :content, type: String, desc: 'content'
-          requires :user_id, type: Integer
-        end
-        post '' do
-          article = Article.new({user_id: params[:user_id], content: params[:content], title: params[:title]})
-          article.save!
-          present article, with: Entities::Article
-        end
+      params do
+        requires :title,   type: String, desc: 'title'
+        requires :content, type: String, desc: 'content'
+        requires :user_id, type: Integer
+      end
+      post '' do
+        article = Article.new({ user_id: params[:user_id], content: params[:content], title: params[:title] })
+        article.save!
+        present article, with: Entities::Article
+      end
     end
   end
 end

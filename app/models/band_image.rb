@@ -10,11 +10,9 @@
 #
 
 class BandImage < ApplicationRecord
-
   # Association
   belongs_to :band
 
   # Uploader
   mount_uploader :name, BandImageUploader
-
 end

@@ -21,7 +21,7 @@ FactoryBot.define do
     concept     { Faker::HowIMetYourMother.quote }
     description { Faker::Number.between(1, 10) }
     people_num  { Faker::Number.between(Band::MIX_NUM, Band::MIX_NUM) }
-    type        { Band::types.values.sample }
+    type        { Band.types.values.sample }
     united_at   { Faker::Time.between(2.days.ago, Date.today, :all) }
   end
 end

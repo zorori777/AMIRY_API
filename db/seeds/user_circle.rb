@@ -28,5 +28,4 @@ DUMMY_REPEAT_TIMES = 20
     p "Total: #{UserCircle.count}"
     exit
   end
-
 end

@@ -21,7 +21,7 @@ DUMMY_REPEAT_TIMES = 20
       recipient_id: User.pluck(:id).sample,
       body:         Faker::HowIMetYourMother.quote
     )
-    message.save! 
+    message.save!
     p message
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Message.count}"

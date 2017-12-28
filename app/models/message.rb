@@ -12,16 +12,15 @@
 #
 
 class Message < ApplicationRecord
-
   # Association
   belongs_to :sender,    class_name: 'User', foreign_key: 'sender_id'
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
 
   # Validation
   validates :sender_id, :recipient_id, numericality: true, presence: true
-  validates :has_body_or_image,        presence: true
+  validates :body_or_image,        presence: true
 
-  def has_body_or_image
+  def body_or_image
     body.presence || image.presence
   end
 end

@@ -6,7 +6,6 @@ Dotenv.overload
 module External
   module Jwt
     class JwtHandler
-
       HMAC_ALGORITHM = 'HS256'.freeze
       LIFETIME_SECONDS = 60 * 60 * 24 * 7
 
@@ -21,31 +20,30 @@ module External
       end
 
       def user_by(token:)
-        begin
-          decoded_token = ::JWT.decode(token, hmac_secret, true, { algorithm: HMAC_ALGORITHM } )
-          user = User.find_by(facebook_id: decoded_token.first['data']['facebook_id'])
-          unless user.present?
-            return {
-                error: {
-                    message: 'User Not Found', code: 404,
-                    detail:  'User with facebook id in JWT does not exist.',
-                }
-            }
-          end
-          user
-        rescue ::JWT::ExpiredSignature
-          refresh!
-        rescue ::JWT::DecodeError
-          {
+        decoded_token = ::JWT.decode(token, hmac_secret, true, { algorithm: HMAC_ALGORITHM })
+        user = User.find_by(facebook_id: decoded_token.first['data']['facebook_id'])
+        unless user.present?
+          return {
             error: {
-                message: 'Jwt Decode Error', code: 403,
-                detail:  'Jwt did not get decode properly.',
+              message: 'User Not Found', code: 404,
+              detail:  'User with facebook id in JWT does not exist.',
             }
           }
         end
+        user
+      rescue ::JWT::ExpiredSignature
+        refresh!
+      rescue ::JWT::DecodeError
+        {
+          error: {
+            message: 'Jwt Decode Error', code: 403,
+            detail:  'Jwt did not get decode properly.',
+          }
+        }
       end
 
       private
+
       def payload
         {
           exp:  Time.now.to_i + LIFETIME_SECONDS,

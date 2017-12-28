@@ -11,7 +11,7 @@ class CreateLives < ActiveRecord::Migration[5.1]
       t.timestamps                                      null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :lives, [:circle_id, :type]
+    add_index :lives, %i(circle_id type)
     add_index :lives, :hold_at
   end
 end

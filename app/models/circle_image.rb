@@ -11,7 +11,6 @@
 #
 
 class CircleImage < ApplicationRecord
-
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
@@ -21,14 +20,6 @@ class CircleImage < ApplicationRecord
   # Association
   belongs_to :circle
 
-  # Validation
-  # validate :logo_exists?
-
   # Uploader
   mount_uploaders :name, CircleImageUploader
-
-  # Need to think this.
-  def logo_exists?
-
-  end
 end

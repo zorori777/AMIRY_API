@@ -4,7 +4,7 @@ module APIComponents
       # index
       desc 'Return all Cirlcle objects' do
         http_codes([
-           { code: 200, message: 'circle', model: Entities::Circle }
+          { code: 200, message: 'circle', model: Entities::Circle }
         ])
       end
       get '/' do

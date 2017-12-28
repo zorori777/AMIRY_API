@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in Matching model
     class Matching < Grape::Entity
       expose :id,          documentation: { required: true, type: 'Integer', desc: 'The primary id of the matching.' }
       expose :sender_name, documentation: { required: true, type: 'String',  desc: 'The name of the sender who sent the matching request.' }

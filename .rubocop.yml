@@ -1,0 +1,80 @@
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'test/**'
+    - 'config/deploy/**'
+    - 'app/controllers/**/*'
+    - 'app/decorators/**/*'
+    - 'bin/**'
+    - "node_modules/**/*"
+  DisplayCopNames: true
+
+GlobalVars:
+  AllowedVariables: [$app_dir, $std_log, $std_log, $timeout, $listen, $pid, $worker]
+
+StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/MethodLength:
+  Enabled: false
+
+Layout/CommentIndentation:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
+Layout/IndentArray:
+  Enabled: false
+
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/HandleExceptions:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false

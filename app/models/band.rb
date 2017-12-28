@@ -15,7 +15,6 @@
 #
 
 class Band < ApplicationRecord
-
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
@@ -37,7 +36,7 @@ class Band < ApplicationRecord
 
   # Validation
   validates :name,                             uniqueness: { scope: :circle_id }
-  validates :name, :concept, 
+  validates :name, :concept,
             :circle_id, :people_num,
             :description, :type, :united_at,   presence: true
   validates :circle_id, :people_num,           numericality: true
@@ -54,14 +53,12 @@ class Band < ApplicationRecord
   end
 
   def intercollege?
-    self.circle_id == 0
+    self.circle_id.zero?
   end
 
   # Custom Validation
   def people_num_between_four_and_seven
-    if self.people_num < MIX_NUM || self.people_num > MAX_NUM
-      errors.add(:people_num, 'The number of a band should be between 4 and 7.')
-    end
+    return unless self.people_num < MIX_NUM || self.people_num > MAX_NUM
+    errors.add(:people_num, 'The number of a band should be between 4 and 7.')
   end
-
 end

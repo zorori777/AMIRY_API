@@ -35,17 +35,17 @@ DUMMY_REPEAT_TIMES = 20
       facebook_id:       Faker::Omniauth.facebook[:extra][:raw_info][:id],
       facebook_token:    Faker::Omniauth.facebook[:credentials][:token],
       first_name:        first_name,
-      last_name:         Faker::Name.last_name, 
+      last_name:         Faker::Name.last_name,
       catch_copy:        Faker::StarWars.quote,
       self_introduction: Faker::Lorem.sentence,
-      email:             Faker::Internet.email(first_name),
+      email:             Faker::Internet.email(first_name)
     )
     user.save!
-    p "---------------"
+    p '---------------'
     User.column_names.each do |column|
       p "#{column}: #{user.send(column)}"
     end
-    p "---------------"
+    p '---------------'
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{User.count}"
     end
@@ -55,5 +55,3 @@ DUMMY_REPEAT_TIMES = 20
     exit
   end
 end
-
-

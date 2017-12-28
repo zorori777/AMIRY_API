@@ -1,5 +1,6 @@
 module APIComponents
   module Entities
+    # Exposed properties in Circle model
     class Circle < Grape::Entity
       expose :id,              documentation: { required: true, type: 'Integer', desc: 'The primary id of the circle.' }
       expose :university_name, documentation: { requried: true, type: 'String',  desc: 'The name of the university that the circle belongs to.' }

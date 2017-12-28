@@ -10,7 +10,6 @@
 #
 
 class UserLive < ApplicationRecord
-
   # Association
   belongs_to :user
   belongs_to :live
@@ -20,5 +19,4 @@ class UserLive < ApplicationRecord
 
   # Counter Culture
   counter_culture :live, column_name: 'reservations_count'
-
 end
