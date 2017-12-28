@@ -20,13 +20,6 @@ class CircleImage < ApplicationRecord
   # Association
   belongs_to :circle
 
-  # Validation
-  # validate :logo_exists?
-
   # Uploader
   mount_uploaders :name, CircleImageUploader
-
-  # Need to think this.
-  def logo_exists?
-  end
 end

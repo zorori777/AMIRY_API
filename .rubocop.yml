@@ -7,6 +7,7 @@ AllCops:
     - 'app/controllers/**/*'
     - 'app/decorators/**/*'
     - 'bin/**'
+    - "node_modules/**/*"
   DisplayCopNames: true
 
 GlobalVars:
@@ -21,9 +22,6 @@ Style/FrozenStringLiteralComment:
 Style/RedundantSelf:
   Enabled: false
 
-Style/BlockComments:
-  Enabled: false
-
 Style/TrailingCommaInLiteral:
   Enabled: false
 
@@ -34,9 +32,6 @@ Style/MutableConstant:
   Enabled: false
 
 Style/BracesAroundHashParameters:
-  Enabled: false
-
-Style/EmptyMethod:
   Enabled: false
 
 Style/AsciiComments:
@@ -57,10 +52,10 @@ Metrics/ClassLength:
 Metrics/AbcSize:
   Max: 25
 
-Layout/ExtraSpacing:
+Metrics/MethodLength:
   Enabled: false
 
-Metrics/MethodLength:
+Layout/ExtraSpacing:
   Enabled: false
 
 Lint/RescueWithoutErrorClass:
