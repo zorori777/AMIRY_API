@@ -1,8 +1,85 @@
 AllCops:
   Exclude:
-    - "vendor/**/*"
-    - "db/schema.rb"
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'test/**'
+    - 'config/deploy/**'
+    - 'app/controllers/**/*'
+    - 'app/decorators/**/*'
+    - 'bin/**'
   DisplayCopNames: true
+
+GlobalVars:
+  AllowedVariables: [$app_dir, $std_log, $std_log, $timeout, $listen, $pid, $worker]
 
 StringLiterals:
   EnforcedStyle: single_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Layout/IndentArray:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/HandleExceptions:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 25
