@@ -18,7 +18,7 @@ module AMIRY
     config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :put, :delete]
+        resource '*', headers: :any, methods: %i(get post put delete)
       end
     end
 

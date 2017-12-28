@@ -6,6 +6,6 @@ class CreateLikes < ActiveRecord::Migration[5.1]
       t.timestamps                null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :likes, [:sender_id, :recipient_id], unique: true
+    add_index :likes, %i(sender_id recipient_id), unique: true
   end
 end

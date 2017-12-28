@@ -6,6 +6,6 @@ class CreateBandImages < ActiveRecord::Migration[5.1]
       t.timestamps           null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :band_images, [:band_id, :name], unique: true
+    add_index :band_images, %i(band_id name), unique: true
   end
 end

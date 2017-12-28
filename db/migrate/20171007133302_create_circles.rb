@@ -9,6 +9,6 @@ class CreateCircles < ActiveRecord::Migration[5.1]
       t.timestamps                                 null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :circles, [:name, :university_id], unique: true
+    add_index :circles, %i(name university_id), unique: true
   end
 end

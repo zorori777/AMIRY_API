@@ -6,6 +6,6 @@ class CreateLiveImages < ActiveRecord::Migration[5.1]
       t.timestamps           null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :live_images, [:live_id, :name], unique: true
+    add_index :live_images, %i(live_id name), unique: true
   end
 end

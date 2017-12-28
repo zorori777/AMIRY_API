@@ -8,6 +8,6 @@ class CreateIntroductions < ActiveRecord::Migration[5.1]
       t.timestamps                null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :introductions, [:sender_id, :recipient_id], unique: true
+    add_index :introductions, %i(sender_id recipient_id), unique: true
   end
 end

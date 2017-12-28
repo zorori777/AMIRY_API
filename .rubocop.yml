@@ -18,15 +18,6 @@ StringLiterals:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Metrics/LineLength:
-  Max: 200
-
-Metrics/BlockLength:
-  Enabled: false
-
-Layout/ExtraSpacing:
-  Enabled: false
-
 Style/RedundantSelf:
   Enabled: false
 
@@ -39,22 +30,13 @@ Style/TrailingCommaInLiteral:
 Style/Documentation:
   Enabled: false
 
-Metrics/MethodLength:
-  Enabled: false
-
-Bundler/OrderedGems:
-  Enabled: false
-
 Style/MutableConstant:
   Enabled: false
 
 Style/BracesAroundHashParameters:
   Enabled: false
 
-Lint/RescueWithoutErrorClass:
-  Enabled: false
-
-Style/SymbolArray:
+Style/EmptyMethod:
   Enabled: false
 
 Style/AsciiComments:
@@ -63,13 +45,28 @@ Style/AsciiComments:
 Style/PercentLiteralDelimiters:
   Enabled: false
 
-Layout/IndentArray:
-  Enabled: false
+Metrics/LineLength:
+  Max: 200
 
-Style/EmptyMethod:
+Metrics/BlockLength:
   Enabled: false
 
 Metrics/ClassLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 25
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
+Layout/IndentArray:
   Enabled: false
 
 Layout/SpaceBeforeFirstArg:
@@ -81,5 +78,5 @@ Lint/AssignmentInCondition:
 Lint/HandleExceptions:
   Enabled: false
 
-Metrics/AbcSize:
-  Max: 25
+Bundler/OrderedGems:
+  Enabled: false

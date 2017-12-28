@@ -8,6 +8,6 @@ class CreateMatchings < ActiveRecord::Migration[5.1]
       t.timestamps                                null: false, default: -> { 'CURRENT_TIMESTAMP' }
     end
 
-    add_index :matchings, [:sender_id, :recipient_id], unique: true
+    add_index :matchings, %i(sender_id recipient_id), unique: true
   end
 end
