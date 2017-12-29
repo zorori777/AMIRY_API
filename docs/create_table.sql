@@ -296,6 +296,17 @@ CREATE TABLE `introductions` (
   CONSTRAINT `fk_user_messages_on_recipient_id` FOREIGN KEY(`recipient_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `facebook_friends` (
+  `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`     BIGINT(20) UNSIGNED NOT NULL,
+  `facebook_id` BIGINT(20) UNSIGNED NOT NULL,
+  `created_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`  DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  KEY(`user_id`),
+  UNIQUE KEY(`writer_id`, `recipient_id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 通知テーブル
 CREATE TABLE `notifications` (
   `id`                BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
