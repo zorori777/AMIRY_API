@@ -67,6 +67,15 @@ gem 'rails_12factor'
 # LISTEN
 gem 'listen', '>= 3.0.5', '< 3.2'
 
+# QUEUE
+gem 'sidekiq'
+gem 'sidekiq-status'
+gem 'sinatra'
+
+# REDIS
+gem 'redis'
+gem 'redis-namespace'
+
 group :production, :staging do
   # APPLICATION SERVER
   gem 'unicorn'

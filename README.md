@@ -12,7 +12,7 @@ Acapella Meetup in Rhythm harmonY
 ## Installation
 ```
 git clone git@github.com:r-ume/AMIRY.git
-bundle install
+bundle install --path vendor/bundle
 bundle exec rake db:create
 bundle exec rake db:migrate
 bundle exec rake db:seed
