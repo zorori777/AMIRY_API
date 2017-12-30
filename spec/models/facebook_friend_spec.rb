@@ -46,15 +46,5 @@ describe FacebookFriend do
         expect(facebook_friend.errors[:user_id]).to include('has already been taken')
       end
     end
-
-    context 'Custom Validation' do
-      it 'is invalid with the pair of user_id and facebook_id of a certain user.' do
-        user = create(:user)
-        facebook_friend = FacebookFriend.new(user_id: user.id, facebook_id: user.facebook_id)
-        expect(facebook_friend.valid?).to be_falsey
-        expect(facebook_friend.errors[:user_id]).to include('The primary id of the same user was about to get inserted.')
-        expect(facebook_friend.errors[:facebook_id]).to include('The facebook_id of the same user was about to get inserted.')
-      end
-    end
   end
 end
