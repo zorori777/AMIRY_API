@@ -16,7 +16,7 @@ DUMMY_REPEAT_TIMES = 20
   begin
     facebook_friend = FacebookFriend.new(
       user_id:     User.pluck(:id).sample,
-      facebook_id: User.pluck(:facebook_id).sample,
+      facebook_id: User.pluck(:facebook_id).sample
     )
     facebook_friend.save!
     p '---------------'
