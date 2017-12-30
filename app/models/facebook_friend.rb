@@ -22,8 +22,7 @@ class FacebookFriend < ApplicationRecord
   # Custom Validation
   def not_same_user_id_and_facebook_id
     return unless self.facebook_id == User.find_by(id: self.user_id).facebook_id
-    errors.add('facebook_id', 'the user itself was about to get inserted.')
-    errors.add('user_id', 'the user itself was about to get inserted.')
+    errors.add(:facebook_id, 'the facebook_id of the same user was about to get inserted.')
+    errors.add(:user_id, 'the primary id of the same user was about to get inserted.')
   end
-
 end
