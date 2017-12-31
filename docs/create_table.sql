@@ -49,7 +49,6 @@ CREATE TABLE `lives`(
   `max_capacity`       BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
   `reservations_count` BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
   `circle_id`          BIGINT(20)  UNSIGNED NOT NULL DEFAULT '0',
-  `type`               TINYINT(3)  UNSIGNED NOT NULL DEFAULT '0'                COMMENT 'サークルライブ: 1, サークルライブ以外: 2',
   `hold_at`            DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at`         DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`         DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,

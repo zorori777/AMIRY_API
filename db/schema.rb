@@ -173,11 +173,10 @@ ActiveRecord::Schema.define(version: 20171229115409) do
     t.text "description", null: false
     t.integer "max_capacity", default: 0, null: false, unsigned: true
     t.integer "reservations_count", default: 0, null: false, unsigned: true
-    t.integer "type", default: 0, null: false, comment: "サークルライブ: 1, サークルライブ以外: 2", unsigned: true
     t.datetime "hold_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.index ["circle_id", "type"], name: "index_lives_on_circle_id_and_type"
+    t.index ["circle_id"], name: "index_lives_on_circle_id"
     t.index ["hold_at"], name: "index_lives_on_hold_at"
   end
 

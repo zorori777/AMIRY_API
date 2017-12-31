@@ -8,7 +8,6 @@
 #  description        :text(65535)      not null
 #  max_capacity       :integer          default(0), unsigned, not null
 #  reservations_count :integer          default(0), unsigned, not null
-#  type               :integer          default(NULL), unsigned, not null
 #  hold_at            :datetime         not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -21,7 +20,6 @@ FactoryBot.define do
     description        { Faker::Lorem.paragraph }
     max_capacity       { Faker::Number.between(1, 10) }
     reservations_count { Faker::Number.between(1, 10) }
-    type               { Live.types.values.sample }
     hold_at            { Faker::Time.between(2.days.ago, Date.today) }
   end
 end

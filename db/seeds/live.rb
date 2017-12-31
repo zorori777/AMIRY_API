@@ -23,7 +23,6 @@ DUMMY_REPEAT_TIMES = 20
       circle_id:   Circle.pluck(:id).sample,
       name:        Faker::Team.name,
       description: Faker::HowIMetYourMother.catch_phrase,
-      type:        Faker::Number.between(1, 3),
       hold_at:     Date.today
     )
     live.save!

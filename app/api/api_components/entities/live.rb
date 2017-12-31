@@ -7,7 +7,6 @@ module APIComponents
       expose :description,         documentation: { required: true, type: 'String',  desc: 'The description of the live.' }
       expose :max_capacity,        documentation: { required: true, type: 'Integer', desc: 'The capacity of the live.' }
       expose :reservations_count,  documentation: { required: true, type: 'Integer', desc: 'The reservations count for the live.' }
-      expose :type,                documentation: { required: true, type: 'Integer', desc: 'The type of the live.' }
       expose :hold_at,             documentation: { required: true, type: 'String',  desc: 'When the live is to be held at.' }
       expose :available_seats_num, documentation: { required: true, type: 'Integer', desc: 'The number of available seats.' }
     end
