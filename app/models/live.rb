@@ -17,6 +17,9 @@ class Live < ApplicationRecord
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
+  # Callback
+  before_save :set_empty_string_in_description, if: :new_record?
+
   # Pagination
   paginates_per 15
 
@@ -31,10 +34,11 @@ class Live < ApplicationRecord
   has_many   :users,     through: :user_lives
 
   # Validation
-  validates :name, :hold_at,
+  validates :name, :hold_at, :description,
             :max_capacity, :reservations_count, presence: true
   validates :circle_id, :max_capacity,
-            :reservations_count,                numericality: true
+            :reservations_count,                numericality: { only_integer: true }
+  validate  :hold_at_time_than_now
 
   # Getter Methods
   def circle_name
@@ -45,8 +49,21 @@ class Live < ApplicationRecord
     self.max_capacity - self.reservations_count
   end
 
+  # Setter Methods
+  def set_empty_string_in_description
+    self.description = '' if self.description.blank?
+  end
+
   # Checker Methods
   def seats_avaiable?
-    self.available_seats.positive?
+    self.available_seats_num.positive?
+  end
+
+  private
+
+  # Custom Validation
+  def hold_at_time_than_now
+    return unless self.hold_at > Time.now
+    errors.add(:hold_at, 'The live should be held at after now.')
   end
 end
