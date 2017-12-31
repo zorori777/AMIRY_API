@@ -20,6 +20,8 @@ class Message < ApplicationRecord
   validates :sender_id, :recipient_id, numericality: true, presence: true
   validates :body_or_image,        presence: true
 
+  private
+
   def body_or_image
     body.presence || image.presence
   end

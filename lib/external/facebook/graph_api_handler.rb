@@ -32,7 +32,7 @@ module External
 
       def valid_app_id?
         return false unless @debug_token_response['data']['app_id'].present?
-        ENV['FACEBOOK_APP_ID'] == @debug_token_response['data']['app_id']
+        @debug_token_response['data']['app_id'] == ENV['FACEBOOK_APP_ID']
       end
 
       def valid_facebook_id?
@@ -42,7 +42,7 @@ module External
 
       def valid_facebook_token?
         return false unless @debug_token_response['data']['expires_at'].present?
-        Time.now.to_i <= @debug_token_response['data']['expires_at']
+        @debug_token_response['data']['expires_at'] >= Time.now.to_i
       end
 
       def facebook_friends

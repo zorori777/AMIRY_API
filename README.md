@@ -1,5 +1,6 @@
 # AMIRY
 Acapella Meetup in Rhythm harmonY
+![grape-docs](https://s3-ap-northeast-1.amazonaws.com/amiry-docs/grape-docs.png)
 
 ## Concept
  - アカペラのライブ、イベント、教室の様々な情報が集う場所。
@@ -12,7 +13,7 @@ Acapella Meetup in Rhythm harmonY
 ## Installation
 ```
 git clone git@github.com:r-ume/AMIRY.git
-bundle install
+bundle install --path vendor/bundle
 bundle exec rake db:create
 bundle exec rake db:migrate
 bundle exec rake db:seed

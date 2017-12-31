@@ -4,10 +4,10 @@
 #
 #  id                :integer          not null, primary key
 #  user_id           :integer          unsigned, not null
-#  target_model_type :integer          default(0), unsigned, not null
+#  target_model_type :integer          default(NULL), unsigned, not null
 #  target_model_id   :integer          default(0), unsigned, not null
 #  body              :string(255)      default(""), not null
-#  status            :integer          default(0), unsigned, not null
+#  status            :integer          default(NULL), unsigned, not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

@@ -56,6 +56,8 @@ class Band < ApplicationRecord
     self.circle_id.zero?
   end
 
+  private
+
   # Custom Validation
   def people_num_between_four_and_seven
     return unless self.people_num < MIX_NUM || self.people_num > MAX_NUM

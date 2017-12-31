@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221142958) do
+ActiveRecord::Schema.define(version: 20171229115409) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -118,6 +118,14 @@ ActiveRecord::Schema.define(version: 20171221142958) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["name", "university_id"], name: "index_circles_on_name_and_university_id", unique: true
+  end
+
+  create_table "facebook_friends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false, unsigned: true
+    t.bigint "facebook_id", default: 0, null: false, unsigned: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "facebook_id"], name: "index_facebook_friends_on_user_id_and_facebook_id", unique: true
   end
 
   create_table "introductions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -2,24 +2,26 @@ module APIComponents
   module Controllers
     class MeController < APIRoot
       include External::Facebook
+      include External::JWT
 
       version 'v1', using: :path
       format :json
 
       before do
         # TODO: NEED TO DELETE THIS FOR PRODUCTION
-        if user_debug_id = headers['User-Debug-Id']
-          @user = User.find(user_debug_id)
-        else
-          facebook_token     = headers['Facebook_Token']
-          facebook_id        = headers['Facebook_Id']
-          user_facebook_info = External::Facebook::GraphApiHandler.new(facebook_token: facebook_token, facebook_id: facebook_id)
+        if request.env['REQUEST_PATH'] == '/api/v1/me'
+          @user_facebook_info = External::Facebook::GraphApiHandler.new(facebook_token: params[:facebook_token], facebook_id: params[:facebook_id])
 
-          unless user_facebook_info.valid_facebook_id_and_token?
+          unless @user_facebook_info.valid_facebook_id_and_token?
             Errors::UnauthorizedError.new(detail: 'Facebook Authentication Did Not Pass.')
           end
 
-          @user = User.find_by(facebook_id: user_facebook_info.facebook_id)
+          @user_facebook_info
+        elsif user_debug_id = headers['User-Debug-Id']
+          @user = User.find(user_debug_id)
+        else
+          jwt_token = headers['JWT_token']
+          @user = External::Jwt::JwtHandler.new.user_by(token: jwt_token)
         end
       end
 
@@ -53,7 +55,11 @@ module APIComponents
         requires :facebook_token, type: String,  desc: 'The access token provided by JS Facebook SDK.'
       end
       post '/' do
+        unless @user_facebook_info.valid_facebook_id_and_token?
+          Errors::UnauthorizedError.new(detail: 'Facebook Authentication Did Not Pass.')
+        end
         user = User.create_from_graph_api(user_facebook_info: @user_facebook_info)
+        FBFriend::Inserter.perform_async(user.id, @user_facebook_info.facebook_friends)
         present user, with: Entities::User
       end
 

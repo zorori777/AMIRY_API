@@ -22,3 +22,5 @@ shared/
 current
 releases/
 repo/
+vendor/bundle
+dump.rdb

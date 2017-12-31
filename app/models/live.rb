@@ -45,7 +45,7 @@ class Live < ApplicationRecord
     self.circle&.name.to_s
   end
 
-  def available_seats
+  def available_seats_num
     self.max_capacity - self.reservations_count
   end
 
