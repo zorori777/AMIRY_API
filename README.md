@@ -1,5 +1,6 @@
 # AMIRY
 Acapella Meetup in Rhythm harmonY
+![grape-docs](https://s3-ap-northeast-1.amazonaws.com/amiry-docs/grape-docs.png)
 
 ## Concept
  - アカペラのライブ、イベント、教室の様々な情報が集う場所。
