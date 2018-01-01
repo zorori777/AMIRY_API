@@ -81,7 +81,9 @@ describe Live do
         expect(live.errors[:hold_at]).to include('The live should be held at after now.')
       end
     end
+  end
 
+  describe 'Instance Methods' do
     context 'Getter Methods' do
       it 'circle_name method should return the same one as the name of the associated circle.' do
         expect(live.circle.name).to eq live.circle_name

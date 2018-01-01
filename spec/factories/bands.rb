@@ -19,7 +19,7 @@ FactoryBot.define do
     association :circle, factory: :circle
     name        { Faker::Pokemon.name  }
     concept     { Faker::HowIMetYourMother.quote }
-    description { Faker::Number.between(1, 10) }
+    description { Faker::Pokemon.name }
     people_num  { Faker::Number.between(Band::MIX_NUM, Band::MIX_NUM) }
     type        { Band.types.values.sample }
     united_at   { Date.today }

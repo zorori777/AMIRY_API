@@ -17,7 +17,7 @@ FactoryBot.define do
   factory :live do
     association        :circle, factory: :circle
     name               { Faker::Company.name }
-    description        { Faker::Lorem.paragraph }
+    description        { Faker::Pokemon.name }
     max_capacity       { Faker::Number.between(1, 10) }
     reservations_count { Faker::Number.between(1, 10) }
     hold_at            { Date.tomorrow }

@@ -69,7 +69,7 @@ class Band < ApplicationRecord
   # Custom Validation
   def people_num_between_four_and_seven
     return unless self.people_num.present?
-    return if self.people_num >= MIX_NUM || self.people_num <= MAX_NUM
+    return if self.people_num >= MIX_NUM && self.people_num <= MAX_NUM
     errors.add(:people_num, 'The number of a band should be between 4 and 7.')
   end
 end

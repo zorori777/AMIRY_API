@@ -16,7 +16,7 @@ FactoryBot.define do
   factory :circle do
     association   :university, factory: :university
     name          { Faker::Company.name  }
-    description   { Faker::Lorem.paragraph }
+    description   { Faker::Pokemon.name }
     members_count { Faker::Number.between(1, 10) }
     bands_count   { Faker::Number.between(1, 10) }
   end
