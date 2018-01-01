@@ -20,6 +20,6 @@ FactoryBot.define do
     description        { Faker::Lorem.paragraph }
     max_capacity       { Faker::Number.between(1, 10) }
     reservations_count { Faker::Number.between(1, 10) }
-    hold_at            { Faker::Time.between(2.days.ago, Date.today) }
+    hold_at            { Date.tomorrow }
   end
 end

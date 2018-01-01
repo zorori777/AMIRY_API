@@ -38,7 +38,7 @@ class Live < ApplicationRecord
             :max_capacity, :reservations_count, presence: true
   validates :circle_id, :max_capacity,
             :reservations_count,                numericality: { only_integer: true }
-  validate  :hold_at_time_than_now
+  validate  :hold_at_date_after_tomorrow
 
   # Getter Methods
   def circle_name
@@ -62,8 +62,8 @@ class Live < ApplicationRecord
   private
 
   # Custom Validation
-  def hold_at_time_than_now
-    return unless self.hold_at > Time.now
+  def hold_at_date_after_tomorrow
+    return unless self.hold_at.to_date < Date.today
     errors.add(:hold_at, 'The live should be held at after now.')
   end
 end
