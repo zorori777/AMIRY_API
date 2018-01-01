@@ -18,7 +18,7 @@ class Live < ApplicationRecord
   self.inheritance_column = :_type_disabled
 
   # Callback
-  before_save :set_empty_string_in_description, if: :new_record?
+  before_save :set_empty_string_in_blank_description, if: :new_record?
 
   # Pagination
   paginates_per 15
@@ -51,7 +51,7 @@ class Live < ApplicationRecord
   end
 
   # Setter Methods
-  def set_empty_string_in_description
+  def set_empty_string_in_blank_description
     self.description = '' if self.description.blank?
   end
 

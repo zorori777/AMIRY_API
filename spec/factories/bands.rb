@@ -22,6 +22,6 @@ FactoryBot.define do
     description { Faker::Number.between(1, 10) }
     people_num  { Faker::Number.between(Band::MIX_NUM, Band::MIX_NUM) }
     type        { Band.types.values.sample }
-    united_at   { Faker::Time.between(2.days.ago, Date.today, :all) }
+    united_at   { Date.today }
   end
 end

@@ -18,6 +18,9 @@ class Band < ApplicationRecord
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
+  # Callback
+  before_save :set_emtpy_string_in_blank_description, if: :new_record?
+
   # Constants
   MIX_NUM = 4
   MAX_NUM = 7
@@ -29,7 +32,7 @@ class Band < ApplicationRecord
   enum type: { only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5 }
 
   # Association
-  belongs_to :circle
+  belongs_to :circle,     optional: true
   has_many   :band_images
   has_many   :band_lives
   has_many   :lives,      through: :band_lives
@@ -39,7 +42,7 @@ class Band < ApplicationRecord
   validates :name, :concept,
             :circle_id, :people_num,
             :description, :type, :united_at,   presence: true
-  validates :circle_id, :people_num,           numericality: true
+  validates :circle_id, :people_num, :type,    numericality: { only_integer: true }
   validate  :people_num_between_four_and_seven
 
   # Getter Methods
@@ -47,11 +50,16 @@ class Band < ApplicationRecord
     self.circle&.name.to_s
   end
 
-  # Checker Methods
   def intercollege_circle
     self.intercollege?
   end
 
+  # Setter Methods
+  def set_emtpy_string_in_blank_description
+    self.description = '' if self.description.blank?
+  end
+
+  # Checker Methods
   def intercollege?
     self.circle_id.zero?
   end
@@ -60,7 +68,8 @@ class Band < ApplicationRecord
 
   # Custom Validation
   def people_num_between_four_and_seven
-    return unless self.people_num < MIX_NUM || self.people_num > MAX_NUM
+    return unless self.people_num.present?
+    return if self.people_num >= MIX_NUM || self.people_num <= MAX_NUM
     errors.add(:people_num, 'The number of a band should be between 4 and 7.')
   end
 end
