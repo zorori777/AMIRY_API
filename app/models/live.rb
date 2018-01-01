@@ -36,6 +36,7 @@ class Live < ApplicationRecord
   # Validation
   validates :name, :hold_at, :description,
             :max_capacity, :reservations_count, presence: true
+  validates :name,                              uniqueness: true
   validates :circle_id, :max_capacity,
             :reservations_count,                numericality: { only_integer: true }
   validate  :hold_at_date_after_tomorrow
@@ -55,7 +56,7 @@ class Live < ApplicationRecord
   end
 
   # Checker Methods
-  def seats_avaiable?
+  def seats_available?
     self.available_seats_num.positive?
   end
 
