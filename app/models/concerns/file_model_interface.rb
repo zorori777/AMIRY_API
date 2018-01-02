@@ -2,6 +2,10 @@ module FileModelInterface
   extend ActiveSupport::Concern
 
   included do
+    # Constant
+    AMAZON_S3_DOMAIN = 'https://s3-ap-northeast-1.amazonaws.com'
+
+    # Getter Methods
     def s3_directory
       case Rails.env
         when 'production'; 'amiry-production'
@@ -13,7 +17,7 @@ module FileModelInterface
     end
 
     def file_url
-      raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
+      "#{AMAZON_S3_DOMAIN}/#{self.s3_directory}/#{self.class.to_s}/#{self.name.file.filename}"
     end
   end
 end

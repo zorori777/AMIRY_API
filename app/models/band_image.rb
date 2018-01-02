@@ -18,9 +18,4 @@ class BandImage < ApplicationRecord
 
   # Uploader
   mount_uploader :name, BandImageUploader
-
-  # Getter Method
-  def image_url
-    "#{AMAZON_S3_DOMAIN}/#{self.s3_directory}/#{self.name.file.filename}"
-  end
 end
