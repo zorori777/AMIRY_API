@@ -12,25 +12,33 @@
 #
 
 class Article < ApplicationRecord
-  # Constant
+  # Pagination
   paginates_per 15
 
   # Scope
   scope :in_newest_order, -> { order(created_at: :desc) }
 
   # Association
-  belongs_to :user, optional: true
+  belongs_to :user
   has_many   :article_comments
+  has_many   :article_files
 
   # Validation
-  validates :content, :user_id, presence: true
-  validates :user_id,           numericality: true
+  validates :title, :content,
+            :user_id,         presence: true
+  validates :user_id,         numericality: { only_integer: true }
 
-  def created_by?(user)
-    self.user_id == user.id
-  end
-
+  # Getter Methods
   def author_name
     self.user&.display_name.to_s
+  end
+
+  def file_urls
+    self.article_files.map(&:file_url)
+  end
+
+  # Checker Methods
+  def created_by?(user)
+    self.user_id == user.id
   end
 end

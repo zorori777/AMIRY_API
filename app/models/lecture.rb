@@ -14,7 +14,7 @@
 
 class Lecture < ApplicationRecord
   # Callback Methods
-  before_save :set_description_empty, if: :new_record?
+  before_save :set_empty_string_in_blank_description, if: :new_record?
 
   # Pagination
   paginates_per 10
@@ -25,19 +25,25 @@ class Lecture < ApplicationRecord
 
   # Association
   belongs_to :user
+  has_many   :lecture_files
 
   # Validation
-  validates :user_id, :description,
-            :address, :hold_at,     presence: true
-  validates :user_id,               numericality: true
+  validates :user_id, :title,
+            :description, :address,
+            :hold_at,               presence: true
+  validates :user_id,               numericality: { only_integer: true }
 
   # Getter Methods
   def holder_name
     self.user&.display_name.to_s
   end
 
+  def file_urls
+    self.lecture_files.map(&:file_url)
+  end
+
   # Setter Methods
-  def set_description_empty
+  def set_empty_string_in_blank_description
     self.description = '' if self.description.blank?
   end
 end

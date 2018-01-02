@@ -27,11 +27,12 @@ class Live < ApplicationRecord
   scope :recent,  -> { order(hold_at: :desc) }
 
   # Association
-  belongs_to :circle,    optional: true
+  belongs_to :circle,     optional: true
   has_many   :band_lives
   has_many   :user_lives
-  has_many   :bands,     through: :band_lives
-  has_many   :users,     through: :user_lives
+  has_many   :bands,      through: :band_lives
+  has_many   :users,      through: :user_lives
+  has_many   :live_images
 
   # Validation
   validates :name, :hold_at, :description,
@@ -48,6 +49,10 @@ class Live < ApplicationRecord
 
   def available_seats_num
     self.max_capacity - self.reservations_count
+  end
+
+  def image_urls
+    self.live_images.map(&:file_url)
   end
 
   # Setter Methods
