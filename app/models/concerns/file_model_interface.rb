@@ -1,4 +1,4 @@
-module S3Storage
+module FileModelInterface
   extend ActiveSupport::Concern
 
   included do
@@ -12,7 +12,7 @@ module S3Storage
       end
     end
 
-    def image_url
+    def file_url
       raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
     end
   end

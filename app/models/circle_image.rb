@@ -11,6 +11,9 @@
 #
 
 class CircleImage < ApplicationRecord
+  # Mix-in
+  include FileModelInterface
+
   # Needs this line because the table has a column named "type"
   self.inheritance_column = :_type_disabled
 
@@ -22,4 +25,8 @@ class CircleImage < ApplicationRecord
 
   # Uploader
   mount_uploaders :name, CircleImageUploader
+
+  def file_url
+    "#{AMAZON_S3_DOMAIN}/#{self.s3_directory}/#{self.name.file.filename}"
+  end
 end
