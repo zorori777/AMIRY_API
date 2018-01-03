@@ -9,7 +9,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
+    raise NotImplementedError, "You must implement #{self.class}##{__method__}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -35,7 +35,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   # Add a white list of extengsions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    raise NotImplementedError.new("You must implement #{self.class}##{__method__}")
+    raise NotImplementedError, "You must implement #{self.class}##{__method__}"
   end
 
   # Override the filename of the uploaded files:
@@ -48,6 +48,6 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   def secure_token(length)
     var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(length/2))
+    model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.hex(length / 2))
   end
 end

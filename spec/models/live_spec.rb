@@ -90,7 +90,7 @@ describe Live do
       end
 
       it 'avaiable_seats_num method should return the same number as the difference between max_capacity and reservations_count' do
-        expect(live.available_seats_num).to eq (live.max_capacity - live.reservations_count)
+        expect(live.available_seats_num).to eq live.max_capacity - live.reservations_count
       end
     end
 
