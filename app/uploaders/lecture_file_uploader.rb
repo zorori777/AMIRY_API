@@ -1,9 +1,9 @@
-class AvatarUploader < BaseUploader
+class LectureFileUploader < BaseUploader
   def store_dir
     model.class.to_s
   end
 
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg png pdf)
   end
 end

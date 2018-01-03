@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171229115409) do
+ActiveRecord::Schema.define(version: 20180102064258) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -136,6 +136,17 @@ ActiveRecord::Schema.define(version: 20171229115409) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["sender_id", "recipient_id"], name: "index_introductions_on_sender_id_and_recipient_id", unique: true
+  end
+
+  create_table "lecture_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id", null: false, unsigned: true
+    t.integer "lecture_id", null: false, unsigned: true
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lecture_id"], name: "index_lecture_files_on_lecture_id"
+    t.index ["name"], name: "index_lecture_files_on_name", unique: true
+    t.index ["user_id"], name: "index_lecture_files_on_user_id"
   end
 
   create_table "lectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

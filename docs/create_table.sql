@@ -208,6 +208,19 @@ CREATE TABLE `lectures` (
   CONSTRAINT `fk_lectures_on_user_id` FOREIGN KEY(`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `lecture_files` (
+  `id`         BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id`    BIGINT(20)  UNSIGNED NOT NULL,
+  `lecture_id` BIGINT(20)  UNSIGNED NOT NULL,
+  `name`       VARCHAR(64)          NOT NULL DEFAULT '',
+  `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(`id`),
+  KEY(`user_id`),
+  KEY(`article_id`),
+  UNIQUE KEY(`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
 CREATE TABLE `articles` (
   `id`         BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,  
   `user_id`    BIGINT(20) UNSIGNED NOT NULL,
@@ -239,8 +252,11 @@ CREATE TABLE `article_files` (
   `name`       VARCHAR(64)          NOT NULL DEFAULT '',
   `created_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME             NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY(`id`)
-)
+  PRIMARY KEY(`id`),
+  KEY(`user_id`),
+  KEY(`article_id`),
+  UNIQUE KEY(`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `messages`(
   `id`            BIGINT(20)  UNSIGNED NOT NULL AUTO_INCREMENT,

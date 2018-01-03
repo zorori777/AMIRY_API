@@ -1,22 +1,26 @@
 # == Schema Information
 #
-# Table name: article_files
+# Table name: lecture_files
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer          unsigned, not null
-#  article_id :integer          unsigned, not null
+#  lecture_id :integer          unsigned, not null
 #  name       :string(255)      default(""), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class ArticleFile < ApplicationRecord
+class LectureFile < ApplicationRecord
   # Mix-in
   include FileModelInterface
 
+  # Association
+  belongs_to :user
+  belongs_to :lecture
+
   # Validation
-  validates :user_id, :article_id, numericality: { only_integer: true }, presence: true
+  validates :user_id, :lecture_id, presence: true, numericality: { only_integer: true }
 
   # Uploader
-  mount_uploader :name, ArticleFileUploader
+  mount_uploader :name, LectureFileUploader
 end

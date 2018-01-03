@@ -34,4 +34,8 @@ class Circle < ApplicationRecord
   def university_name
     self.university&.name.to_s
   end
+
+  def image_urls
+    self.circle_images.map(&:file_url)
+  end
 end

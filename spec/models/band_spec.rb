@@ -92,7 +92,8 @@ describe Band do
       context 'Uniqueness Validation.' do
         it 'is invalid with the name that has already been taken in the same circle.' do
           existing_band = create(:band)
-          band.circle_id, band.name = existing_band.circle_id, existing_band.name
+          band.circle_id = existing_band.circle_id
+          band.name = existing_band.name
           expect(band.valid?).to be_falsey
           expect(band.errors[:name]).to include('has already been taken')
         end

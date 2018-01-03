@@ -10,9 +10,12 @@
 #
 
 class LiveImage < ApplicationRecord
+  # Mix-in
+  include FileModelInterface
+
   # Association
   belongs_to :live
 
   # Uploader
-  mount_uploaders :name, LiveImageUploader
+  mount_uploader :name, LiveImageUploader
 end

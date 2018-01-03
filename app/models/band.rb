@@ -54,6 +54,10 @@ class Band < ApplicationRecord
     self.intercollege?
   end
 
+  def image_urls
+    self.band_images.map(&:file_url)
+  end
+
   # Setter Methods
   def set_emtpy_string_in_blank_description
     self.description = '' if self.description.blank?

@@ -42,16 +42,18 @@ module APIComponents
         requires :name,        type: String,   desc: 'The name of the live.'
         requires :description, type: String,   desc: 'The description of the live.'
         requires :hold_at,     type: DateTime, desc: 'When the live is to be held at.'
+        optional :image_file,  type: File,     desc: 'The image files for the live.'
       end
       post '/' do
         live = Live.new(name: params[:name], description: params[:description], hold_at: params[:hold_at])
         live.circle = Circle.find_by(id: params[:circle_id])
+        live.live_images.build(name: params[:image_file])
         begin
           live.save!
+          present live, with: Entities::Live
         rescue => error
           Errors::InternalServerError.new(message: error.message)
         end
-        present live, with: Entities::Live
       end
     end
   end
