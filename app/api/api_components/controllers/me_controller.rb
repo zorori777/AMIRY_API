@@ -59,7 +59,7 @@ module APIComponents
           Errors::UnauthorizedError.new(detail: 'Facebook Authentication Did Not Pass.')
         end
         user = User.create_from_graph_api(user_facebook_info: @user_facebook_info)
-        FBFriend::Inserter.perform_async(user.id, @user_facebook_info.facebook_friends)
+        Inserters::FBFriend.perform_async(user.id, @user_facebook_info.facebook_friends)
         present user, with: Entities::User
       end
 

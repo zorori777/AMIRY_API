@@ -42,6 +42,8 @@ module APIComponents
           Errors::RecordNotFoundError.new(id: params[:id], model: 'Matching')
         end
         matching.update_acceptance!(acceptance: params[:acceptance])
+        Notifiers::Matching.perform_async(matching.sender_id, matching.recipient_id)
+        Inserters::Matching.perform_async
         present matching, with: Entities::Matching
       end
     end

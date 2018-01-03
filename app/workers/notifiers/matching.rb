@@ -3,7 +3,7 @@ module Notifiers
     include Sidekiq::Worker
     include NotifierInterface
 
-    def perform_async(sender_id, recipient_id)
+    def perform(sender_id, recipient_id)
       sender    = User.find_by(id: sender_id)
       recipient = User.find_by(id: recipient_id)
 
@@ -12,7 +12,8 @@ module Notifiers
       begin
         self.send_push_notification(body: Notification::MATCHING_BODY, player_ids: [sender_id, recipient_id])
       rescue => error
-        p error
+        logger.info  'Matching Notification. The Reasons are below.'
+        logger.debug "Error: #{error}"
       end
     end
   end

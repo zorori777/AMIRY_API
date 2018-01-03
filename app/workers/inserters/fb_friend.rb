@@ -1,5 +1,5 @@
-module FBFriend
-  class Inserter
+module Inserters
+  class FBFriend
     include Sidekiq::Worker
     include Constant
 
