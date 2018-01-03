@@ -35,6 +35,18 @@ class Notification < ApplicationRecord
             :target_model_type,
             :target_model_id,   presence: true, numericality: { only_integer: true }
 
+  # Class Methods
+  class << self
+    def new_matching_notification(user_id:, matching_id:)
+      notification                   = self.new
+      notification.user_id           = user_id
+      notification.target_model_type = self.target_model_types[:matching]
+      notification.target_model_id   = matching_id
+      notification.body              = MATCHING_BODY
+      notification
+    end
+  end
+
   # Setter Method
   def set_unread_status
     self.status = Notification.statuses[:unread]
