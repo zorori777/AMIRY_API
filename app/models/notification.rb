@@ -34,7 +34,7 @@ class Notification < ApplicationRecord
   validates :user_id, :status,
             :target_model_type,
             :target_model_id,   presence: true, numericality: { only_integer: true }
-  
+
   # Setter Method
   def set_unread_status
     self.status = Notification.statuses[:unread]
