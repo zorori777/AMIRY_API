@@ -13,9 +13,9 @@
 
 FactoryBot.define do
   factory :matching do
-    association :like,      factory: :live
+    association :like,      factory: :like
     association :sender,    factory: :user
-    association :recipeint, factory: :user
+    association :recipient, factory: :user
     acceptance  { Matching.acceptances.values.sample }
   end
 end

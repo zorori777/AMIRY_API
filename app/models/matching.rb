@@ -41,7 +41,7 @@ class Matching < ApplicationRecord
   end
 
   # Setter Method
-  def update_acceptance_status!(status:)
-    self.update!(acceptance: status)
+  def update_acceptance!(acceptance:)
+    self.update!(acceptance: acceptance)
   end
 end

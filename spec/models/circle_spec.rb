@@ -65,7 +65,7 @@ describe Circle do
     end
 
     context 'Uniqueness Validation' do
-      it 'is valid with a different unique name' do
+      it 'is invalid with a different unique name' do
         existing_circle = create(:circle)
         circle.university = existing_circle.university
         circle.name = existing_circle.name

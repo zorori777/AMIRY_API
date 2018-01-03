@@ -12,6 +12,6 @@
 FactoryBot.define do
   factory :like do
     association :sender,    factory: :user
-    association :recipeint, factory: :user
+    association :recipient, factory: :user
   end
 end
