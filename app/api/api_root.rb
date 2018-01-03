@@ -33,6 +33,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::LecturesController
   end
 
+  namespace :matchings do
+    mount APIComponents::Controllers::MatchingsController
+  end
+
   namespace :me do
     mount APIComponents::Controllers::MeController
   end
