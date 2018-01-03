@@ -16,6 +16,9 @@ class Notification < ApplicationRecord
   # Callback
   before_validation :set_unread_status, if: :new_record?
 
+  # Constant
+  MATCHING_BODY = 'マッチングが成立しました！'
+
   # Pagination
   paginates_per 10
 
@@ -31,7 +34,7 @@ class Notification < ApplicationRecord
   validates :user_id, :status,
             :target_model_type,
             :target_model_id,   presence: true, numericality: { only_integer: true }
-
+  
   # Setter Method
   def set_unread_status
     self.status = Notification.statuses[:unread]
