@@ -39,4 +39,9 @@ class Matching < ApplicationRecord
   def recipient_name
     self.recipient&.display_name.to_s
   end
+
+  # Setter Method
+  def update_acceptance_status!(status:)
+    self.update!(acceptance: status)
+  end
 end
