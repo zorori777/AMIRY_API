@@ -14,9 +14,11 @@
 
 FactoryBot.define do
   factory :notification do
+    random_target_model_type = Notification.target_model_types.keys.sample
+
     association       :user, factory: :user
-    target_model_type { Notification.target_model_types.values.sample  }
-    target_model_id   { Introduction.pluck(:id).sample }
+    target_model_type { Notification.target_model_types[random_target_model_type] }
+    target_model_id   { random_target_model_type.capitalize.constantize.pluck(:id).sample }
     body              { Faker::Pokemon.name }
     status            { Notification.statuses.values.sample }
   end
