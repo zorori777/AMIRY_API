@@ -13,7 +13,7 @@ module APIComponents
       end
       params do
         requires :like_id,      type: Integer, desc: 'The id of the like that the recipient approved.'
-        requires :recipient_id, type: Integer, desc: 'The id of the user who receives the introduction.'
+        requires :recipient_id, type: Integer, desc: 'The id of the user who receives the matching.'
         requires :sender_id,    type: Integer, desc: 'The id of the user who sends the introduction.'
       end
       post '/' do
