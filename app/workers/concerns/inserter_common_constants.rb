@@ -1,4 +1,4 @@
-module Constant
+module InserterCommonConstants
   extend ActiveSupport::Concern
 
   included do

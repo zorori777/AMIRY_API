@@ -3,7 +3,7 @@ require 'dotenv'
 
 Dotenv.overload
 
-module NotifierInterface
+module NotifierCommonMethods
   extend ActiveSupport::Concern
 
   included do
@@ -11,9 +11,9 @@ module NotifierInterface
       return unless body.present? || player_ids.present?
 
       request_body = {
-          app_id:             ENV['ONE_SIGNAL_APP_ID'],
-          contents:           { ja: body, en: body },
-          include_player_ids: player_ids
+        app_id:             ENV['ONE_SIGNAL_APP_ID'],
+        contents:           { ja: body, en: body },
+        include_player_ids: player_ids
       }
 
       request_json = request_body.to_json
