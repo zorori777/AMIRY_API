@@ -14,10 +14,11 @@
 
 class Notification < ApplicationRecord
   # Callback
-  before_validation :set_unread_status, if: :new_record?
+  before_save :set_unread_status, if: :new_record?
 
   # Constant
-  MATCHING_BODY = 'マッチングが成立しました！'
+  MATCHING_BODY     = 'マッチングが成立しました！'
+  INTRODUCTION_BODY = '紹介文が追加されました！'
 
   # Pagination
   paginates_per 10

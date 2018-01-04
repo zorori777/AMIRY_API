@@ -43,7 +43,7 @@ module APIComponents
         end
         matching.update_acceptance!(acceptance: params[:acceptance])
         Notifiers::Matching.perform_async(matching.sender_id, matching.recipient_id)
-        Inserters::Matching.perform_async
+        Inserters::Matching.perform_async(matching.sender_id, matching.recipient_id, matching.id)
         present matching, with: Entities::Matching
       end
     end
