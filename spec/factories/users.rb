@@ -28,12 +28,12 @@ FactoryBot.define do
 
   factory :user do
     association :university, factory: :university
-    facebook_id               { user_object[:extra][:raw_info][:id].to_i }
+    sequence(:facebook_id)    { |n| user_object[:extra][:raw_info][:id].to_i + n }
     facebook_token            { user_object[:credentials][:token] }
     facebook_token_expires_at { user_object[:credentials][:expires_at] }
     first_name                { user_object[:info][:first_name] }
     last_name                 { user_object[:info][:last_name] }
-    email                     { user_object[:info][:email] }
+    sequence(:email)          { |n| "#{n}#{user_object[:info][:email]}" }
     avatar                    { user_object[:info][:image] }
     catch_copy                { Faker::HowIMetYourMother.catch_phrase }
     self_introduction         { Faker::HowIMetYourMother.quote }

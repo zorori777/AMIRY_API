@@ -24,8 +24,9 @@ class Matching < ApplicationRecord
   belongs_to :recipient, foreign_key: 'recipient_id', class_name: 'User'
 
   # Validation
-  validates :sender_id, :recipient_id, :like_id, numericality: true, presence: true
-  validates :sender_id,                          uniqueness: { scope: :recipient_id }
+  validates :sender_id, :recipient_id,
+            :like_id, :acceptance,     numericality: { only_integer: true }, presence: true
+  validates :sender_id,                uniqueness: { scope: :recipient_id }
 
   # Counter Culture
   counter_culture :recipient, column_name: 'matchings_count'
@@ -37,5 +38,10 @@ class Matching < ApplicationRecord
 
   def recipient_name
     self.recipient&.display_name.to_s
+  end
+
+  # Setter Method
+  def update_acceptance!(acceptance:)
+    self.update!(acceptance: acceptance)
   end
 end

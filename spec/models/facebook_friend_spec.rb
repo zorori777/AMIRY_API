@@ -13,17 +13,15 @@ require 'rails_helper'
 
 describe FacebookFriend do
   describe 'Validation' do
-    context 'with all necessary attributes' do
-      let!(:facebook_friend) { build(:facebook_friend) }
+    let(:facebook_friend) { build(:facebook_friend) }
 
+    context 'with all necessary attributes' do
       it 'is valid' do
         expect(facebook_friend).to be_valid
       end
     end
 
     context 'Presence Validation' do
-      let!(:facebook_friend) { build(:facebook_friend) }
-
       it 'is invalid with nil user_id' do
         facebook_friend.user_id = nil
         expect(facebook_friend.valid?).to be_falsey
@@ -38,7 +36,6 @@ describe FacebookFriend do
     end
 
     context 'Uniqueness Validation' do
-      # TODO: let(:facebook_friend) { build(:facebook_friend) }で、テストが通らなかったため調査が必要。
       it 'is invalid with the same pair of user_id and facebook_id' do
         existing_facebook_friend = create(:facebook_friend)
         facebook_friend = FacebookFriend.new(user_id: existing_facebook_friend.user_id, facebook_id: existing_facebook_friend.facebook_id)

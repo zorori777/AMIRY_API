@@ -47,6 +47,9 @@ module APIComponents
           introduction.sender.add_bonus_likes_count
         end
 
+        Notifiers::Introduction.perform(introduction.sender_id, introduction.recipient_id)
+        Inserters::Introduction.perform(introduction.sender_id, introduction.recipient_id, introduction.id)
+
         present introduction, with: Entities::Introduction
       end
     end

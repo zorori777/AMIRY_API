@@ -23,6 +23,14 @@ jobs:
             bundle exec rake db:schema:load RAILS_ENV=test
             bundle exec rake db:migrate RAILS_ENV=test
       - run:
+          name: Inserting Seed Data
+          command: |
+            bundle exec rake db:seed:university RAILS_ENV=test
+            bundle exec rake db:seed:user RAILS_ENV=test
+            bundle exec rake db:seed:like RAILS_ENV=test
+            bundle exec rake db:seed:matching RAILS_ENV=test
+            bundle exec rake db:seed:introduction RAILS_ENV=test
+      - run:
           name: rspec
           command: bundle exec rspec
       - run:

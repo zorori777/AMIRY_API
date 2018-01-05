@@ -14,7 +14,12 @@
 
 class Notification < ApplicationRecord
   # Callback
-  before_validation :set_unread_status, if: :new_record?
+  before_save :set_unread_status, if: :new_record?
+
+  # Constant
+  MATCHING_REQUEST_BODY  = 'いいねが送られました！'
+  MATCHING_APPROVAL_BODY = 'マッチングが成立しました！'
+  INTRODUCTION_BODY      = '紹介文が追加されました！'
 
   # Pagination
   paginates_per 10
@@ -31,6 +36,27 @@ class Notification < ApplicationRecord
   validates :user_id, :status,
             :target_model_type,
             :target_model_id,   presence: true, numericality: { only_integer: true }
+
+  # Class Methods
+  class << self
+    def new_matching_request_notification(user_id:, matching_id:)
+      notification                   = self.new
+      notification.user_id           = user_id
+      notification.target_model_type = self.target_model_types[:matching]
+      notification.target_model_id   = matching_id
+      notification.body              = MATCHING_REQUEST_BODY
+      notification
+    end
+
+    def new_matching_approval_notification(user_id:, matching_id:)
+      notification                   = self.new
+      notification.user_id           = user_id
+      notification.target_model_type = self.target_model_types[:matching]
+      notification.target_model_id   = matching_id
+      notification.body              = MATCHING_APPROVAL_BODY
+      notification
+    end
+  end
 
   # Setter Method
   def set_unread_status
