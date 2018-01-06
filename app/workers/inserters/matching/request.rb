@@ -1,7 +1,7 @@
 module Inserters
   module Matching
     class Request
-      include Sidekiq::Workers
+      include Sidekiq::Worker
       include InserterCommonConstants
       include InserterCommonMethods
 
