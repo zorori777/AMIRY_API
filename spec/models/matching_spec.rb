@@ -6,7 +6,6 @@
 #  like_id      :integer          unsigned, not null
 #  sender_id    :integer          unsigned, not null
 #  recipient_id :integer          unsigned, not null
-#  acceptance   :integer          unsigned, not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -42,12 +41,6 @@ describe Matching do
           expect(matching.valid?).to be_falsey
           expect(matching.errors[:recipient_id]).to include('can\'t be blank')
         end
-
-        it 'is invalid with nil acceptance.' do
-          matching.acceptance = nil
-          expect(matching.valid?).to be_falsey
-          expect(matching.errors[:acceptance]).to include('can\'t be blank')
-        end
       end
     end
 
@@ -68,16 +61,6 @@ describe Matching do
 
       it 'recipient_name method should return the display_name of the associated recipient.' do
         expect(matching.recipient_name).to eq matching.recipient.display_name
-      end
-    end
-
-    context 'Setter Methods.' do
-      it 'update_acceptance_status! method should update the data of acceptance.' do
-        existing_matching = create(:matching)
-        previous_acceptance = existing_matching.acceptance
-        desired_acceptance = (Matching.acceptances.values - [existing_matching.acceptance_before_type_cast]).sample
-        existing_matching.update_acceptance!(acceptance: desired_acceptance)
-        expect(existing_matching.acceptance).not_to eq previous_acceptance
       end
     end
   end

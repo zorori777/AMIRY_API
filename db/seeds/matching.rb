@@ -18,8 +18,7 @@ DUMMY_REPEAT_TIMES = 20
     matching = Matching.new(
       like_id:      Like.pluck(:id).sample,
       recipient_id: User.pluck(:id).sample,
-      sender_id:    User.pluck(:id).sample,
-      acceptance:   Matching.acceptances.values.sample
+      sender_id:    User.pluck(:id).sample
     )
     matching.save!
     p '---------------'

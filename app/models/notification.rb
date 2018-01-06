@@ -17,9 +17,9 @@ class Notification < ApplicationRecord
   before_save :set_unread_status, if: :new_record?
 
   # Constant
-  MATCHING_REQUEST_BODY  = 'いいねが送られました！'
-  MATCHING_APPROVAL_BODY = 'マッチングが成立しました！'
-  INTRODUCTION_BODY      = '紹介文が追加されました！'
+  LIKE_REQUEST_BODY  = 'いいねが送られました！'
+  LIKE_APPROVAL_BODY = 'マッチングが成立しました！'
+  INTRODUCTION_BODY  = '紹介文が追加されました！'
 
   # Pagination
   paginates_per 10
@@ -39,21 +39,21 @@ class Notification < ApplicationRecord
 
   # Class Methods
   class << self
-    def new_matching_request_notification(user_id:, matching_id:)
+    def new_like_request_notification(user_id:, like_id:)
       notification                   = self.new
       notification.user_id           = user_id
-      notification.target_model_type = self.target_model_types[:matching]
-      notification.target_model_id   = matching_id
-      notification.body              = MATCHING_REQUEST_BODY
+      notification.target_model_type = self.target_model_types[:like]
+      notification.target_model_id   = like_id
+      notification.body              = LIKE_REQUEST_BODY
       notification
     end
 
-    def new_matching_approval_notification(user_id:, matching_id:)
+    def new_like_approval_notification(user_id:, like_id:)
       notification                   = self.new
       notification.user_id           = user_id
-      notification.target_model_type = self.target_model_types[:matching]
-      notification.target_model_id   = matching_id
-      notification.body              = MATCHING_APPROVAL_BODY
+      notification.target_model_type = self.target_model_types[:like]
+      notification.target_model_id   = like_id
+      notification.body              = LIKE_APPROVAL_BODY
       notification
     end
   end

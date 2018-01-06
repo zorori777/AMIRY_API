@@ -16,10 +16,15 @@ DUMMY_REPEAT_TIMES = 20
   begin
     like = Like.new(
       sender_id:    User.pluck(:id).sample,
-      recipient_id: User.pluck(:id).sample
+      recipient_id: User.pluck(:id).sample,
+      acceptance:   Like.acceptances.values.sample
     )
     like.save!
-    p like
+    p '---------------'
+    Like.column_names.each do |column|
+      p "#{column}: #{matching.send(column)}"
+    end
+    p '---------------'
     if num == DUMMY_REPEAT_TIMES
       p "#{num} records of #{RECORD_NAME} inserted. Total: #{Like.count}"
     end

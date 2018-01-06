@@ -6,7 +6,6 @@
 #  like_id      :integer          unsigned, not null
 #  sender_id    :integer          unsigned, not null
 #  recipient_id :integer          unsigned, not null
-#  acceptance   :integer          unsigned, not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -16,6 +15,5 @@ FactoryBot.define do
     association :like,      factory: :like
     association :sender,    factory: :user
     association :recipient, factory: :user
-    acceptance  { Matching.acceptances.values.sample }
   end
 end
