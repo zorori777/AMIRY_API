@@ -24,5 +24,9 @@ module NotifierCommonMethods
         request.body                     = request_json
       end
     end
+
+    def args_all_present?(*args)
+      args.all?(&:present?)
+    end
   end
 end
