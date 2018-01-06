@@ -21,7 +21,7 @@ module APIComponents
           like.save!
           Inserters::Like::Request.perform_async(like.id)
           Notifiers::Like::Request.perform_async(like.id)
-          present like, with: Entities::like
+          present like, with: Entities::Like
         rescue => error
           Errors::InternalServerError.new(message: error)
         end
