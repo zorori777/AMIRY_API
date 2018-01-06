@@ -19,8 +19,8 @@ module APIComponents
         like = Like.new(recipient_id: params[:recipient_id], sender_id: params[:sender_id])
         begin
           like.save!
-          Inserters::Like::Request.perform_async(like.id)
-          Notifiers::Like::Request.perform_async(like.id)
+          Inserters::Like::Request.perform(like.id)
+          Notifiers::Like::Request.perform(like.id)
           present like, with: Entities::Like
         rescue => error
           Errors::InternalServerError.new(message: error)
@@ -57,8 +57,8 @@ module APIComponents
             matching.save!
           end
 
-          Notifiers::Like::Approval.perform_async(like.id)
-          Inserters::Like::Approval.perform_async(like.id)
+          Notifiers::Like::Approval.perform(like.id)
+          Inserters::Like::Approval.perform(like.id)
 
           present like, with: Entities::Like
         end

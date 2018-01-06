@@ -5,7 +5,7 @@ module Inserters
       include InserterCommonConstants
       include InserterCommonMethods
 
-      def perform(like_id)
+      def perform_async(like_id)
         like = Like.find_by(id: like_id)
 
         return unless self.args_all_present?(like)
