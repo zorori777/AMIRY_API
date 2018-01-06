@@ -1,7 +1,7 @@
 module Inserters
   class FBFriend
     include Sidekiq::Worker
-    include Constant
+    include InserterCommonConstants
 
     def perform(user_id, facebook_friends)
       return unless user_id.present? || facebook_friends.present?

@@ -6,7 +6,6 @@
 #  like_id      :integer          unsigned, not null
 #  sender_id    :integer          unsigned, not null
 #  recipient_id :integer          unsigned, not null
-#  acceptance   :integer          unsigned, not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -14,9 +13,6 @@
 class Matching < ApplicationRecord
   # Pagination
   paginates_per 15
-
-  # Enum
-  enum acceptance: { accepted: 1, pending: 2, rejected: 3 }
 
   # Association
   belongs_to :like
@@ -30,18 +26,4 @@ class Matching < ApplicationRecord
 
   # Counter Culture
   counter_culture :recipient, column_name: 'matchings_count'
-
-  # Getter Methods
-  def sender_name
-    self.sender&.display_name.to_s
-  end
-
-  def recipient_name
-    self.recipient&.display_name.to_s
-  end
-
-  # Setter Method
-  def update_acceptance!(acceptance:)
-    self.update!(acceptance: acceptance)
-  end
 end
