@@ -1,7 +1,7 @@
 module APIComponents
   module Controllers
     class ArticleCommentsController < ApiController
-      desc 'Return all comments associated with the specific article.' do
+      desc 'Return all comments associated with the specific Article object.' do
         http_codes([
           { code: 200, message: 'Article Comment', model: Entities::ArticleComment }
         ])
