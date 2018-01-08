@@ -12,6 +12,8 @@
 #
 
 class Article < ApplicationRecord
+  before_update :count_up_updated_times!
+
   # Pagination
   paginates_per 15
 
@@ -26,6 +28,7 @@ class Article < ApplicationRecord
   # Validation
   validates :title, :content,
             :user_id,         presence: true
+  validates :title,           uniqueness: true
   validates :user_id,         numericality: { only_integer: true }
 
   # Getter Methods
@@ -35,6 +38,11 @@ class Article < ApplicationRecord
 
   def file_urls
     self.article_files.map(&:file_url)
+  end
+
+  # Setter Methods
+  def count_up_updated_times!
+    self.updated_times += 1
   end
 
   # Checker Methods
