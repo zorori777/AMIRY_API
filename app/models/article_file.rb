@@ -14,6 +14,10 @@ class ArticleFile < ApplicationRecord
   # Mix-in
   include FileModelInterface
 
+  # Association
+  belongs_to :user
+  belongs_to :article
+
   # Validation
   validates :user_id, :article_id, numericality: { only_integer: true }, presence: true
 

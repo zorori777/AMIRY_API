@@ -5,12 +5,8 @@ class APIRoot < Grape::API
   format :json
   prefix :api
 
-  namespace :articles do
+  namespace do
     mount APIComponents::Controllers::ArticlesController
-  end
-
-  namespace :article_commments do
-    mount APIComponents::Controllers::ArticleCommentsController
   end
 
   namespace :bands do
