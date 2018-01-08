@@ -17,5 +17,15 @@ FactoryBot.define do
     title         { Faker::Book.title }
     content       { Faker::HowIMetYourMother.quote }
     updated_times { Faker::Number.between(1, 10) }
+
+    trait :with_article_files do
+      transient do
+        default_article_files_num 3
+      end
+
+      after(:build) do |article, evalutor|
+        article.article_files << build_list(:article_file, evalutor.default_article_files_num)
+      end
+    end
   end
 end
