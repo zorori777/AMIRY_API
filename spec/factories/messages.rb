@@ -14,8 +14,8 @@
 FactoryBot.define do
   factory :message do
     association :sender,    factory: :user
-    association :recipeint, factory: :user
+    association :recipient, factory: :user
     body        { Faker::HowIMetYourMother.quote }
-    image       { Faker::Avatar.image('my-own-slug') }
+    image       { fixture_file_upload('spec/fixtures/baymax.jpeg', 'image/jpeg') }
   end
 end

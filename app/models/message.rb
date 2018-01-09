@@ -17,7 +17,7 @@ class Message < ApplicationRecord
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
 
   # Validation
-  validates :sender_id, :recipient_id, numericality: true, presence: true
+  validates :sender_id, :recipient_id, presence: true, numericality: { only_integer: true }
   validates :body_or_image,            presence: true
 
   # Uploader
