@@ -4,7 +4,7 @@ module APIComponents
       def initialize(message:)
         error!(
           {
-            message: 'Record Not Found', code: 500,
+            message: 'Internal Server Error', code: 500,
             detail: message,
             with: APIComponents::Entities::Error
           }, 500
