@@ -59,23 +59,6 @@ module APIComponents
         end
         present user, with: Entities::User
       end
-
-      # destroy
-      desc '/' do
-        http_codes([
-          { code: 200, message: 'User',  model: Entities::User },
-          { code: 400, message: 'Error', model: Entities::Error }
-        ])
-        headers(
-          facebook_id:    { description: 'The id of the user on facebook',             required: false },
-          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
-          user_debug_id:  { description: 'Debug id.',                                  required: false }
-        )
-      end
-      delete '/' do
-        @user.update!(account_status: User.account_statuses[:unregistered])
-        present user, with: Entities::User
-      end
     end
   end
 end

@@ -90,7 +90,7 @@ describe Article do
 
     context 'Setter Methods.' do
       it 'set_emtpy_string_in_blank_description method should set empty string if description is empty.' do
-        expect{ article.run_callbacks :update }.to change{ article.updated_times }.by(1)
+        expect { article.run_callbacks :update }.to change { article.updated_times }.by(1)
       end
     end
 

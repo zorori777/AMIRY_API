@@ -25,7 +25,7 @@ DUMMY_REPEAT_TIMES = 20
     end
     p '---------------'
     if num == DUMMY_REPEAT_TIMES
-      p "#{num} records of #{RECORD_NAME} inserted. Total: #{Band.count}"
+      p "#{num} records of #{RECORD_NAME} inserted. Total: #{UserBand.count}"
     end
   rescue => error
     p "Seed file fails because #{error.message}. #{num - 1} records have been inserted."

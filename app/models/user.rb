@@ -112,4 +112,9 @@ class User < ApplicationRecord
   def add_bonus_likes_count
     self.update!(sendable_likes_count: self.sendable_likes_count + BONUS_LIKE_COUNT)
   end
+
+  # Checker Methods
+  def joins_band?(band:)
+    self.bands.pluck(:id).include?(band.id)
+  end
 end

@@ -29,7 +29,7 @@ class Article < ApplicationRecord
   validates :user_id,               numericality: { only_integer: true }
   validates :title,                 uniqueness: true
   validates :title, :updated_times,
-            :user_id, :content ,    presence: true
+            :user_id, :content,     presence: true
 
   # Getter Methods
   def author_name

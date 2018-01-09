@@ -206,6 +206,17 @@ module APIComponents
         end
         present @user.notifications, with: Entities::Notification
       end
+
+      # destroy
+      desc '/' do
+        http_codes([
+          { code: 200, message: 'User',  model: Entities::User },
+          { code: 400, message: 'Error', model: Entities::Error }
+       ])
+      end
+      delete '/' do
+        @user.update!(account_status: User.account_statuses[:unregistered])
+      end
     end
   end
 end

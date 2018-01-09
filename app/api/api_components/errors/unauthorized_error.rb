@@ -7,7 +7,7 @@ module APIComponents
             message: 'Unauthorized', code: 401,
             detail: detail,
             with: APIComponents::Entities::Error
-          }, 404
+          }, 401
         )
       end
     end

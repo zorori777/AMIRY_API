@@ -23,7 +23,7 @@ module APIComponents
         # show
         desc 'Return an article.' do
           detail <<~DETAIL
-          Returns an Article Object
+            Returns an Article Object
           DETAIL
           http_codes([
             { code: 200, message: 'Article', model: Entities::Article },

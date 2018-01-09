@@ -35,7 +35,9 @@ class Band < ApplicationRecord
   belongs_to :circle,     optional: true
   has_many   :band_images
   has_many   :band_lives
+  has_many   :user_bands
   has_many   :lives,      through: :band_lives
+  has_many   :users,      through: :user_bands
 
   # Validation
   validates :name,                             uniqueness: { scope: :circle_id }

@@ -1,6 +1,15 @@
 module APIComponents
   module Controllers
     class BandsController < ApiController
+      before do
+        if user_debug_id = headers['User-Debug-Id']
+          @user = User.find(user_debug_id)
+        else
+          jwt_token = headers['JWT_token']
+          @user = External::Jwt::JwtHandler.new.user_by(token: jwt_token)
+        end
+      end
+
       desc 'Return all bands' do
         http_codes([
           { code: 200, message: 'circle', model: Entities::Band }
@@ -39,14 +48,14 @@ module APIComponents
         ])
       end
       params do
-        optional :circle_id
-        requires :name
-        requires :concept
-        requires :description
-        requires :people_num, type: Integer
-        requires :type, type: Integer
-        requires :united_at, type: DateTime
-        optional :image_file, type: Array[File]
+        optional :circle_id,   type: Integer,     desc: 'The id of the circle that the band belongs to.'
+        requires :name,        type: String,      desc: 'The name of the band.'
+        requires :concept,     type: String,      desc: 'The concept of the band.'
+        requires :description, type: String,      desc: 'The description of the band.'
+        requires :people_num,  type: Integer,     desc: 'The number of people in the band.'
+        requires :type,        type: Integer,     desc: 'The type of the band. only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5'
+        requires :united_at,   type: DateTime,    desc: 'When the band got united_at.'
+        optional :image_file,  type: Array[File], desc: 'The image files of the band.'
       end
       post '/' do
         band = Band.new(
@@ -54,7 +63,6 @@ module APIComponents
           description: params[:description], people_num: params[:people_num],
           united_at: params[:united_at], circle_id: params[:circle_id]
         )
-
         begin
           ActiveRecord::Base.transaction do
             band.save!
@@ -66,6 +74,24 @@ module APIComponents
         rescue => error
           Errors::InternalServerError.new(message: error)
         end
+      end
+
+      # destroy
+      desc 'Delete a new band.' do
+        headers(
+          JWT_token:     { description: 'JWT Token.', required: false },
+          user_debug_id: { description: 'Debug id.',  required: false }
+        )
+      end
+      params do
+        requires :id, type: Integer, desc: 'The id of the band.'
+      end
+      delete '/:id' do
+        band = Band.find(params[:id])
+        unless @user.joins_band?(band: band)
+          Errors::UnauthorizedError.new(detail: 'The signed-in user does not belong to the user.')
+        end
+        band.destroy
       end
     end
   end
