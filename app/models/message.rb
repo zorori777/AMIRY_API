@@ -20,6 +20,9 @@ class Message < ApplicationRecord
   validates :sender_id, :recipient_id, numericality: true, presence: true
   validates :body_or_image,            presence: true
 
+  # Uploader
+  mount_uploader :image, MessageImageUploader
+
   private
 
   def body_or_image
