@@ -23,6 +23,15 @@ class Message < ApplicationRecord
   # Uploader
   mount_uploader :image, MessageImageUploader
 
+  # Getter Methods
+  def sender_name
+    self.sender&.display_name.to_s
+  end
+
+  def recipient_name
+    self.recipient&.display_name.to_s
+  end
+
   private
 
   def body_or_image
