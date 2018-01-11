@@ -9,6 +9,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::ArticlesController
   end
 
+  namespace :auth_tokens do
+    mount APIComponents::Controllers::AuthTokensController
+  end
+
   namespace :bands do
     mount APIComponents::Controllers::BandsController
   end
@@ -35,6 +39,10 @@ class APIRoot < Grape::API
 
   namespace :me do
     mount APIComponents::Controllers::MeController
+  end
+
+  namespace :messages do
+    mount APIComponents::Controllers::MessagesController
   end
 
   namespace :universities do
