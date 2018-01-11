@@ -16,7 +16,7 @@ module External
       end
 
       def encodes
-        ::JWT.encode(payload, hmac_secret, HMAC_ALGORITHM)
+        { token: ::JWT.encode(payload, hmac_secret, HMAC_ALGORITHM) }
       end
 
       def user_by(token:)
