@@ -20,8 +20,8 @@ class Lecture < ApplicationRecord
   paginates_per 10
 
   # Scope
-  scope :recent, -> { order(created_at: :desc) }
-  scope :passed, -> { where('created_at < ?', Date.today) }
+  scope :in_newest_order, -> { order(created_at: :desc) }
+  scope :without_passed,  -> { where('created_at < ?', Date.today) }
 
   # Association
   belongs_to :user

@@ -12,6 +12,9 @@
 #
 
 class Message < ApplicationRecord
+  # Mix-in
+  include FileModel
+
   # Association
   belongs_to :sender,    class_name: 'User', foreign_key: 'sender_id'
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
@@ -30,6 +33,10 @@ class Message < ApplicationRecord
 
   def recipient_name
     self.recipient&.display_name.to_s
+  end
+
+  def name
+    self.image
   end
 
   private

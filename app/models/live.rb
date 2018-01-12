@@ -24,7 +24,8 @@ class Live < ApplicationRecord
   paginates_per 15
 
   # Scope
-  scope :recent,  -> { order(hold_at: :desc) }
+  scope :in_newest_order, -> { order(created_at: :desc) }
+  scope :without_passed,  -> { where('created_at > ?', Date.today) }
 
   # Association
   belongs_to :circle,     optional: true

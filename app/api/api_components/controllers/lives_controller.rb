@@ -11,7 +11,7 @@ module APIComponents
         optional :page, type: Integer, desc: 'Page Num'
       end
       get '/' do
-        present Live.includes(:user).newest.passed.page(params[:page]), with: Entities::Live
+        present Live.includes(:circle, :live_images).in_newest_order.without_passed.page(params[:page]), with: Entities::Live
       end
 
       # show

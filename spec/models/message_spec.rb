@@ -52,5 +52,15 @@ describe Message do
         end
       end
     end
+
+    context 'Getter Methods' do
+      it 'sender_name method returns the display name who sent the message.' do
+        expect(message.sender_name).to eq message.sender.display_name
+      end
+
+      it 'recipient_name method returns the display name who received the message.' do
+        expect(message.sender_name).to eq message.sender.display_name
+      end
+    end
   end
 end

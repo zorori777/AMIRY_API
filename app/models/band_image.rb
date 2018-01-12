@@ -11,7 +11,7 @@
 
 class BandImage < ApplicationRecord
   # Mix-in
-  include FileModelInterface
+  include FileModel
 
   # Association
   belongs_to :band

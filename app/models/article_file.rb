@@ -12,7 +12,7 @@
 
 class ArticleFile < ApplicationRecord
   # Mix-in
-  include FileModelInterface
+  include FileModel
 
   # Association
   belongs_to :user

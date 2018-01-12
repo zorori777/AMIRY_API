@@ -3,7 +3,7 @@ module APIComponents
     class UniversitiesController < ApiController
       desc 'Return all universities' do
         http_codes([
-          { code: 200, message: 'circle', model: Entities::University }
+          { code: 200, message: 'University', model: Entities::University }
         ])
       end
       params do
@@ -15,11 +15,11 @@ module APIComponents
 
       desc 'Return one single university object' do
         http_codes([
-          { code: 200, message: 'circle', model: Entities::University }
+          { code: 200, message: 'University', model: Entities::University }
         ])
       end
       params do
-        requires :id, type: Integer, desc: 'id of the university.'
+        requires :id, type: Integer, desc: 'The id of the university.'
       end
       get '/:id' do
         present University.find(params[:id]), with: Entities::University

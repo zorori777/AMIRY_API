@@ -10,7 +10,7 @@
 
 class University < ApplicationRecord
   # Pagination
-  paginates_per 15
+  paginates_per 10
 
   # Association
   has_many :circles
