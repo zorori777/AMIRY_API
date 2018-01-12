@@ -9,6 +9,7 @@ module APIComponents
       expose :address,     documentation: { required: true, type: 'String',  desc: 'The address of the lecture.' }
       expose :hold_at,     documentation: { required: true, type: 'String',  desc: 'When the lecture is to be held.' }
       expose :created_at,  documentation: { required: true, type: 'String',  desc: 'When the lecture got created.' }
+      expose :file_urls,   documentation: { required: true, type: 'String',  desc: 'The url for the lectures.' }
     end
   end
 end
