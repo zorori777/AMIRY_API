@@ -16,4 +16,7 @@ class UserBand < ApplicationRecord
   # Association
   belongs_to :user
   belongs_to :band
+
+  # Counter culture
+  counter_culture :band, column_name: 'people_num'
 end
