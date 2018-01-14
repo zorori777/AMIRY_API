@@ -45,7 +45,6 @@ class Band < ApplicationRecord
             :circle_id, :people_num,
             :description, :type, :united_at,   presence: true
   validates :circle_id, :people_num, :type,    numericality: { only_integer: true }
-  validate  :people_num_between_four_and_seven
 
   # Getter Methods
   def circle_name
@@ -70,12 +69,7 @@ class Band < ApplicationRecord
     self.circle_id.zero?
   end
 
-  private
-
-  # Custom Validation
-  def people_num_between_four_and_seven
-    return unless self.people_num.present?
-    return if self.people_num >= MIX_NUM && self.people_num <= MAX_NUM
-    errors.add(:people_num, 'The number of a band should be between 4 and 7.')
+  def additional_people_num_within_range?(additional_people_num:)
+    self.people_num + additional_people_num >= MIX_NUM && self.people_num + additional_people_num <= MAX_NUM
   end
 end
