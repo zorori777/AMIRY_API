@@ -12,7 +12,7 @@ module APIComponents
 
       desc 'Return all bands' do
         http_codes([
-          { code: 200, message: 'circle', model: Entities::Band }
+          { code: 200, message: 'Band', model: Entities::Band }
         ])
       end
       params do
@@ -48,26 +48,32 @@ module APIComponents
         ])
       end
       params do
-        optional :circle_id,   type: Integer,     desc: 'The id of the circle that the band belongs to.'
-        requires :name,        type: String,      desc: 'The name of the band.'
-        requires :concept,     type: String,      desc: 'The concept of the band.'
-        requires :description, type: String,      desc: 'The description of the band.'
-        requires :people_num,  type: Integer,     desc: 'The number of people in the band.'
-        requires :type,        type: Integer,     desc: 'The type of the band. only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5'
-        requires :united_at,   type: DateTime,    desc: 'When the band got united_at.'
-        optional :image_file,  type: Array[File], desc: 'The image files of the band.'
+        optional :circle_id,   type: Integer,        desc: 'The id of the circle that the band belongs to.'
+        requires :name,        type: String,         desc: 'The name of the band.'
+        requires :concept,     type: String,         desc: 'The concept of the band.'
+        requires :description, type: String,         desc: 'The description of the band.'
+        requires :type,        type: Integer,        desc: 'The type of the band. only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5'
+        requires :united_at,   type: DateTime,       desc: 'When the band got united_at.'
+        requires :user_ids,    type: Array[Integer], desc: 'Ids of the users who joins the band.'
+        optional :image_file,  type: Array[File],    desc: 'The image files of the band.'
       end
       post '/' do
         band = Band.new(
           name: params[:name], concept: params[:concept], type: params[:type],
-          description: params[:description], people_num: params[:people_num],
-          united_at: params[:united_at], circle_id: params[:circle_id]
+          description: params[:description], united_at: params[:united_at], circle_id: params[:circle_id]
         )
         begin
           ActiveRecord::Base.transaction do
             band.save!
-            params[:image_file].size.times do |num|
-              band.band_images << BandImage.new(name: params[:image_file][num])
+            if params[:image_file].present?
+              params[:image_file].size.times do |num|
+                band.band_images << BandImage.new(name: params[:image_file][num])
+              end
+            end
+            if params[:user_ids].present?
+              params[:user_ids].size.times do |num|
+                band.user_bands << UserBand.new(user_id: params[:user_ids][num])
+              end
             end
             present band, with: Entities::Band
           end
