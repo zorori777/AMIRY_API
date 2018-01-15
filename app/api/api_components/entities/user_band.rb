@@ -1,5 +1,5 @@
 module APIComponents
-  module UserBand
+  module Entities
     class UserBand < Grape::Entity
       expose :user_display_name
       expose :band_name

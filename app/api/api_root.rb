@@ -53,6 +53,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::UsersController
   end
 
+  namespace :user_bands do
+    mount APIComponents::Controllers::UserBandsController
+  end
+
   route :any, '*path' do
   end
 
