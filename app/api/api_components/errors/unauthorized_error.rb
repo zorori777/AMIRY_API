@@ -1,12 +1,12 @@
 module APIComponents
   module Errors
     class UnauthorizedError < ErrorBase
-      def initialize(detail:)
+      def initialize(message:)
         error!(
           {
             message: 'Unauthorized', code: 401,
-            detail: detail,
-            with: APIComponents::Entities::Error
+            detail:  message,
+            with:    APIComponents::Entities::Error
           }, 401
         )
       end

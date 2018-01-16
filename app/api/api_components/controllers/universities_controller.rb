@@ -1,6 +1,7 @@
 module APIComponents
   module Controllers
     class UniversitiesController < ApiController
+      # index
       desc 'Return all universities' do
         http_codes([
           { code: 200, message: 'University', model: Entities::University }
@@ -13,6 +14,7 @@ module APIComponents
         present University.includes(:circles).page(params[:page]), with: Entities::University
       end
 
+      # show
       desc 'Return one single university object' do
         http_codes([
           { code: 200, message: 'University', model: Entities::University }
