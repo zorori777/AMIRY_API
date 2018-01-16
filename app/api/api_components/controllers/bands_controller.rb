@@ -10,6 +10,7 @@ module APIComponents
         end
       end
 
+      # index
       desc 'Return all bands' do
         http_codes([
           { code: 200, message: 'Band', model: Entities::Band }
@@ -44,7 +45,7 @@ module APIComponents
           Creates a Band Object
         DETAIL
         http_codes([
-          { code: 200, message: 'Circle', model: Entities::Band }
+          { code: 200, message: 'Band', model: Entities::Band }
         ])
       end
       params do
@@ -82,12 +83,51 @@ module APIComponents
         end
       end
 
+      # update
+      desc 'Update a new band.' do
+        detail <<~DETAIL
+          Updates a Band Object
+        DETAIL
+        headers(
+          JWT_token:     { description: 'JWT Token.', required: false },
+          user_debug_id: { description: 'Debug id.',  required: false }
+        )
+        http_codes([
+          { code: 200, message: 'Band', model: Entities::Band }
+        ])
+      end
+      params do
+        requires :id,          type: Integer, desc: 'The id of the user.'
+        optional :name,        type: String
+        optional :concept,     type: String
+        optional :description, type: String,  desc: 'The description of the band.'
+        optional :type,        type: Integer, desc: 'The type of the band. only_men: 1, only_women: 2, mix: 3, sub_only_men: 4, sub_only_women: 5'
+      end
+      put '/:id' do
+        band = Band.find_by(id: params[:id])
+        unless band.present?
+          Errors::RecordNotFoundError.new(id: params[:id], model: 'Band')
+        end
+        unless @user.joins_band?(band: band)
+          Errors::UnauthorizedError.new(detail: 'The signed-in user does not belong to the band.')
+        end
+        begin
+          band.update!(params)
+          present band, with: Entities::Band
+        rescue => error
+          Errors::InternalServerError.new(message: error)
+        end
+      end
+
       # destroy
       desc 'Delete a new band.' do
         headers(
           JWT_token:     { description: 'JWT Token.', required: false },
           user_debug_id: { description: 'Debug id.',  required: false }
         )
+        http_codes([
+          { code: 200, message: 'Band', model: Entities::Band }
+        ])
       end
       params do
         requires :id, type: Integer, desc: 'The id of the band.'
@@ -95,7 +135,7 @@ module APIComponents
       delete '/:id' do
         band = Band.find(params[:id])
         unless @user.joins_band?(band: band)
-          Errors::UnauthorizedError.new(detail: 'The signed-in user does not belong to the user.')
+          Errors::UnauthorizedError.new(detail: 'The signed-in user does not belong to the band.')
         end
         band.destroy
       end

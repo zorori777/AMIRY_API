@@ -83,7 +83,7 @@ module APIComponents
           requires :title,   type: String,  desc: 'The title of the article.'
           requires :content, type: String,  desc: 'The content of the article.'
         end
-        put '/' do
+        put '/:id' do
           article = Article.find_by(id: params[:id])
           unless article.present?
             Errors::RecordNotFoundError.new(id: params[:id], model: 'Article')
@@ -109,7 +109,7 @@ module APIComponents
         params do
           requires :id, type: Integer, desc: 'The id of the article.'
         end
-        delete '/' do
+        delete '/:id' do
           article = Article.find_by(id: params[:id])
           unless article.present?
             Errors::RecordNotFoundError.new(id: params[:id], model: 'Article')
