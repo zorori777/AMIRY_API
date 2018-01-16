@@ -98,20 +98,6 @@ describe Band do
           expect(band.errors[:name]).to include('has already been taken')
         end
       end
-
-      context 'Custom Validation.' do
-        it 'is invalid with less than 4 people_num' do
-          band.people_num = 3
-          expect(band.valid?).to be_falsey
-          expect(band.errors[:people_num]).to include('The number of a band should be between 4 and 7.')
-        end
-
-        it 'is invalid with more than 7 people_num.' do
-          band.people_num = 10
-          expect(band.valid?).to be_falsey
-          expect(band.errors[:people_num]).to include('The number of a band should be between 4 and 7.')
-        end
-      end
     end
   end
 
