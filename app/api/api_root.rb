@@ -63,6 +63,10 @@ class APIRoot < Grape::API
     error_400! e
   end
 
+  rescue_from APIComponents::Errors::UnauthorizedError do |e|
+    error_403! e
+  end
+
   rescue_from APIComponents::Errors::RecordNotFoundError do |e|
     error_404! e
   end

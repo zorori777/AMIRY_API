@@ -38,6 +38,10 @@ module APIComponents
         _parameter_error(400, *args)
       end
 
+      def error_403!(message = 'Forbidden')
+        _error(message, 403)
+      end
+
       def error_404!(message = 'Not Found')
         _error(message, 404)
       end
@@ -49,7 +53,7 @@ module APIComponents
 
         error!({
           error: {
-            code: 404,
+            code: code,
             message: message,
           },
           with: APIComponents::Entities::Error
