@@ -16,6 +16,18 @@ module APIComponents
         present_success(data, data_entity, opts)
       end
 
+      ## 201 Created
+      def present_created(data, data_entity=nil, **opts)
+        status 201
+        present_success(data, data_entity, opts)
+      end
+
+      ## 204 No Content
+      def present_no_content(data, data_entity=nil, **opts)
+        status 204
+        present_success(data, data_entity, opts)
+      end
+
       def present_success(data, data_entity, **opts)
         options = data_entity ? { with: data_entity } : {}
         options.merge!(opts)
