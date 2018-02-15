@@ -59,6 +59,10 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::UserBandsController
   end
 
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    error_400! e
+  end
+
   rescue_from APIComponents::Errors::RecordNotFoundError do |e|
     error_404! e
   end

@@ -34,6 +34,10 @@ module APIComponents
         present data, options
       end
 
+      def error_400!(*args)
+        _parameter_error(400, *args)
+      end
+
       def error_404!(message = 'Not Found')
         _error(message, 404)
       end
@@ -49,6 +53,28 @@ module APIComponents
             message: message,
           },
           with: APIComponents::Entities::Error
+        }, code)
+      end
+
+      def _parameter_error(code, *args)
+        messages = []
+        if args[0].is_a? ActiveRecord::Base
+          model = args[0]
+          model.errors.each do |key|
+            message = { key => [] }
+            model.errors.full_messages_for(key).each { |full_message| message[key] << full_message }
+            messages << message
+          end
+        else
+          messages = args
+        end
+
+        error!({
+          error: {
+            code: code,
+            messages: messages
+          },
+          with: APIComponents::Entities::ParameterError
         }, code)
       end
     end
