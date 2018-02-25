@@ -5,6 +5,8 @@ class APIRoot < Grape::API
   format :json
   prefix :api
 
+  helpers APIComponents::Helpers::ResponseHelper
+
   namespace do
     mount APIComponents::Controllers::ArticlesController
   end
@@ -57,7 +59,16 @@ class APIRoot < Grape::API
     mount APIComponents::Controllers::UserBandsController
   end
 
-  route :any, '*path' do
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    error_400! e
+  end
+
+  rescue_from APIComponents::Errors::UnauthorizedError do |e|
+    error_403! e
+  end
+
+  rescue_from APIComponents::Errors::RecordNotFoundError do |e|
+    error_404! e
   end
 
   add_swagger_documentation(
