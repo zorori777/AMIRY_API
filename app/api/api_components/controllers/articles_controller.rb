@@ -60,12 +60,13 @@ module APIComponents
         end
 
         # create
-        desc 'Create an Article.'
-        headers(
-          facebook_id:    { description: 'The id of the user on facebook',             required: false },
-          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
-          user_debug_id:  { description: 'Debug id.',                                  required: false }
-        )
+        desc 'Create an Article.' do
+          headers(
+            facebook_id:    { description: 'The id of the user on facebook',             required: false },
+            facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+            user_debug_id:  { description: 'Debug id.',                                  required: false }
+          )
+        end
         params do
           requires :title,   type: String, desc: 'title'
           requires :content, type: String, desc: 'content'
