@@ -5,7 +5,7 @@ module APIComponents
 
       def initialize(*args, **opts)
         @detail = opts.fetch(:detail, '')
-        super *args
+        super(*args)
       end
     end
   end

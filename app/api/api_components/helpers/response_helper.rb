@@ -3,21 +3,20 @@ require 'date'
 module APIComponents
   module Helpers
     module ResponseHelper
-
       ## 200 OK
-      def present_ok(data, data_entity=nil, **opts)
+      def present_ok(data, data_entity = nil, **opts)
         status 200
         present_success(data, data_entity, opts)
       end
 
       ## 201 Created
-      def present_created(data, data_entity=nil, **opts)
+      def present_created(data, data_entity = nil, **opts)
         status 201
         present_success(data, data_entity, opts)
       end
 
       ## 204 No Content
-      def present_no_content(data, data_entity=nil, **opts)
+      def present_no_content(data, data_entity = nil, **opts)
         status 204
         present_success(data, data_entity, opts)
       end
@@ -45,9 +44,7 @@ module APIComponents
       end
 
       def _error(message, code, *args)
-        if args[0].is_a? Exception
-          message ||= args[0].message
-        end
+        message ||= args[0].message if args[0].is_a?(Exception)
 
         error!({
           error: {
