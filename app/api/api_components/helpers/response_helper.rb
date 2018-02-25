@@ -4,12 +4,6 @@ module APIComponents
   module Helpers
     module ResponseHelper
 
-      def _get_server_meta_data
-        {
-          server_clock: Time.zone.now
-        }
-      end
-
       ## 200 OK
       def present_ok(data, data_entity=nil, **opts)
         status 200
@@ -44,6 +38,10 @@ module APIComponents
 
       def error_404!(message = 'Not Found')
         _error(message, 404)
+      end
+
+      def error_500!(*args)
+        _error('Internal Server Error', 500, *args)
       end
 
       def _error(message, code, *args)

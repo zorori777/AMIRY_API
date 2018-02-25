@@ -5,10 +5,10 @@ module APIComponents
 
       before do
         if user_debug_id = headers['User-Debug-Id']
-          @user = User.find(user_debug_id)
+          @current_user = User.find(user_debug_id)
         else
           jwt_token = headers['JWT_token']
-          @user = External::Jwt::JwtHandler.new.user_by(token: jwt_token)
+          @current_user = External::Jwt::JwtHandler.new.user_by(token: jwt_token)
         end
       end
 
@@ -21,12 +21,18 @@ module APIComponents
           http_codes([
             { code: 200, message: 'Article', model: Entities::Article }
           ])
+          headers(
+            facebook_id:    { description: 'The id of the user on facebook',             required: false },
+            facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+            user_debug_id:  { description: 'Debug id.',                                  required: false }
+          )
         end
         params do
           optional :page, type: Integer, desc: 'Page Num'
         end
         get '' do
-          present Article.includes(:user).page(params[:page]), with: Entities::Article
+          articles = Article.includes(:user).page(params[:page])
+          present_success articles, Entities::Article
         end
 
         # show
@@ -37,22 +43,29 @@ module APIComponents
           http_codes([
             { code: 200, message: 'Article', model: Entities::Article },
             { code: 400, message: 'Error',   model: Entities::Error }
-           ])
+          ])
+          headers(
+            facebook_id:    { description: 'The id of the user on facebook',             required: false },
+            facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+            user_debug_id:  { description: 'Debug id.',                                  required: false }
+          )
         end
         params do
           requires :id, type: Integer, desc: 'Article Primary id.'
         end
         get '/:id' do
-          article_id = params[:id].to_i
-          article = Article.find_by(id: article_id)
-          unless article.present?
-            Errors::RecordNotFoundError.new(id: article_id, model: 'Article')
-          end
-          present Article.find(params[:id]), with: Entities::Article
+          article = Article.find_by(id: params[:id])
+          error_404! unless article.present?
+          present_success article, Entities::Article
         end
 
         # create
         desc 'Create an Article.'
+        headers(
+          facebook_id:    { description: 'The id of the user on facebook',             required: false },
+          facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+          user_debug_id:  { description: 'Debug id.',                                  required: false }
+        )
         params do
           requires :title,   type: String, desc: 'title'
           requires :content, type: String, desc: 'content'
@@ -60,11 +73,10 @@ module APIComponents
         post '' do
           article = Article.new(content: params[:content], title: params[:title])
           article.user = @user
-          begin
-            article.save!
+          if article.save
             present article, with: Entities::Article
-          rescue => error
-            Errors::InternalServerError.new(message: error)
+          else
+            error_400! article
           end
         end
 
@@ -77,6 +89,11 @@ module APIComponents
             { code: 200, message: 'Article', model: Entities::Article },
             { code: 400, message: 'Error',   model: Entities::Error }
           ])
+          headers(
+            facebook_id:    { description: 'The id of the user on facebook',             required: false },
+            facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+            user_debug_id:  { description: 'Debug id.',                                  required: false }
+          )
         end
         params do
           requires :id,      type: Integer, desc: 'The id of the article.'
@@ -85,14 +102,12 @@ module APIComponents
         end
         put '/:id' do
           article = Article.find_by(id: params[:id])
-          unless article.present?
-            Errors::RecordNotFoundError.new(id: params[:id], model: 'Article')
-          end
-          begin
-            article.save!
-            present article, with: Entities::Article
-          rescue => error
-            Errors::InternalServerError.new(message: error)
+          error_404! article.present?
+
+          if article.save
+            present_success article, Entities::Article
+          else
+            error_400! article
           end
         end
 
@@ -104,27 +119,23 @@ module APIComponents
           http_codes([
             { code: 200, message: 'Article', model: Entities::Article },
             { code: 400, message: 'Error',   model: Entities::Error }
-           ])
+          ])
+          headers(
+            facebook_id:    { description: 'The id of the user on facebook',             required: false },
+            facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+            user_debug_id:  { description: 'Debug id.',                                  required: false }
+          )
         end
         params do
           requires :id, type: Integer, desc: 'The id of the article.'
         end
         delete '/:id' do
           article = Article.find_by(id: params[:id])
-          unless article.present?
-            Errors::RecordNotFoundError.new(id: params[:id], model: 'Article')
-          end
-          unless article.created_by?(@user)
-            Errors::UnauthorizedError.new(message: 'The user doesn\'t own the article.')
-          end
-          begin
-            article.destroy!
-            present :ok
-          rescue => error
-            Errors::InternalServerError.new(message: error)
-          end
-        end
+          error_404! unless article.present?
+          error_403! unless article.created_by?(@user)
 
+          article.destroy ? present_ok : error_500!
+        end
 
         route_param :article_id do
           resource :article_comments do
@@ -136,16 +147,19 @@ module APIComponents
               http_codes([
                 { code: 200, message: 'Article', model: Entities::ArticleComment }
               ])
+              headers(
+                facebook_id:    { description: 'The id of the user on facebook',             required: false },
+                facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+                user_debug_id:  { description: 'Debug id.',                                  required: false }
+              )
             end
             params do
               optional :page, type: Integer, desc: 'Page Num'
             end
             get '/' do
               article = Article.find_by(id: params[:article_id])
-              unless article.present?
-                Errors::RecordNotFoundError.new(id: params[:article_id], model: 'Article')
-              end
-              present article.article_comments.page(params[:page]), with: Entities::ArticleComment
+              error_404! unless article.present?
+              present_success article.article_comments.page(params[:page]), Entities::ArticleComment
             end
 
             # create
@@ -156,6 +170,11 @@ module APIComponents
               http_codes([
                 { code: 200, message: 'Article', model: Entities::ArticleComment }
               ])
+              headers(
+                facebook_id:    { description: 'The id of the user on facebook',             required: false },
+                facebook_token: { description: 'The access token provided by Facebook SDK.', required: false },
+                user_debug_id:  { description: 'Debug id.',                                  required: false }
+              )
             end
             params do
               requires :article_id, type: Integer, desc: 'The id of the article.'
@@ -163,17 +182,15 @@ module APIComponents
             end
             post '/' do
               article = Article.find_by(id: params[:article_id])
-              unless article.present?
-                Errors::RecordNotFoundError.new(id: params[:article_id], model: 'Article')
-              end
+              error_404! unless article.present?
               article_comment = ArticleComment.new(content: params[:content])
-              article_comment.user = @user
+              article_comment.user = @current_user
               article_comment.article = article
-              begin
-                article_comment.save!
-                present article_comment, with: Entities::ArticleComment
-              rescue => error
-                Errors::InternalServerError.new(message: error)
+
+              if article_comment.save
+                present_success article_comment, Entities::ArticleComment
+              else
+                error_400! article_comment
               end
             end
           end
