@@ -1,4 +1,4 @@
-server "13.230.13.45",
+server "XX.XXX.XX",
    user: "umeki",
    roles: %w{web app db}
 
